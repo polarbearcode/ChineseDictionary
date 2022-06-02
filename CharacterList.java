@@ -36,11 +36,39 @@ public class CharacterList {
     }
 
     /**
+     * Add a character to the dictionary.
+     * @param c The character to add.
+     */
+    public static void addCharacter(ChineseCharacter c) {
+        Set<ChineseCharacter> curDictionary = getDictionary();
+        curDictionary.add(c);
+        writeDictionaryToFile(curDictionary);
+    }
+
+    /**
+     * Save the current state of the dictionary to a file.
+     * @param curDictionary A Set representing the dictionary to save.
+     */
+    private static void writeDictionaryToFile(Set<ChineseCharacter> curDictionary) {
+        try {
+            String fileName = "./dictionary.srl";
+            FileOutputStream fos = new FileOutputStream(fileName);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(CharacterList.dictionary);
+            oos.close();
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+    }
+
+    /**
      * Remove the specified character from the dictionary.
      * @param c The character to remove.
      */
     public static void removeChar(ChineseCharacter c) {
-        CharacterList.dictionary.remove(c);
+        Set<ChineseCharacter> curDictionary = getDictionary();
+        curDictionary.remove(c);
+        writeDictionaryToFile(curDictionary);
     }
 
 }

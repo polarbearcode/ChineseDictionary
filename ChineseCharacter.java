@@ -143,10 +143,13 @@ public class ChineseCharacter {
     /**
      * Save the character to the list of characters in the dictionary.
      */
-    private void saveCharacter() {
-
+    public void saveCharacter() {
+        this.dictionary.add(this);
     }
 
-
-
+    @Override
+    public int hashCode() {
+        char c = this.simplified.charAt(0);
+        return (int) c;
+    }
 }

@@ -55,9 +55,6 @@ public class ChineseCharacter {
             this.pinyin.add(py);
             this.audioFile.add(audio);
         }
-
-
-
     }
 
     /**
@@ -93,11 +90,42 @@ public class ChineseCharacter {
     public Set<String> getExampleUses() {
         return new HashSet<>(this.exampleUses);
     }
-    
+
     /** Get the audio file path. **/
     public Set<String> getAudioFile() {
         return this.audioFile;
     }
+
+    /** Add a Cantonese pronunciation for this character.
+     * @param pronunciation A String for the pronunciation.
+     * **/
+    public void addCantonesePronunciation(String pronunciation) {
+        this.cantonesePronunciation.add(pronunciation);
+    }
+
+    /** Add a Mandarin pronunciation for this character.
+     * @param pronunciation A String for the pronunciation.
+     * **/
+    public void addMandarinPronunciation(String pronunciation) {
+        this.pinyin.add(pronunciation);
+    }
+
+    /**
+     * Add an audio file for this character.
+     * @param audioPath Path to the audio file.
+     */
+    public void addAudio(String audioPath) {
+        this.audioFile.add(audioPath);
+    }
+
+    /**
+     * Add the provided example to the example list.
+     * @param example The example to add.
+     */
+    public void addExamples(String example) {
+        this.exampleUses.add(example);
+    }
+
 
 
 }

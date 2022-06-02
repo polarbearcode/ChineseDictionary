@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -6,7 +7,7 @@ import java.util.Set;
 /** Represents a Chinese character with simplified and traditional character, audio file,
  * and an example sentence/pairs.
  */
-public class ChineseCharacter {
+public class ChineseCharacter implements Serializable {
 
     /** String for simplified character. **/
     private String simplified;
@@ -139,17 +140,21 @@ public class ChineseCharacter {
         // some regex
         return null;
     }
-
-    /**
-     * Save the character to the list of characters in the dictionary.
-     */
-    public void saveCharacter() {
-        this.dictionary.add(this);
-    }
-
     @Override
     public int hashCode() {
         char c = this.simplified.charAt(0);
+        int x = (int) c;
         return (int) c;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!o.getClass().toString().equals(this.getClass().toString())){
+            return false;
+        }
+
+        ChineseCharacter otherChar = (ChineseCharacter) o;
+
+        return otherChar.hashCode() == this.hashCode();
     }
 }

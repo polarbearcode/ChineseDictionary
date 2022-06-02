@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/** Represents the current dictionary of all the characters. **/
 public class CharacterList {
     private static Set<ChineseCharacter> dictionary;
 
@@ -32,6 +33,14 @@ public class CharacterList {
         } catch (IOException f) {
             f.printStackTrace();
         }
+    }
+
+    /**
+     * Remove the specified character from the dictionary.
+     * @param c The character to remove.
+     */
+    public static void removeChar(ChineseCharacter c) {
+        CharacterList.dictionary.remove(c);
     }
 
 }

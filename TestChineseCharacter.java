@@ -14,21 +14,31 @@ public class TestChineseCharacter {
     @Test
     public void testAlreadyAdded() {
 
-        Set<ChineseCharacter> characterSet = CharacterList.getDictionary();
+
 
         ChineseCharacter 汉 = new ChineseCharacter("汉", "漢",
                 "hon3", "han4", "Audio/hon3");
 
-        汉.saveCharacter();
+        CharacterList.addCharacter(汉);
+
+        Set<ChineseCharacter> characterSet = CharacterList.getDictionary();
 
         int curSize = characterSet.size();
 
         ChineseCharacter copy = new ChineseCharacter("汉", "漢",
                 "hon3", "han4", "Audio/hon3");
 
+        CharacterList.addCharacter(copy);
+
+        characterSet =CharacterList.getDictionary();
+
         assertEquals(curSize, characterSet.size());
 
-        characterSet.remove(汉);
+        CharacterList.removeChar(汉);
+
+        characterSet = CharacterList.getDictionary();
+
+        assertEquals(0, characterSet.size());
 
     }
 }

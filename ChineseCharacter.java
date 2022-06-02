@@ -29,6 +29,9 @@ public class ChineseCharacter {
     /** Pronunciation using other Chinese characters. **/
     private PronunciationAndTone pronunciationWithCharacters;
 
+    /** The current dictionary of all the characters. **/
+    private Set<ChineseCharacter> dictionary;
+
 
     /**
      * Create a Chinese character.
@@ -39,6 +42,8 @@ public class ChineseCharacter {
      * @param audio A String representing the path to the audio file in the Audio folder.
      */
     public ChineseCharacter(String simplified, String traditional, String cp, String py, String audio) {
+
+        this.dictionary = CharacterList.getDictionary();
 
         if (checkIfAlreadyAdded(simplified)) {
             // read in and update;
@@ -63,7 +68,7 @@ public class ChineseCharacter {
      * @return  True if the character is already in the dictionary, false otherwise.
      */
     private boolean checkIfAlreadyAdded(String chineseChar) {
-        return false;
+        return this.dictionary.contains(chineseChar);
     }
 
     /** Get the simplified character. **/
@@ -124,6 +129,22 @@ public class ChineseCharacter {
      */
     public void addExamples(String example) {
         this.exampleUses.add(example);
+    }
+
+    /**
+     * Finds the combo of characters to make the PronunciationAndTone object.
+     * @param pronunciation The Cantonese or Mandarin pronunciation.
+     */
+    private PronunciationAndTone findPronunciationCombo(String pronunciation) {
+        // some regex
+        return null;
+    }
+
+    /**
+     * Save the character to the list of characters in the dictionary.
+     */
+    private void saveCharacter() {
+
     }
 
 

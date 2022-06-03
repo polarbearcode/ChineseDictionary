@@ -19,7 +19,7 @@ public class CharacterList {
     }
 
     /** Returns the current dictionary of all the characters added. */
-    public Map<String, ChineseCharacter> getDictionary() {
+    private Map<String, ChineseCharacter> getDictionary() {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dictionaryPath));
             this.dictionary = (HashMap<String, ChineseCharacter>) ois.readObject();
@@ -52,9 +52,8 @@ public class CharacterList {
      * @param c The character to add.
      */
     public void addCharacter(ChineseCharacter c) {
-        Map<String, ChineseCharacter> curDictionary = getDictionary();
-        curDictionary.put(c.getSimplified(), c);
-        writeDictionaryToFile(curDictionary);
+        this.dictionary.put(c.getSimplified(), c);
+        writeDictionaryToFile(this.dictionary);
     }
 
     /**
@@ -75,12 +74,11 @@ public class CharacterList {
 
     /**
      * Remove the specified character from the dictionary.
-     * @param c The character to remove.
+     * @param c String for The simplified character to remove.
      */
-    public void removeChar(ChineseCharacter c) {
-        Map<String, ChineseCharacter> curDictionary = getDictionary();
-        curDictionary.remove(c);
-        writeDictionaryToFile(curDictionary);
+    public void removeChar(String c) {
+        this.dictionary.remove(c);
+        writeDictionaryToFile(this.dictionary);
     }
 
     /**
@@ -101,12 +99,27 @@ public class CharacterList {
     /**
      * Look up the specified character in the dictionary.
      * @param chineseChar   The simplified chinese character to look up.
-     * @return  The ChineseCharacter object containing all the information.
+     * @return  The ChineseCharacter object containing all the information. Return null if
+     * character is not in the dictionary.
      */
     public ChineseCharacter lookUp(String chineseChar) {
-        return null;
+        return this.dictionary.getOrDefault(chineseChar, null);
     }
 
+    /**
+     * Get the current dictionary.
+     * @return  The HashMap dictionary.
+     */
+    public Map<String, ChineseCharacter> getCurrentDictionary() {
+        return this.dictionary;
+    }
 
+    /**
+     * Get the current size of the dictionary.
+     * @return  The number of characters in the HashMap.
+     */
+    public int size() {
+        return this.dictionary.size();
+    }
 
 }

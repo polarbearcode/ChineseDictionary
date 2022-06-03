@@ -52,8 +52,14 @@ public class CharacterList {
      * @param c The character to add.
      */
     public void addCharacter(ChineseCharacter c) {
-        this.dictionary.put(c.getSimplified(), c);
-        writeDictionaryToFile(this.dictionary);
+        if (this.dictionary.containsKey(c.getSimplified())) {
+            ChineseCharacter charInDictionary = this.dictionary.get(c.getSimplified());
+            charInDictionary.getCantonesePronunciation().putAll(c.getCantonesePronunciation());
+            charInDictionary.getMandarinPronunciation().addAll(c.getMandarinPronunciation());
+        } else {
+            this.dictionary.put(c.getSimplified(), c);
+            writeDictionaryToFile(this.dictionary);
+        }
     }
 
     /**

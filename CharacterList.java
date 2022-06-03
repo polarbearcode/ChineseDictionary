@@ -1,11 +1,13 @@
 import java.io.*;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /** Represents the current dictionary of all the characters. **/
 public class CharacterList {
     private String dictionaryPath;
-    private Set<ChineseCharacter> dictionary;
+    private Map<String, ChineseCharacter> dictionary;
 
     /**
      * Instantiate a CharacterList representing the specified dictionary.
@@ -13,13 +15,14 @@ public class CharacterList {
      */
     public CharacterList(String dictionaryPath) {
         this.dictionaryPath = dictionaryPath;
+        this.dictionary = this.getDictionary();
     }
 
     /** Returns the current dictionary of all the characters added. */
-    public Set<ChineseCharacter> getDictionary() {
+    public Map<String, ChineseCharacter> getDictionary() {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dictionaryPath));
-            this.dictionary = (Set<ChineseCharacter>) ois.readObject();
+            this.dictionary = (HashMap<String, ChineseCharacter>) ois.readObject();
             ois.close();
             return this.dictionary;
         } catch (IOException | ClassNotFoundException io) {
@@ -36,7 +39,7 @@ public class CharacterList {
             String fileName = dictionaryPath;
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            this.dictionary = new HashSet<>();
+            this.dictionary = new HashMap<>();
             oos.writeObject(this.dictionary);
             oos.close();
         } catch (IOException f) {
@@ -49,16 +52,16 @@ public class CharacterList {
      * @param c The character to add.
      */
     public void addCharacter(ChineseCharacter c) {
-        Set<ChineseCharacter> curDictionary = getDictionary();
-        curDictionary.add(c);
+        Map<String, ChineseCharacter> curDictionary = getDictionary();
+        curDictionary.put(c.getSimplified(), c);
         writeDictionaryToFile(curDictionary);
     }
 
     /**
      * Save the current state of the dictionary to a file.
-     * @param curDictionary A Set representing the dictionary to save.
+     * @param curDictionary A HashMap representing the dictionary to save.
      */
-    private void writeDictionaryToFile(Set<ChineseCharacter> curDictionary) {
+    private void writeDictionaryToFile(Map<String, ChineseCharacter> curDictionary) {
         try {
             String fileName = dictionaryPath;
             FileOutputStream fos = new FileOutputStream(fileName);
@@ -75,7 +78,7 @@ public class CharacterList {
      * @param c The character to remove.
      */
     public void removeChar(ChineseCharacter c) {
-        Set<ChineseCharacter> curDictionary = getDictionary();
+        Map<String, ChineseCharacter> curDictionary = getDictionary();
         curDictionary.remove(c);
         writeDictionaryToFile(curDictionary);
     }
@@ -88,14 +91,21 @@ public class CharacterList {
      * @param audio The audio file.
      */
     public void addCantonesePronunciation(ChineseCharacter chineseChar, String pronunciation, String audio) {
-        if (this.dictionary.contains(chineseChar)) {
+        if (this.dictionary.containsKey(chineseChar.getSimplified())) {
             chineseChar.addCantonesePronunciation(pronunciation, audio);
         }
 
         writeDictionaryToFile(this.dictionary);
     }
 
-    public ChineseCharacter lookUp()
+    /**
+     * Look up the specified character in the dictionary.
+     * @param chineseChar   The simplified chinese character to look up.
+     * @return  The ChineseCharacter object containing all the information.
+     */
+    public ChineseCharacter lookUp(String chineseChar) {
+        return null;
+    }
 
 
 

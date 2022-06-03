@@ -96,7 +96,8 @@ public class CharacterList {
      */
     public void addCantonesePronunciation(ChineseCharacter chineseChar, String pronunciation, String audio) {
         if (this.dictionary.containsKey(chineseChar.getSimplified())) {
-            chineseChar.addCantonesePronunciation(pronunciation, audio);
+            ChineseCharacter charInDict = this.dictionary.get(chineseChar.getSimplified());
+            charInDict.addCantonesePronunciation(pronunciation, audio);
         }
 
         writeDictionaryToFile(this.dictionary);

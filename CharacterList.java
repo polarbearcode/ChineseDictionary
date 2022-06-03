@@ -3,41 +3,41 @@ import java.util.HashSet;
 import java.util.Set;
 
 /** Represents the current dictionary of all the characters. **/
-public abstract class CharacterList {
-    private static String dictionaryPath;
-    private static Set<ChineseCharacter> dictionary;
+public class CharacterList {
+    private String dictionaryPath;
+    private Set<ChineseCharacter> dictionary;
 
     /**
      * Instantiate a CharacterList representing the specified dictionary.
      * @param dictionaryPath String for the path to the dictionary file.
      */
     public CharacterList(String dictionaryPath) {
-        CharacterList.dictionaryPath = dictionaryPath;
+        this.dictionaryPath = dictionaryPath;
     }
 
     /** Returns the current dictionary of all the characters added. */
-    public static Set<ChineseCharacter> getDictionary() {
+    public Set<ChineseCharacter> getDictionary() {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dictionaryPath));
-            CharacterList.dictionary = (Set<ChineseCharacter>) ois.readObject();
+            this.dictionary = (Set<ChineseCharacter>) ois.readObject();
             ois.close();
-            return CharacterList.dictionary;
+            return this.dictionary;
         } catch (IOException | ClassNotFoundException io) {
             initializeDictionary();
-            return CharacterList.dictionary;
+            return this.dictionary;
         }
     }
 
     /**
      * Initialize dictionary file if it doesn't already exist.
      */
-    private static void initializeDictionary() {
+    private void initializeDictionary() {
         try {
             String fileName = dictionaryPath;
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            CharacterList.dictionary = new HashSet<>();
-            oos.writeObject(CharacterList.dictionary);
+            this.dictionary = new HashSet<>();
+            oos.writeObject(this.dictionary);
             oos.close();
         } catch (IOException f) {
             f.printStackTrace();
@@ -48,7 +48,7 @@ public abstract class CharacterList {
      * Add a character to the dictionary.
      * @param c The character to add.
      */
-    public static void addCharacter(ChineseCharacter c) {
+    public void addCharacter(ChineseCharacter c) {
         Set<ChineseCharacter> curDictionary = getDictionary();
         curDictionary.add(c);
         writeDictionaryToFile(curDictionary);
@@ -58,12 +58,12 @@ public abstract class CharacterList {
      * Save the current state of the dictionary to a file.
      * @param curDictionary A Set representing the dictionary to save.
      */
-    private static void writeDictionaryToFile(Set<ChineseCharacter> curDictionary) {
+    private void writeDictionaryToFile(Set<ChineseCharacter> curDictionary) {
         try {
             String fileName = dictionaryPath;
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(CharacterList.dictionary);
+            oos.writeObject(this.dictionary);
             oos.close();
         } catch (IOException io) {
             io.printStackTrace();
@@ -74,7 +74,7 @@ public abstract class CharacterList {
      * Remove the specified character from the dictionary.
      * @param c The character to remove.
      */
-    public static void removeChar(ChineseCharacter c) {
+    public void removeChar(ChineseCharacter c) {
         Set<ChineseCharacter> curDictionary = getDictionary();
         curDictionary.remove(c);
         writeDictionaryToFile(curDictionary);

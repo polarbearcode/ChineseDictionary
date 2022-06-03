@@ -8,12 +8,11 @@ public class TestChineseCharacter {
 
     private final String testDictionaryPath = "./testDictionary.srl";
     private final CharacterList c = new CharacterList(testDictionaryPath);
+    private final ChineseCharacter 汉 = new ChineseCharacter("汉", "漢",
+            "hon3", "han4", "Audio/hon3");
 
     @Test
     public void testAlreadyAdded() {
-
-        ChineseCharacter 汉 = new ChineseCharacter("汉", "漢",
-                "hon3", "han4", "Audio/hon3");
 
         c.addCharacter(汉);
 
@@ -38,21 +37,30 @@ public class TestChineseCharacter {
 
     @Test
     public void testUpdateChar() {
-        ChineseCharacter 汉 = new ChineseCharacter("汉", "漢",
-                "hon3", "han4", "Audio/hon3");
 
         c.addCharacter(汉);
 
         ChineseCharacter copy = new ChineseCharacter("汉", "漢",
-                "hon3", "han4", "Audio/hon4");
+                "hon4", "han4", "Audio/hon4");
 
         c.addCharacter(copy);
 
         assertEquals(1, c.size());
 
-        assertEquals(2, 汉.getCantonesePronunciation().size());
+        assertEquals(2, c.lookUp("汉").getCantonesePronunciation().size());
 
         cleanUpDictionary();
+    }
+
+    @Test
+    public void testAddPronunciation() {
+        c.addCharacter(汉);
+        c.addCantonesePronunciation(汉, "hon1","hon1.mp3");
+        c.addCantonesePronunciation(汉, "hon1", "pin1.mp3");
+
+        assertEquals(2, c.lookUp(汉.getSimplified()).getCantonesePronunciation().size());
+
+
     }
 
 

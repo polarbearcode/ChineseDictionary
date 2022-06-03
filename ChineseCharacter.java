@@ -128,4 +128,9 @@ public class ChineseCharacter implements Serializable {
 
         return otherChar.hashCode() == this.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return this.simplified;
+    }
 }

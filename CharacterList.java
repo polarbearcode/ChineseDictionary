@@ -4,8 +4,16 @@ import java.util.Set;
 
 /** Represents the current dictionary of all the characters. **/
 public abstract class CharacterList {
-    private static String dictionaryPath = "./dictionary.srl";
+    private static String dictionaryPath;
     private static Set<ChineseCharacter> dictionary;
+
+    /**
+     * Instantiate a CharacterList representing the specified dictionary.
+     * @param dictionaryPath String for the path to the dictionary file.
+     */
+    public CharacterList(String dictionaryPath) {
+        CharacterList.dictionaryPath = dictionaryPath;
+    }
 
     /** Returns the current dictionary of all the characters added. */
     public static Set<ChineseCharacter> getDictionary() {
@@ -72,11 +80,6 @@ public abstract class CharacterList {
         writeDictionaryToFile(curDictionary);
     }
 
-    /**
-     * For testing, update the dictionary file path.
-     */
-    public static void updateDictionaryFile() {
-         CharacterList.dictionaryPath = "./testDictionary.srl";
-    }
+
 
 }

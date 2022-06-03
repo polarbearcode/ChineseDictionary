@@ -4,12 +4,13 @@ import java.util.Set;
 
 /** Represents the current dictionary of all the characters. **/
 public class CharacterList {
+    private static final String dictionaryPath = "./dictionary.srl";
     private static Set<ChineseCharacter> dictionary;
 
     /** Returns the current dictionary of all the characters added. */
     public static Set<ChineseCharacter> getDictionary() {
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("." + "/dictionary.srl"));
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dictionaryPath));
             CharacterList.dictionary = (Set<ChineseCharacter>) ois.readObject();
             ois.close();
             return CharacterList.dictionary;
@@ -24,7 +25,7 @@ public class CharacterList {
      */
     private static void initializeDictionary() {
         try {
-            String fileName = "./dictionary.srl";
+            String fileName = dictionaryPath;
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             CharacterList.dictionary = new HashSet<>();
@@ -51,7 +52,7 @@ public class CharacterList {
      */
     private static void writeDictionaryToFile(Set<ChineseCharacter> curDictionary) {
         try {
-            String fileName = "./dictionary.srl";
+            String fileName = dictionaryPath;
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(CharacterList.dictionary);

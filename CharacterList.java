@@ -80,6 +80,23 @@ public class CharacterList {
         writeDictionaryToFile(curDictionary);
     }
 
+    /**
+     * Add a Cantonese pronunciation to the character. Do nothing if the character is not in the
+     * dictionary.
+     * @param chineseChar   The simplified character.
+     * @param pronunciation The Cantonese pronunciation.
+     * @param audio The audio file.
+     */
+    public void addCantonesePronunciation(ChineseCharacter chineseChar, String pronunciation, String audio) {
+        if (this.dictionary.contains(chineseChar)) {
+            chineseChar.addCantonesePronunciation(pronunciation, audio);
+        }
+
+        writeDictionaryToFile(this.dictionary);
+    }
+
+    public ChineseCharacter lookUp()
+
 
 
 }

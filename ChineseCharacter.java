@@ -82,7 +82,7 @@ public class ChineseCharacter implements Serializable {
     }
 
     /** Get the Cantonese pronunciation(s). **/
-    public Set<String> getCantonesePronunciation() {
+    public Map<String, String> getCantonesePronunciation() {
         return this.cantonesePronunciation;
     }
 
@@ -96,16 +96,13 @@ public class ChineseCharacter implements Serializable {
         return new HashSet<>(this.exampleUses);
     }
 
-    /** Get the audio file path. **/
-    public Set<String> getAudioFile() {
-        return this.audioFile;
-    }
 
     /** Add a Cantonese pronunciation for this character.
      * @param pronunciation A String for the pronunciation.
+     * @param audio Path to corresponding audio file.
      * **/
-    public void addCantonesePronunciation(String pronunciation) {
-        this.cantonesePronunciation.add(pronunciation);
+    public void addCantonesePronunciation(String pronunciation, String audio) {
+        this.cantonesePronunciation.put(pronunciation, audio);
     }
 
     /** Add a Mandarin pronunciation for this character.
@@ -113,14 +110,6 @@ public class ChineseCharacter implements Serializable {
      * **/
     public void addMandarinPronunciation(String pronunciation) {
         this.pinyin.add(pronunciation);
-    }
-
-    /**
-     * Add an audio file for this character.
-     * @param audioPath Path to the audio file.
-     */
-    public void addAudio(String audioPath) {
-        this.audioFile.add(audioPath);
     }
 
     /**

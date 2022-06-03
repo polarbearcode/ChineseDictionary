@@ -1,8 +1,5 @@
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /** Represents a Chinese character with simplified and traditional character, audio file,
  * and an example sentence/pairs.
@@ -15,14 +12,11 @@ public class ChineseCharacter implements Serializable {
     /**String for the traditional character. **/
     private String traditional;
 
-    /** Strings for the Cantonese pronunciation of the character. **/
-    private Set<String> cantonesePronunciation;
+    /** A Map for the Cantonese pronunciation of the character and the relevant audio file. **/
+    private Map<String, String> cantonesePronunciation;
 
     /** Strings for the pinyin pronunciation of the character. **/
     private Set<String> pinyin;
-
-    /** Paths to the character's audio in the Audio folder. **/
-    private Set<String> audioFile;
 
     /** Sentences and/or phrases using the character. **/
     private Set<String> exampleUses;
@@ -35,7 +29,8 @@ public class ChineseCharacter implements Serializable {
 
 
     /**
-     * Create a Chinese character.
+     * Create a Chinese character. If the character is already in the dictionary, update it if
+     * the provided parameters are different.
      * @param simplified String for simplified character.
      * @param traditional String for traditional character.
      * @param cp    String for the cantonese pronunciation.
@@ -47,19 +42,23 @@ public class ChineseCharacter implements Serializable {
         this.dictionary = CharacterList.getDictionary();
 
         if (checkIfAlreadyAdded(simplified)) {
-            // read in and update;
+            if (!this.cantonesePronunciation.keySet().contains(cp)) {
+                this.cantonesePronunciation.put(cp, audio);
+            }
+
+            if (!this.pinyin.contains(py)) {
+                this.pinyin.add(py);
+            }
         } else {
 
             this.simplified = simplified;
             this.traditional = traditional;
 
-            this.cantonesePronunciation = new HashSet<>();
+            this.cantonesePronunciation = new HashMap<>();
             this.pinyin = new HashSet<>();
-            this.audioFile = new HashSet<>();
 
-            this.cantonesePronunciation.add(cp);
+            this.cantonesePronunciation.put(cp, audio);
             this.pinyin.add(py);
-            this.audioFile.add(audio);
         }
     }
 

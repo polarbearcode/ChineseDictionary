@@ -3,8 +3,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /** Represents the current dictionary of all the characters. **/
-public class CharacterList {
-    private static final String dictionaryPath = "./dictionary.srl";
+public abstract class CharacterList {
+    private static String dictionaryPath = "./dictionary.srl";
     private static Set<ChineseCharacter> dictionary;
 
     /** Returns the current dictionary of all the characters added. */
@@ -70,6 +70,13 @@ public class CharacterList {
         Set<ChineseCharacter> curDictionary = getDictionary();
         curDictionary.remove(c);
         writeDictionaryToFile(curDictionary);
+    }
+
+    /**
+     * For testing, update the dictionary file path.
+     */
+    public static void updateDictionaryFile() {
+         CharacterList.dictionaryPath = "./testDictionary.srl";
     }
 
 }

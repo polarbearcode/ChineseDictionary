@@ -30,19 +30,6 @@ public class ChineseCharacter implements Serializable {
 
 
     /**
-     * Create a Chinese character. If the character is already in the dictionary, update it if
-     * the provided parameters are different. Uses default dictionary.
-     * @param simplified String for simplified character.
-     * @param traditional String for traditional character.
-     * @param cp    String for the cantonese pronunciation.
-     * @param py    String for the pinyin.
-     * @param audio A String representing the path to the audio file in the Audio folder.
-     */
-    public ChineseCharacter(String simplified, String traditional, String cp, String py, String audio) {
-        this(simplified, traditional, cp, py, audio, "./dictionary.srl");
-    }
-
-    /**
      * Create a Chinese character. Saves to the provided dictionary.
      * If the character is already in the dictionary, update it if
      * the provided parameters are different.
@@ -51,43 +38,20 @@ public class ChineseCharacter implements Serializable {
      * @param cp    String for the cantonese pronunciation.
      * @param py    String for the pinyin.
      * @param audio A String representing the path to the audio file in the Audio folder.
-     * @param dictionaryPath A String for the path to the dictionary.
      */
     public ChineseCharacter(String simplified, String traditional, String cp,
-                            String py, String audio,String dictionaryPath) {
+                            String py, String audio) {
 
-        CharacterList c = new CharacterList(dictionaryPath);
 
-        this.dictionary = CharacterList.getDictionary();
+        this.simplified = simplified;
+        this.traditional = traditional;
 
-        if (checkIfAlreadyAdded(simplified)) {
-            if (!this.cantonesePronunciation.keySet().contains(cp)) {
-                this.cantonesePronunciation.put(cp, audio);
-            }
+        this.cantonesePronunciation = new HashMap<>();
+        this.pinyin = new HashSet<>();
 
-            if (!this.pinyin.contains(py)) {
-                this.pinyin.add(py);
-            }
-        } else {
+        this.cantonesePronunciation.put(cp, audio);
+        this.pinyin.add(py);
 
-            this.simplified = simplified;
-            this.traditional = traditional;
-
-            this.cantonesePronunciation = new HashMap<>();
-            this.pinyin = new HashSet<>();
-
-            this.cantonesePronunciation.put(cp, audio);
-            this.pinyin.add(py);
-        }
-    }
-
-    /**
-     * Checks if the provided character is already in the dictionary.
-     * @param chineseChar The character to check.
-     * @return  True if the character is already in the dictionary, false otherwise.
-     */
-    private boolean checkIfAlreadyAdded(String chineseChar) {
-        return this.dictionary.contains(chineseChar);
     }
 
     /** Get the simplified character. **/

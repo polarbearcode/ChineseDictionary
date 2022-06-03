@@ -28,9 +28,10 @@ public class ChineseCharacter implements Serializable {
     private Set<ChineseCharacter> dictionary;
 
 
+
     /**
      * Create a Chinese character. If the character is already in the dictionary, update it if
-     * the provided parameters are different.
+     * the provided parameters are different. Uses default dictionary.
      * @param simplified String for simplified character.
      * @param traditional String for traditional character.
      * @param cp    String for the cantonese pronunciation.
@@ -38,6 +39,24 @@ public class ChineseCharacter implements Serializable {
      * @param audio A String representing the path to the audio file in the Audio folder.
      */
     public ChineseCharacter(String simplified, String traditional, String cp, String py, String audio) {
+        this(simplified, traditional, cp, py, audio, "./dictionary.srl");
+    }
+
+    /**
+     * Create a Chinese character. Saves to the provided dictionary.
+     * If the character is already in the dictionary, update it if
+     * the provided parameters are different.
+     * @param simplified String for simplified character.
+     * @param traditional String for traditional character.
+     * @param cp    String for the cantonese pronunciation.
+     * @param py    String for the pinyin.
+     * @param audio A String representing the path to the audio file in the Audio folder.
+     * @param dictionaryPath A String for the path to the dictionary.
+     */
+    public ChineseCharacter(String simplified, String traditional, String cp,
+                            String py, String audio,String dictionaryPath) {
+
+        CharacterList c = new CharacterList(dictionaryPath);
 
         this.dictionary = CharacterList.getDictionary();
 

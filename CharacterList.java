@@ -114,6 +114,18 @@ public class CharacterList {
     }
 
     /**
+     * Add an example usage for the specified character. Do nothing if character is not in the dictionary.
+     * @param chineseChar String simplified Chinese character.
+     * @param example   String, example usage to add.
+     */
+    public void addExample(String chineseChar, String example) {
+        if (this.dictionary.containsKey(chineseChar) && example.contains(chineseChar)) {
+           ChineseCharacter charInDict = this.dictionary.get(chineseChar);
+           charInDict.addExamples(example);
+        }
+    }
+
+    /**
      * Get the current dictionary.
      * @return  The HashMap dictionary.
      */

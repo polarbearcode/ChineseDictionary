@@ -1,29 +1,10 @@
 /** Stores two characters: one for pronunciation and one for tone. Like 切韵 **/
-public class PronunciationAndTone {
-
-    /** The character representing the pronunciation. **/
-    private String pronunciationChar;
-
-    /** The character representing the tone. **/
-    private String toneChar;
-
+public interface PronunciationAndTone {
     /**
-     * Instantiate with the provided pronunciation and tone.
-     * @param pronunciationChar String for the pronunciation character.
-     * @param toneChar  String for the tone character.
+     * Returns a combination of characters that equal the provided pronunciation.
+     * @param pronunciation String of the pronunciation in the format of "abcd1"
+     * @return A length 2 array where the 0 element is the equivalent pronunciation,
+     *          the 1 index element is the equivalent tone.
      */
-    PronunciationAndTone(String pronunciationChar, String toneChar) {
-        this.pronunciationChar = pronunciationChar;
-        this.toneChar = toneChar;
-    }
-
-    /** Get the pronunciation character. **/
-    public String getPronunciationChar() {
-        return this.pronunciationChar;
-    }
-
-    /** Get the tone character. **/
-    public String getToneChar() {
-        return this.toneChar;
-    }
+    public String[] characterCombo(String pronunciation);
 }

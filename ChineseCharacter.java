@@ -52,6 +52,8 @@ public class ChineseCharacter implements Serializable {
         this.cantonesePronunciation.put(cp, audio);
         this.pinyin.add(py);
 
+        this.exampleUses = new HashSet<>();
+
     }
 
     /** Get the simplified character. **/
@@ -97,10 +99,13 @@ public class ChineseCharacter implements Serializable {
 
     /**
      * Add the provided example to the example list.
+     * Do nothing if the example does not contain the character.
      * @param example The example to add.
      */
     public void addExamples(String example) {
-        this.exampleUses.add(example);
+        if (example.contains(this.simplified) || example.contains(this.traditional)) {
+            this.exampleUses.add(example);
+        }
     }
 
     /**

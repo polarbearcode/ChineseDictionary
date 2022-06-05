@@ -10,12 +10,13 @@ public class CantonesePronunciationAndTone implements PronunciationAndTone {
     private HashMap<String, String> pronunCharacters;
 
     /**
-     * Find the character combo for the pronunciation.
-     * @param pronunciation String of the pronunciation in the format of "abcd1"
-     * @return  A length 2 array containing the characters mapping to the pronunciation and the tone.
+     * Returns a combination of characters that equal to the pronunciation of the provided character.
+     * @param chineseCharacter The character to find the pronunciation for.
+     * @return A length 2 array where the 0 element is the equivalent pronunciation,
+     *          the 1 index element is the equivalent tone.
      */
     @Override
-    public String[] characterCombo(String pronunciation) {
+    public String[] characterCombo(ChineseCharacter chineseCharacter) {
 
     }
 }

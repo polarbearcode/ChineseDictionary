@@ -137,7 +137,7 @@ public class CharacterList {
 
     /**
      * Remove an example form the provided chinese character.
-     * Do nothing if the character is not in the dictionary or there is no such example for that hcatacter.
+     * Do nothing if the character is not in the dictionary or there is no such example for that character.
      * @param chineseChar   String, the simplified chinese character
      * @param example String, the example to remove.
      */
@@ -145,6 +145,16 @@ public class CharacterList {
         if (this.dictionary.containsKey(chineseChar)) {
             this.lookUp(chineseChar).getExampleUses().remove(example);
         }
+    }
+
+    /**
+     * Remove an example form the provided chinese character.
+     * Do nothing if the character is not in the dictionary or there is no such example for that character.
+     * @param chineseChar   ChineseCharacter object, the simplified chinese character
+     * @param example String, the example to remove.
+     */
+    public void removeExample(ChineseCharacter chineseChar, String example) {
+        this.removeExample(chineseChar.getSimplified(), example);
     }
 
     /**

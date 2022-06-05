@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -31,8 +32,6 @@ public class TestChineseCharacter {
         assertEquals(0, c.size());
 
         cleanUpDictionary();
-
-        int x = 10;
     }
 
     @Test
@@ -60,7 +59,34 @@ public class TestChineseCharacter {
 
         assertEquals(2, c.lookUp(汉.getSimplified()).getCantonesePronunciation().size());
 
+        cleanUpDictionary();
+    }
 
+    @Test
+    public void testAddExample() {
+        cleanUpDictionary();
+        c.addCharacter(汉);
+        c.addExample(汉,"汉字");
+        c.addExample(汉,"蚶子");
+
+        Set<String> actual = c.lookUp(汉.getSimplified()).getExampleUses();
+        Set<String> expected = new HashSet<String>();
+        expected.add("汉字");
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testCantoneseCombo() {
+        String[] firstCombo = new String[]{"漢", "酱"};
+        CantonesePronunciationAndTone finder = new CantonesePronunciationAndTone();
+        assertArrayEquals(firstCombo, finder.characterCombo(汉));
+
+        String[] secondCombo = new String[]{"漢", "番"};
+
+        ChineseCharacter sameSound = new ChineseCharacter("刊", "刊", "hon1",
+                "kan4", "hon1");
+        assertArrayEquals(secondCombo, finder.characterCombo(sameSound));
     }
 
 

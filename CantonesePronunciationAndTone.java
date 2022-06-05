@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.List;
 
 /** Finds the character combo for the Cantonese Pronunciation. **/
 public class CantonesePronunciationAndTone implements PronunciationAndTone {
@@ -12,11 +13,11 @@ public class CantonesePronunciationAndTone implements PronunciationAndTone {
     /**
      * Returns a combination of characters that equal to the pronunciation of the provided character.
      * @param chineseCharacter The character to find the pronunciation for.
-     * @return A length 2 array where the 0 element is the equivalent pronunciation,
+     * @return A list of length 2 arrays where the 0 element is the equivalent pronunciation,
      *          the 1 index element is the equivalent tone.
      */
     @Override
-    public String[] characterCombo(ChineseCharacter chineseCharacter) {
+    public List<String[]> characterCombo(ChineseCharacter chineseCharacter) {
 
     }
 }

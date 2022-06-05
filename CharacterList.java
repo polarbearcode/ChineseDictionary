@@ -56,6 +56,7 @@ public class CharacterList {
             ChineseCharacter charInDictionary = this.dictionary.get(c.getSimplified());
             charInDictionary.getCantonesePronunciation().putAll(c.getCantonesePronunciation());
             charInDictionary.getMandarinPronunciation().addAll(c.getMandarinPronunciation());
+            charInDictionary.getExampleUses().addAll(c.getExampleUses());
         } else {
             this.dictionary.put(c.getSimplified(), c);
             writeDictionaryToFile(this.dictionary);
@@ -122,6 +123,27 @@ public class CharacterList {
         if (this.dictionary.containsKey(chineseChar) && example.contains(chineseChar)) {
            ChineseCharacter charInDict = this.dictionary.get(chineseChar);
            charInDict.addExamples(example);
+        }
+    }
+
+    /**
+     * Add an example usage for the specified character. Do nothing if character is not in the dictionary.
+     * @param chineseChar ChineseCharacter object.
+     * @param example   String, example usage to add.
+     */
+    public void addExample(ChineseCharacter chineseChar, String example) {
+        this.addExample(chineseChar.getSimplified(), example);
+    }
+
+    /**
+     * Remove an example form the provided chinese character.
+     * Do nothing if the character is not in the dictionary or there is no such example for that hcatacter.
+     * @param chineseChar   String, the simplified chinese character
+     * @param example String, the example to remove.
+     */
+    public void removeExample(String chineseChar, String example) {
+        if (this.dictionary.containsKey(chineseChar)) {
+            this.lookUp(chineseChar).getExampleUses().remove(example);
         }
     }
 

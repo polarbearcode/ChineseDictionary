@@ -21,13 +21,6 @@ public class ChineseCharacter implements Serializable {
     /** Sentences and/or phrases using the character. **/
     private Set<String> exampleUses;
 
-    /** Pronunciation using other Chinese characters. **/
-    private PronunciationAndTone pronunciationWithCharacters;
-
-    /** The current dictionary of all the characters. **/
-    private Set<ChineseCharacter> dictionary;
-
-
 
     /**
      * Create a Chinese character. Saves to the provided dictionary.

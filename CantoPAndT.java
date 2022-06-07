@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /** Finds the character combo for the Cantonese Pronunciation. **/
 public class CantoPAndT implements PronunciationAndTone {
@@ -13,10 +14,12 @@ public class CantoPAndT implements PronunciationAndTone {
     private HashMap<String, String> pronunCharacters;
 
     /** The path to the pronunciation character mapping HashMap serialized object. **/
-    private final String mapPath = "./cantonPronun.srl";
+    private String mapPath;
 
-    /** Instantiate the toneCharacters and pronunCharacters mapping. **/
-    public CantoPAndT() {
+    /** Instantiate the toneCharacters and pronunCharacters mapping.
+     * Set file to read and save to mapPath.
+     * @param mapPath   String, path to the HashMap serializable **/
+    public CantoPAndT(String mapPath) {
 
         this.toneCharacters = new HashMap<>();
 
@@ -28,6 +31,8 @@ public class CantoPAndT implements PronunciationAndTone {
         this.toneCharacters.put(6, "面");
 
         initializePronunciationMap();
+
+        this.mapPath = mapPath;
     }
 
     /**
@@ -63,7 +68,15 @@ public class CantoPAndT implements PronunciationAndTone {
         }
 
         return toReturn;
+    }
 
+    /**
+     * Remove the pronunciation from the mapping.
+     * @param pronunciation String for the pronunciation.
+     */
+    public void deleteCharacterMapping(String pronunciation) {
+        this.pronunCharacters.remove(pronunciation);
+        this.updatePronunciationMap();
     }
 
     /**
@@ -108,4 +121,12 @@ public class CantoPAndT implements PronunciationAndTone {
     private String[] pronunciationSplit(String pronunciation) {
         return null;
     }
+
+    /** Return a copy of the pronunCharacters mapping. **/
+    public Map<String, String> getPronunCharacters() {
+        HashMap<String, String> copy = new HashMap<>();
+        copy.putAll(this.pronunCharacters);
+        return copy;
+    }
+
 }

@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,9 @@ public class CantonesePronunciationAndTone implements PronunciationAndTone {
 
     /** A HashMap containing the mapping for pronunciation to characters **/
     private HashMap<String, String> pronunCharacters;
+
+    /** The path to the pronunciation character mapping HashMap serialized object. **/
+    private final String mapPath = "./cantonPronun.srl";
 
     /** Instantiate the toneCharacters and pronunCharacters mapping. **/
     public CantonesePronunciationAndTone() {
@@ -67,8 +71,26 @@ public class CantonesePronunciationAndTone implements PronunciationAndTone {
      * Read in the pronunciation map file or create one if it does not exist yet.
      * @return  The saved pronunciation map.
      */
-    private HashMap<String, String> initializePronunciationMap() {
-        return null;
+    private void initializePronunciationMap() {
+        File cantonesePronunciationMap = new File(this.mapPath);
+        if (!cantonesePronunciationMap.exists()) {
+            this.pronunCharacters = new HashMap<>();
+        } else {
+            readInPronunMap();
+        }
+
+        updatePronunciationMap();
+    }
+
+    private void readInPronunMap() {
+        try {
+            File cantonesePronunciationMap = new File(this.mapPath);
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(cantonesePronunciationMap));
+            this.pronunCharacters = (HashMap<String, String>) ois.readObject();
+            ois.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

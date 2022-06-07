@@ -15,19 +15,17 @@ public class CharacterList {
      */
     public CharacterList(String dictionaryPath) {
         this.dictionaryPath = dictionaryPath;
-        this.dictionary = this.getDictionary();
+        this.getDictionary();
     }
 
     /** Returns the current dictionary of all the characters added. */
-    private Map<String, ChineseCharacter> getDictionary() {
+    private void getDictionary() {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dictionaryPath));
             this.dictionary = (HashMap<String, ChineseCharacter>) ois.readObject();
             ois.close();
-            return this.dictionary;
         } catch (IOException | ClassNotFoundException io) {
             initializeDictionary();
-            return this.dictionary;
         }
     }
 

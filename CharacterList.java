@@ -35,16 +35,8 @@ public class CharacterList {
      * Initialize dictionary file if it doesn't already exist.
      */
     private void initializeDictionary() {
-        try {
-            String fileName = dictionaryPath;
-            FileOutputStream fos = new FileOutputStream(fileName);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            this.dictionary = new HashMap<>();
-            oos.writeObject(this.dictionary);
-            oos.close();
-        } catch (IOException f) {
-            f.printStackTrace();
-        }
+        this.dictionary = new HashMap<>();
+        writeDictionaryToFile(this.dictionary);
     }
 
     /**

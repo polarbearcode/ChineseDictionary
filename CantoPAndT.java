@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /** Finds the character combo for the Cantonese Pronunciation. **/
-public class CantonesePronunciationAndTone implements PronunciationAndTone {
+public class CantoPAndT implements PronunciationAndTone {
 
     /** A HashMap containing the mapping for tones to characters. **/
     private HashMap<Integer, String> toneCharacters;
@@ -16,7 +16,7 @@ public class CantonesePronunciationAndTone implements PronunciationAndTone {
     private final String mapPath = "./cantonPronun.srl";
 
     /** Instantiate the toneCharacters and pronunCharacters mapping. **/
-    public CantonesePronunciationAndTone() {
+    public CantoPAndT() {
 
         this.toneCharacters = new HashMap<>();
 
@@ -95,14 +95,7 @@ public class CantonesePronunciationAndTone implements PronunciationAndTone {
      * Updates the pronunciation map file.
      */
     private void updatePronunciationMap() {
-        try {
-            FileOutputStream fos = new FileOutputStream(this.mapPath);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this.pronunCharacters);
-            oos.close();
-        } catch (IOException io) {
-            io.printStackTrace();
-        }
+        WriteFile.writeFile(this.mapPath, this.pronunCharacters);
 
     }
 

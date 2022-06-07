@@ -58,15 +58,7 @@ public class CharacterList {
      * @param curDictionary A HashMap representing the dictionary to save.
      */
     private void writeDictionaryToFile(Map<String, ChineseCharacter> curDictionary) {
-        try {
-            String fileName = dictionaryPath;
-            FileOutputStream fos = new FileOutputStream(fileName);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this.dictionary);
-            oos.close();
-        } catch (IOException io) {
-            io.printStackTrace();
-        }
+        WriteFile.writeFile(this.dictionaryPath, curDictionary);
     }
 
     /**

@@ -27,8 +27,7 @@ public class CantonesePronunciationAndTone implements PronunciationAndTone {
         this.toneCharacters.put(5, "腩");
         this.toneCharacters.put(6, "面");
 
-
-        this.pronunCharacters = initializePronunciationMap();
+        initializePronunciationMap();
     }
 
     /**
@@ -75,11 +74,10 @@ public class CantonesePronunciationAndTone implements PronunciationAndTone {
         File cantonesePronunciationMap = new File(this.mapPath);
         if (!cantonesePronunciationMap.exists()) {
             this.pronunCharacters = new HashMap<>();
+            updatePronunciationMap();
         } else {
             readInPronunMap();
         }
-
-        updatePronunciationMap();
     }
 
     private void readInPronunMap() {
@@ -97,7 +95,15 @@ public class CantonesePronunciationAndTone implements PronunciationAndTone {
      * Updates the pronunciation map file.
      */
     private void updatePronunciationMap() {
-        ;
+        try {
+            FileOutputStream fos = new FileOutputStream(this.mapPath);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this.pronunCharacters);
+            oos.close();
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+
     }
 
     /**

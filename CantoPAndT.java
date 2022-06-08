@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** Finds the character combo for the Cantonese Pronunciation. **/
 public class CantoPAndT implements PronunciationAndTone {
@@ -30,9 +32,10 @@ public class CantoPAndT implements PronunciationAndTone {
         this.toneCharacters.put(5, "腩");
         this.toneCharacters.put(6, "面");
 
-        initializePronunciationMap();
-
         this.mapPath = mapPath;
+
+        readInPronunMap();
+
     }
 
     /**
@@ -53,12 +56,12 @@ public class CantoPAndT implements PronunciationAndTone {
             String[] split = this.pronunciationSplit(pronunciation);
 
             if (!this.pronunCharacters.containsKey(split[0])) {
-                this.pronunCharacters.put(pronunciation, chineseCharacter.getSimplified());
+                this.pronunCharacters.put(split[0], chineseCharacter.getTraditional());
                 needUpdate = true;
             }
 
             toAdd[0] = this.pronunCharacters.get(split[0]);
-            toAdd[1] = this.pronunCharacters.get(split[1]);
+            toAdd[1] = this.toneCharacters.get(Integer.valueOf(split[1]));
 
             toReturn.add(toAdd);
         }
@@ -79,19 +82,6 @@ public class CantoPAndT implements PronunciationAndTone {
         this.updatePronunciationMap();
     }
 
-    /**
-     * Read in the pronunciation map file or create one if it does not exist yet.
-     * @return  The saved pronunciation map.
-     */
-    private void initializePronunciationMap() {
-        File cantonesePronunciationMap = new File(this.mapPath);
-        if (!cantonesePronunciationMap.exists()) {
-            this.pronunCharacters = new HashMap<>();
-            updatePronunciationMap();
-        } else {
-            readInPronunMap();
-        }
-    }
 
     private void readInPronunMap() {
         try {
@@ -99,8 +89,9 @@ public class CantoPAndT implements PronunciationAndTone {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(cantonesePronunciationMap));
             this.pronunCharacters = (HashMap<String, String>) ois.readObject();
             ois.close();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException | ClassNotFoundException | NullPointerException e) {
+            this.pronunCharacters = new HashMap<>();
+            updatePronunciationMap();
         }
     }
 
@@ -119,7 +110,16 @@ public class CantoPAndT implements PronunciationAndTone {
      * the 1-index element is the tone number as a string.
      */
     private String[] pronunciationSplit(String pronunciation) {
-        return null;
+        String[] split = new String[2];
+        Pattern p = Pattern.compile("([a-zA-Z]+)([1-6])");
+        Matcher m = p.matcher(pronunciation);
+
+        if (m.find()) {
+            split[0] = m.group(1);
+            split[1] = m.group(2);
+        }
+
+        return split;
     }
 
     /** Return a copy of the pronunCharacters mapping. **/

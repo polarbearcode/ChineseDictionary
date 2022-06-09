@@ -30,10 +30,9 @@ public class ChineseCharacter implements Serializable {
      * @param traditional String for traditional character.
      * @param cp    String for the cantonese pronunciation.
      * @param py    String for the pinyin.
-     * @param audio A String representing the path to the audio file in the Audio folder.
      */
     public ChineseCharacter(String simplified, String traditional, String cp,
-                            String py, String audio) {
+                            String py) {
 
 
         this.simplified = simplified;
@@ -42,7 +41,6 @@ public class ChineseCharacter implements Serializable {
         this.cantonesePronunciation = new HashMap<>();
         this.pinyin = new HashSet<>();
 
-        this.cantonesePronunciation.put(cp, audio);
         this.pinyin.add(py);
 
         this.exampleUses = new HashSet<>();

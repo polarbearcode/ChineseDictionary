@@ -12,7 +12,7 @@ public class TestChineseCharacter {
     private final String testMapPath = "./testCPAndT.srl";
     private final CharacterList c = new CharacterList(testDictionaryPath);
     private final ChineseCharacter 汉 = new ChineseCharacter("汉", "漢",
-            "hon3", "han4", "Audio/hon3");
+            "hon3", "han4");
 
     @Test
     public void testAlreadyAdded() {
@@ -22,7 +22,7 @@ public class TestChineseCharacter {
         int curSize = c.size();
 
         ChineseCharacter copy = new ChineseCharacter("汉", "漢",
-                "hon3", "han4", "Audio/hon3");
+                "hon3", "han4");
 
         c.addCharacter(copy);
 
@@ -42,7 +42,7 @@ public class TestChineseCharacter {
         c.addCharacter(汉);
 
         ChineseCharacter copy = new ChineseCharacter("汉", "漢",
-                "hon4", "han4", "Audio/hon4");
+                "hon4", "han4");
 
         c.addCharacter(copy);
 
@@ -87,10 +87,34 @@ public class TestChineseCharacter {
         String[] secondCombo = new String[]{"漢", "番"};
 
         ChineseCharacter sameSound = new ChineseCharacter("刊", "刊", "hon1",
-                "kan4", "hon1");
+                "kan4");
         assertArrayEquals(secondCombo, finder.characterCombo(sameSound).get(0));
 
+        ChineseCharacter newChar = new ChineseCharacter("用", "用",
+                "jung6", "yong4");
+
+        String[] thirdCombo = new String[]{"用", "面"};
+
+        assertArrayEquals(thirdCombo, finder.characterCombo(newChar).get(0));
+
         cleanUpMapping(finder);
+    }
+
+    @Test
+    public void testChangeCharacterMapping() {
+        CantoPAndT finder = new CantoPAndT(testMapPath);
+        finder.characterCombo(汉);
+
+        finder.changeCharacterMapping("hon3", "看");
+
+        String[] expected = new String[]{"看", "酱"};
+
+        assertArrayEquals(expected, finder.characterCombo(汉).get(0));
+    }
+
+    @Test
+    public void testMultiplePronunciations() {
+        
     }
 
 

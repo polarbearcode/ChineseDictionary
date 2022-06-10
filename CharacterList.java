@@ -57,7 +57,7 @@ public class CharacterList {
      * Save the current state of the dictionary to a file.
      * @param curDictionary A HashMap representing the dictionary to save.
      */
-    private void writeDictionaryToFile(Map<String, ChineseCharacter> curDictionary) {
+    void writeDictionaryToFile(Map<String, ChineseCharacter> curDictionary) {
         WriteFile.writeFile(this.dictionaryPath, curDictionary);
     }
 

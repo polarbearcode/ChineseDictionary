@@ -51,7 +51,7 @@ public class CantoPAndT implements PronunciationAndTone {
 
         List<String[]> toReturn = new ArrayList<>();
 
-        for (String pronunciation : chineseCharacter.getCantonesePronunciation().keySet()) {
+        for (String pronunciation : chineseCharacter.getCantonesePronunciation()) {
             String[] toAdd = new String[2];
             String[] split = this.pronunciationSplit(pronunciation);
 
@@ -71,6 +71,17 @@ public class CantoPAndT implements PronunciationAndTone {
         }
 
         return toReturn;
+    }
+
+    /**
+     * Change the character associated with the pronunciation.
+     * If the pronunciation doesn't exist yet, create the mapping.
+     * @param pronunciation String, the key in the dictionary for the pronunciation
+     * @param chineseCharacter  String, the character to change the mapping to.
+     */
+    public void changeCharacterMapping(String pronunciation, String chineseCharacter) {
+        this.pronunCharacters.put(pronunciation, chineseCharacter);
+        this.updatePronunciationMap();
     }
 
     /**
@@ -98,7 +109,7 @@ public class CantoPAndT implements PronunciationAndTone {
     /**
      * Updates the pronunciation map file.
      */
-    private void updatePronunciationMap() {
+    void updatePronunciationMap() {
         WriteFile.writeFile(this.mapPath, this.pronunCharacters);
 
     }
@@ -127,6 +138,11 @@ public class CantoPAndT implements PronunciationAndTone {
         HashMap<String, String> copy = new HashMap<>();
         copy.putAll(this.pronunCharacters);
         return copy;
+    }
+
+    /** Return the pronounCharacters mapping (not a copy) for testing. **/
+    Map<String, String> getPronounCharactersTest() {
+        return this.pronunCharacters;
     }
 
 }

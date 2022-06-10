@@ -41,6 +41,8 @@ public class TestChineseCharacter {
     @Test
     public void testUpdateChar() {
 
+        cleanUpDictionary();
+
         c.addCharacter(汉);
 
         ChineseCharacter copy = new ChineseCharacter("汉", "漢",
@@ -84,6 +86,9 @@ public class TestChineseCharacter {
     public void testCantoneseCombo() {
         String[] firstCombo = new String[]{"漢", "酱"};
         CantoPAndT finder = new CantoPAndT(testMapPath);
+
+        cleanUpMapping(finder);
+
         assertArrayEquals(firstCombo, finder.characterCombo(汉).get(0));
 
         String[] secondCombo = new String[]{"漢", "番"};
@@ -107,11 +112,13 @@ public class TestChineseCharacter {
         CantoPAndT finder = new CantoPAndT(testMapPath);
         finder.characterCombo(汉);
 
-        finder.changeCharacterMapping("hon3", "看");
+        finder.changeCharacterMapping("hon", "看");
 
         String[] expected = new String[]{"看", "酱"};
 
         assertArrayEquals(expected, finder.characterCombo(汉).get(0));
+
+        cleanUpMapping(finder);
     }
 
     @Test
@@ -148,21 +155,35 @@ public class TestChineseCharacter {
 
         cleanUpDictionary();
 
+        int x = 10;
+
     }
 
 
     /** Clean up the dictionary after testing. **/
     private void cleanUpDictionary() {
-        for (String chineseChar : c.getCurrentDictionary().keySet()) {
-            c.removeChar(chineseChar);
+
+        Iterator<Map.Entry<String, ChineseCharacter>> itr = c.getCurrentDictionary().entrySet().iterator();
+
+        while (itr.hasNext()) {
+            itr.next();
+            itr.remove();
         }
+
+        c.writeDictionaryToFile(c.getCurrentDictionary());
+
     }
 
     /** Clean up the pronunciation mapping after testing. **/
     private void cleanUpMapping(CantoPAndT finder) {
-        for (String p : finder.getPronunCharacters().keySet()) {
-            finder.deleteCharacterMapping(p);
+        Iterator<Map.Entry<String, String>> itr = finder.getPronounCharactersTest().entrySet().iterator();
+
+        while (itr.hasNext()) {
+            itr.next();
+            itr.remove();
         }
+
+        finder.updatePronunciationMap();
     }
 
     /** Helper function to create a character with multiple pronunciations.

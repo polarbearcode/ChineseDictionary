@@ -44,7 +44,7 @@ public class CharacterList {
     public void addCharacter(ChineseCharacter c) {
         if (this.dictionary.containsKey(c.getSimplified())) {
             ChineseCharacter charInDictionary = this.dictionary.get(c.getSimplified());
-            charInDictionary.getCantonesePronunciation().putAll(c.getCantonesePronunciation());
+            charInDictionary.getCantonesePronunciation().addAll(c.getCantonesePronunciation());
             charInDictionary.getMandarinPronunciation().addAll(c.getMandarinPronunciation());
             charInDictionary.getExampleUses().addAll(c.getExampleUses());
         } else {
@@ -80,7 +80,7 @@ public class CharacterList {
     public void addCantonesePronunciation(ChineseCharacter chineseChar, String pronunciation, String audio) {
         if (this.dictionary.containsKey(chineseChar.getSimplified())) {
             ChineseCharacter charInDict = this.dictionary.get(chineseChar.getSimplified());
-            charInDict.addCantonesePronunciation(pronunciation, audio);
+            charInDict.addCantonesePronunciation(pronunciation);
         }
 
         writeDictionaryToFile(this.dictionary);
@@ -137,6 +137,34 @@ public class CharacterList {
      */
     public void removeExample(ChineseCharacter chineseChar, String example) {
         this.removeExample(chineseChar.getSimplified(), example);
+    }
+
+    /**
+     * Find the audio file for the Cantonese pronunciation(s) of a character.
+     * @param chineseCharacter The character to find the pronunciations for.
+     * @return A Map of pronunciation->audio file path pairs. Map a pronunciation to null if the audio file
+     * for that pronunciation doesn't exist.
+     */
+    public Map<String, String> findAudio(ChineseCharacter chineseCharacter) {
+        if (this.lookUp(chineseCharacter.getSimplified()) == null) {
+            this.addCharacter(chineseCharacter);
+            this.writeDictionaryToFile(this.dictionary);
+        }
+
+        Map<String, String> toReturn = new HashMap<>();
+
+        for (String p : chineseCharacter.getCantonesePronunciation()) {
+            String audioFilePath = "./Audio" + "/" + p + ".mp3";
+            File f = new File(audioFilePath);
+            if (f.exists()) {
+                toReturn.put(p, audioFilePath);
+            } else {
+                toReturn.put(p, null);
+            }
+        }
+
+        return toReturn;
+
     }
 
     /**

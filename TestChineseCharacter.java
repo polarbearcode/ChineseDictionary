@@ -1,7 +1,7 @@
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -13,6 +13,8 @@ public class TestChineseCharacter {
     private final CharacterList c = new CharacterList(testDictionaryPath);
     private final ChineseCharacter 汉 = new ChineseCharacter("汉", "漢",
             "hon3", "han4");
+
+    private final ChineseCharacter 種 = multiplePronunciationChar();
 
     @Test
     public void testAlreadyAdded() {
@@ -114,7 +116,38 @@ public class TestChineseCharacter {
 
     @Test
     public void testMultiplePronunciations() {
-        
+
+        CantoPAndT finder = new CantoPAndT(testMapPath);
+
+        finder.changeCharacterMapping("zung", "中");
+
+        List<String[]> expected = new ArrayList<>();
+        String[] firstCombo = new String[]{"中", "茄"};
+        String[] secondCombo = new String[]{"中", "酱"};
+
+        expected.add(firstCombo);
+        expected.add(secondCombo);
+
+        assertArrayEquals(expected.get(0), finder.characterCombo(種).get(0));
+        assertArrayEquals(expected.get(1), finder.characterCombo(種).get(1));
+
+       cleanUpDictionary();
+    }
+
+    @Test
+    public void testAudioFinder() {
+
+        Map<String, String> expected = new HashMap<>();
+        expected.put("hon3", "./Audio/hon3.mp3");
+        assertEquals(expected, c.findAudio(汉));
+
+        Map<String, String> expected2 = new HashMap<>();
+        expected2.put("zung2", "./Audio/zung2.mp3");
+        expected2.put("zung3", "./Audio/zung3.mp3");
+        assertEquals(expected2, c.findAudio(種));
+
+        cleanUpDictionary();
+
     }
 
 
@@ -130,5 +163,19 @@ public class TestChineseCharacter {
         for (String p : finder.getPronunCharacters().keySet()) {
             finder.deleteCharacterMapping(p);
         }
+    }
+
+    /** Helper function to create a character with multiple pronunciations.
+     * @return  A Chinese character that has a list of pronunciations.  **/
+    private ChineseCharacter multiplePronunciationChar() {
+
+        List<String> pronunciations = new ArrayList<>();
+        pronunciations.add("zung2");
+        pronunciations.add("zung3");
+
+        ChineseCharacter 種 = new ChineseCharacter("種", "种", pronunciations,
+                "zhong3");
+
+        return 種;
     }
 }

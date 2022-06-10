@@ -12,8 +12,8 @@ public class ChineseCharacter implements Serializable {
     /**String for the traditional character. **/
     private String traditional;
 
-    /** A Map for the Cantonese pronunciation of the character and the relevant audio file. **/
-    private Map<String, String> cantonesePronunciation;
+    /** A Map for the Cantonese pronunciation(s) of the character **/
+    private Set<String> cantonesePronunciation;
 
     /** Strings for the pinyin pronunciation of the character. **/
     private Set<String> pinyin;
@@ -34,12 +34,31 @@ public class ChineseCharacter implements Serializable {
     public ChineseCharacter(String simplified, String traditional, String cp,
                             String py) {
 
+        this(simplified, traditional, Collections.singletonList(cp), py);
+
+    }
+
+    /**
+     * Create a Chinese character. User inputs a list of pronunciations.
+     * Saves to the provided dictionary.
+     * If the character is already in the dictionary, update it if
+     * the provided parameters are different.
+     * @param simplified String for simplified character.
+     * @param traditional String for traditional character.
+     * @param cp    String for the cantonese pronunciation.
+     * @param py    String for the pinyin.
+     */
+    public ChineseCharacter(String simplified, String traditional, List<String> cp,
+                            String py) {
+
 
         this.simplified = simplified;
         this.traditional = traditional;
 
-        this.cantonesePronunciation = new HashMap<>();
+        this.cantonesePronunciation = new HashSet<>();
         this.pinyin = new HashSet<>();
+
+        this.cantonesePronunciation.addAll(cp);
 
         this.pinyin.add(py);
 
@@ -58,7 +77,7 @@ public class ChineseCharacter implements Serializable {
     }
 
     /** Get the Cantonese pronunciation(s). **/
-    public Map<String, String> getCantonesePronunciation() {
+    public Set<String> getCantonesePronunciation() {
         return this.cantonesePronunciation;
     }
 
@@ -75,10 +94,10 @@ public class ChineseCharacter implements Serializable {
 
     /** Add a Cantonese pronunciation for this character.
      * @param pronunciation A String for the pronunciation.
-     * @param audio Path to corresponding audio file.
+
      * **/
-    public void addCantonesePronunciation(String pronunciation, String audio) {
-        this.cantonesePronunciation.put(pronunciation, audio);
+    public void addCantonesePronunciation(String pronunciation) {
+        this.cantonesePronunciation.add(pronunciation);
     }
 
     /** Add a Mandarin pronunciation for this character.

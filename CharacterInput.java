@@ -48,6 +48,7 @@ public class CharacterInput {
         this.mainFrame = new JFrame("Character Input");
         this.mainFrame.setSize(this.frameWidth, this.frameHeight);
         this.addFiveTextBoxes();
+        this.addAddButton();
         this.mainFrame.setLayout(null);
         this.mainFrame.setVisible(true);
     }
@@ -63,7 +64,7 @@ public class CharacterInput {
         double inputWidthProportion = 0.45;
         double inputHeightProportion = 0.07;
         double marginBetweenLabelAndBoxProportion = 0.05;
-        double marginBetweenSectionsProportion = 0.17;
+        double marginBetweenSectionsProportion = 0.1;
 
 
 
@@ -75,7 +76,7 @@ public class CharacterInput {
         int marginBetweenLabelAndInput = (int)(this.frameWidth * marginBetweenLabelAndBoxProportion);
         int marginBetweenSections = (int)(this.frameHeight * marginBetweenSectionsProportion);
 
-        int startY = frameHeight - this.topAndBotMargin;
+        int startY = frameHeight - this.topAndBotMargin * 6;
 
         String[] labelStrings = new String[]{"Examples", "Pinyin", "Cantonese Pronunciations",
                 "Traditional Character", "Simplified Character"};
@@ -98,6 +99,18 @@ public class CharacterInput {
             this.mainFrame.add(textInput);
 
         }
+    }
+
+    /**
+     * Add an "Add" button to the main frame so user can save the inputted character.
+     */
+    private void addAddButton() {
+        JButton addButton = new JButton("Add Character");
+        int yPosition = this.frameHeight - this.topAndBotMargin * 5;
+        int buttonWidth = (int) (this.frameWidth * 0.5);
+        int buttonHeight = (int) (this.frameHeight * 0.1);
+        addButton.setBounds((int)(this.frameWidth * 0.25), yPosition, buttonWidth, buttonHeight);
+        this.mainFrame.add(addButton);
     }
 
 

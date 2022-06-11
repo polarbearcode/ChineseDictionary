@@ -1,12 +1,12 @@
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CharacterInput {
 
@@ -23,7 +23,7 @@ public class CharacterInput {
     private JFrame mainFrame;
 
     /** Save the JTextAreas to get the information. **/
-    private List<JTextArea> inputTextList;
+    private Map<String, JTextArea> inputTextList;
 
     /** The margin percentage relative to all the window edges. **/
     private final double marginPercentage = 0.05;
@@ -44,7 +44,7 @@ public class CharacterInput {
         this.frameHeight = h;
         this.topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
         this.leftAndRightMargin = (int) (this.frameWidth * marginPercentage);
-        this.inputTextList = new ArrayList<>();
+        this.inputTextList = new HashMap<>();
         this.mainFrame = new JFrame("Character Input");
         this.mainFrame.setSize(this.frameWidth, this.frameHeight);
         this.addFiveTextBoxes();
@@ -93,7 +93,7 @@ public class CharacterInput {
                     curHeight, inputWidth, inputHeight);
             textInput.setBackground(Color.cyan);
 
-            this.inputTextList.add(textInput);
+            this.inputTextList.put(labelStrings[i], textInput);
 
             this.mainFrame.add(label);
             this.mainFrame.add(textInput);
@@ -110,7 +110,74 @@ public class CharacterInput {
         int buttonWidth = (int) (this.frameWidth * 0.5);
         int buttonHeight = (int) (this.frameHeight * 0.1);
         addButton.setBounds((int)(this.frameWidth * 0.25), yPosition, buttonWidth, buttonHeight);
+        addButton.setActionCommand("Add Character");
         this.mainFrame.add(addButton);
+    }
+
+    /**
+     * Get a copy of inputTextList.
+     * @return  A copy of the user input mapping (inputTextList)
+     */
+    public Map<String, JTextArea> getInputTextList() {
+
+        Map<String, JTextArea> copy = new HashMap<>();
+        copy.putAll(this.inputTextList);
+        return copy;
+    }
+    private class AddButtonListener implements  ActionListener {
+
+        /** Get the inputTextList from Character Input class. **/
+        Map<String, JTextArea> userInputInfo = getInputTextList();
+
+        /** Regex to check no alphanumeric characters in the simplified/traditional text boxes. **/
+        Pattern characterChecker = Pattern.compile("[^a-zA-Z/d]");
+
+        /** Regex to check pronunciations are in the right format for Cantonese pronunciation. **/
+        Pattern cPronunciationPattern = Pattern.compile("([a-zA-Z]+[1-6])+");
+
+        /** Regex to check pinyin is in the right format **/
+        Pattern mPronunciationPattern = Pattern.compile("([a-zA-Z]+[1-4]?)+");
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String command = e.getActionCommand();
+            if (command.equals("Add Character")) {
+                for (String label : userInputInfo.keySet()) {
+                    String inputtedValue = userInputInfo.get(label).getText();
+                    if (inputtedValue == null) {
+                        // put a label at the top of the window
+                        break;
+                    } else if (label.equals("Simplified Character") || label.equals("Traditional Character"))  {
+                        Matcher charMatcher = characterChecker.matcher(inputtedValue);
+
+                        if (charMatcher.find() == false || inputtedValue.length() != 1) {
+                            // put label at the top of the window
+                            break;
+                        }
+                    }  else if (label.equals("Cantonese Pronunciation")) {
+                        Matcher cMatcher = this.cPronunciationPattern.matcher(inputtedValue);
+
+                        if (cMatcher.find() == false) {
+                            // put label at the top of the window
+                            break;
+                        }
+                    } else if (label.equals("Pinyin")) {
+                        Matcher pMatcher = this.mPronunciationPattern.matcher(inputtedValue);
+                        if (pMatcher.find() == false) {
+                            // put label at the top of the window
+                            break;
+                        }
+                    } else {
+                        if (!inputtedValue.contains(this.userInputInfo.get("Simplified Character").getText())) {
+                            // put label at the top of the window
+                            break;
+                        }
+                    }
+
+
+                }
+            }
+        }
     }
 
 

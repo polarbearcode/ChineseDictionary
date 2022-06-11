@@ -28,6 +28,12 @@ public class CharacterInput {
     /** The margin percentage relative to all the window edges. **/
     private final double marginPercentage = 0.05;
 
+    /** The margin from the top and bottom window edges for the text area. **/
+    private int topAndBotMargin;
+
+    /** The margin from the left and right edges for the text area. **/
+    private int leftAndRightMargin;
+
     /**
      * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
      * @param w int, the width of the window
@@ -36,6 +42,8 @@ public class CharacterInput {
     CharacterInput(int w, int h) {
         this.frameWidth = w;
         this.frameHeight = h;
+        this.topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
+        this.leftAndRightMargin = (int) (this.frameWidth * marginPercentage);
         this.inputTextList = new ArrayList<>();
         this.mainFrame = new JFrame("Character Input");
         this.mainFrame.setSize(this.frameWidth, this.frameHeight);
@@ -58,8 +66,6 @@ public class CharacterInput {
         double marginBetweenSectionsProportion = 0.17;
 
 
-        int topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
-        int leftAndRightMargin = (int) (this.frameWidth * marginPercentage);
 
         int labelWidth = (int)(this.frameWidth * labelWidthProportion);
         int labelHeight = (int) (this.frameHeight * labelHeightProportion);
@@ -69,7 +75,7 @@ public class CharacterInput {
         int marginBetweenLabelAndInput = (int)(this.frameWidth * marginBetweenLabelAndBoxProportion);
         int marginBetweenSections = (int)(this.frameHeight * marginBetweenSectionsProportion);
 
-        int startY = frameHeight - topAndBotMargin;
+        int startY = frameHeight - this.topAndBotMargin;
 
         String[] labelStrings = new String[]{"Examples", "Pinyin", "Cantonese Pronunciations",
                 "Traditional Character", "Simplified Character"};
@@ -79,10 +85,10 @@ public class CharacterInput {
             JLabel label = new JLabel(labelStrings[i]);
             label.setFont(this.labelFont);
             int curHeight = startY - (marginBetweenSections * (i + 1));
-            label.setBounds(leftAndRightMargin, curHeight, labelWidth, labelHeight);
+            label.setBounds(this.leftAndRightMargin, curHeight, labelWidth, labelHeight);
 
             JTextArea textInput = new JTextArea();
-            textInput.setBounds(leftAndRightMargin + labelWidth + marginBetweenLabelAndInput,
+            textInput.setBounds(this.leftAndRightMargin + labelWidth + marginBetweenLabelAndInput,
                     curHeight, inputWidth, inputHeight);
             textInput.setBackground(Color.cyan);
 

@@ -150,53 +150,58 @@ public class CharacterInput {
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
 
+            JTextArea errorTextArea = null;
+            String errorMessage = "";
+
             if (command.equals("Add Character")) {
                 for (String label : inputTextList.keySet()) {
-                    String inputtedValue = inputTextList.get(label).getText();
+                    JTextArea textArea = inputTextList.get(label);
+                    errorTextArea = textArea;
+                    String inputtedValue = textArea.getText();
                     if (inputtedValue.equals("")) {
-                        errorLabel.setText("Missing " + label + " field");
+                        errorMessage = "Missing " + label;
                         break;
                     } else if (label.equals("Simplified Character") || label.equals("Traditional Character"))  {
                         Matcher charMatcher = characterChecker.matcher(inputtedValue);
 
                         if (!charMatcher.find() || inputtedValue.length() != 1) {
-                            errorLabel.setText("Characters must be length 1 and can not contain alphanumeric");
+                            errorMessage = "Characters must be length 1 and can not contain alphanumeric";
                             break;
                         }
                     }  else if (label.equals("Cantonese Pronunciation")) {
                         Matcher cMatcher = this.cPronunciationPattern.matcher(inputtedValue);
 
                         if (!cMatcher.find()) {
-                            errorLabel.setText("Fix " + label);
+                            errorMessage = "Fix " + label;
                             break;
                         }
                     } else if (label.equals("Pinyin")) {
                         Matcher pMatcher = this.mPronunciationPattern.matcher(inputtedValue);
                         if (!pMatcher.find()) {
-                            errorLabel.setText("Fix " + label);
+                            errorMessage = "Fix " + label;
                             break;
                         }
                     } else {
                         String chineseChar = inputTextList.get("Simplified Character").getText();
                         if (!inputtedValue.contains(chineseChar)) {
-                            errorLabel.setText("Example must contain" + chineseChar);
+                            errorMessage = "Example must contain" + chineseChar;
                             break;
                         }
                     }
+                }
 
-
+                if (!errorMessage.equals("")) {
+                    createErrorMessage(errorMessage, errorTextArea);
                 }
             }
         }
 
         /** Put the error message on the main frame.
-         * @param  message  The message to display. **/
-        private void createErrorMessage(String message) {
-            JLabel errorLabel = new JLabel(message);
-            errorLabel.setFont(labelFont);
-            errorLabel.setBounds((int)(frameWidth * 0.2), (int) (topAndBotMargin),
-                    (int)(frameWidth * 0.6), (int)(frameHeight * 0.2));
-            mainFrame.add(errorLabel);
+         * @param  message  The message to display.
+         * @param textArea The JText area with the error**/
+        private void createErrorMessage(String message, JTextArea textArea) {
+            errorLabel.setText(message);
+            textArea.setBackground(Color.RED);
 
         }
     }
@@ -204,40 +209,6 @@ public class CharacterInput {
 
 
     public static void main(String[] args) {
-
-        /**
-        JFrame mainFrame = new JFrame("Character Input");
-        mainFrame.setSize(400,400);
-
-        mainFrame.getContentPane().setBackground(Color.YELLOW);
-
-        Font labelFont = new Font("Comic Sans MS", Font.BOLD, 16);
-
-        JLabel simplifiedChar = new JLabel("Simplified Character");
-        simplifiedChar.setFont(labelFont);
-        simplifiedChar.setBounds(50, 30, 250, 20);
-
-        JTextArea simplifiedCharacterText = new JTextArea("");
-        simplifiedCharacterText.setBounds(250, 30, 100, 20);
-        simplifiedCharacterText.setBackground(Color.cyan);
-
-        JLabel tradChar = new JLabel("Traditional Character");
-        tradChar.setFont(labelFont);
-        tradChar.setBounds(50, 60, 250, 20);
-
-        JTextArea tradCharText = new JTextArea("");
-        tradCharText.setBounds(250, 60, 100, 20);
-        tradCharText.setBackground(Color.cyan);
-
-
-        mainFrame.add(simplifiedCharacterText);
-        mainFrame.add(simplifiedChar);
-        mainFrame.add(tradChar);
-        mainFrame.add(tradCharText);
-
-        mainFrame.setLayout(null);
-
-        mainFrame.setVisible(true); **/
 
         new CharacterInput(500, 500);
 

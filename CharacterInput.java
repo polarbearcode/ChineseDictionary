@@ -1,7 +1,5 @@
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -23,7 +21,17 @@ public class CharacterInput {
     private JFrame mainFrame;
 
     /** Save the JTextAreas to get the information. **/
-    private List<JTextArea> inputTextList;
+    private Map<String, JTextArea> inputTextList;
+
+    /** Margin percentage from window edges on all sides for text area. **/
+    private final double marginPercentage = 0.1;
+
+    /** The top and bottom margin from window edges for the text area. **/
+    private final int topAndBotMargin;
+
+    /** The left and right margin from window edges for the text area. **/
+    private final int leftAndRightMargin;
+
 
     /**
      * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
@@ -33,12 +41,15 @@ public class CharacterInput {
     CharacterInput(int w, int h) {
         this.frameWidth = w;
         this.frameHeight = h;
-        this.inputTextList = new ArrayList<>();
+        this.inputTextList = new HashMap<>();
         this.mainFrame = new JFrame("Character Input");
         this.mainFrame.setSize(this.frameWidth, this.frameHeight);
         this.addFiveTextBoxes();
         this.mainFrame.setLayout(null);
         this.mainFrame.setVisible(true);
+
+        this.topAndBotMargin =  (int) (this.frameHeight * this.marginPercentage);
+        this.leftAndRightMargin = (int) (this.frameWidth * this.marginPercentage);
     }
 
     /**
@@ -46,17 +57,13 @@ public class CharacterInput {
      * pinyin, and examples to the main frame of this.
      */
     private void addFiveTextBoxes() {
-        double marginPercentage = 0.05;
+
         double labelWidthProportion = 0.4;
         double labelHeightProportion = 0.07;
         double inputWidthProportion = 0.45;
         double inputHeightProportion = 0.07;
         double marginBetweenLabelAndBoxProportion = 0.05;
-        double marginBetweenSectionsProportion = 0.17;
-
-
-        int topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
-        int leftAndRightMargin = (int) (this.frameWidth * marginPercentage);
+        double marginBetweenSectionsProportion = 0.13;
 
         int labelWidth = (int)(this.frameWidth * labelWidthProportion);
         int labelHeight = (int) (this.frameHeight * labelHeightProportion);
@@ -66,7 +73,7 @@ public class CharacterInput {
         int marginBetweenLabelAndInput = (int)(this.frameWidth * marginBetweenLabelAndBoxProportion);
         int marginBetweenSections = (int)(this.frameHeight * marginBetweenSectionsProportion);
 
-        int startY = frameHeight - topAndBotMargin;
+        int startY = frameHeight - this.topAndBotMargin * 5;
 
         String[] labelStrings = new String[]{"Examples", "Pinyin", "Cantonese Pronunciations",
                 "Traditional Character", "Simplified Character"};
@@ -76,19 +83,27 @@ public class CharacterInput {
             JLabel label = new JLabel(labelStrings[i]);
             label.setFont(this.labelFont);
             int curHeight = startY - (marginBetweenSections * (i + 1));
-            label.setBounds(leftAndRightMargin, curHeight, labelWidth, labelHeight);
+            label.setBounds(this.leftAndRightMargin, curHeight, labelWidth, labelHeight);
 
             JTextArea textInput = new JTextArea();
-            textInput.setBounds(leftAndRightMargin + labelWidth + marginBetweenLabelAndInput,
+            textInput.setBounds(this.leftAndRightMargin + labelWidth + marginBetweenLabelAndInput,
                     curHeight, inputWidth, inputHeight);
             textInput.setBackground(Color.cyan);
 
-            this.inputTextList.add(textInput);
+            this.inputTextList.put(labelStrings[i], textInput);
 
             this.mainFrame.add(label);
             this.mainFrame.add(textInput);
-
         }
+    }
+
+    /**
+     * Add an "Add" button to the main frame.
+     */
+    private void addAddButton() {
+        JButton addButton = new JButton("Add Character");
+        addButton.setBounds((int) (this.frameWidth * 0.5), this.frameHeight - this.topAndBotMargin,
+                20, 20);
     }
 
 

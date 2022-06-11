@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import java.awt.Font;
@@ -24,44 +26,68 @@ public class CharacterInput {
     private List<JTextArea> inputTextList;
 
     /**
+     * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
+     * @param w int, the width of the window
+     * @param h int, the height of the windows.
+     */
+    CharacterInput(int w, int h) {
+        this.frameWidth = w;
+        this.frameHeight = h;
+        this.inputTextList = new ArrayList<>();
+        this.mainFrame = new JFrame("Character Input");
+        this.mainFrame.setSize(this.frameWidth, this.frameHeight);
+        this.addFiveTextBoxes();
+        this.mainFrame.setLayout(null);
+        this.mainFrame.setVisible(true);
+    }
+
+    /**
      * Add the 5 required text boxes and their labels (simplified char, traditional char, cantonese pronunciation,
      * pinyin, and examples to the main frame of this.
      */
     private void addFiveTextBoxes() {
-        double marginPercentage = 0.1;
-        double labelWidthProportion = 0.25;
-        double labelHeightProportion = 0.1;
-        double inputWidthProportion = 0.5;
-        double inputHeightProportion = 0.1;
+        double marginPercentage = 0.05;
+        double labelWidthProportion = 0.4;
+        double labelHeightProportion = 0.07;
+        double inputWidthProportion = 0.45;
+        double inputHeightProportion = 0.07;
+        double marginBetweenLabelAndBoxProportion = 0.05;
+        double marginBetweenSectionsProportion = 0.17;
 
 
         int topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
         int leftAndRightMargin = (int) (this.frameWidth * marginPercentage);
-
-        int startY = frameHeight - topAndBotMargin;
-        int startX = leftAndRightMargin;
 
         int labelWidth = (int)(this.frameWidth * labelWidthProportion);
         int labelHeight = (int) (this.frameHeight * labelHeightProportion);
 
         int inputWidth = (int)(this.frameWidth * inputWidthProportion);
         int inputHeight = (int)(this.frameHeight * inputHeightProportion);
+        int marginBetweenLabelAndInput = (int)(this.frameWidth * marginBetweenLabelAndBoxProportion);
+        int marginBetweenSections = (int)(this.frameHeight * marginBetweenSectionsProportion);
 
-        String[] labelStrings = new String[]{"Simplified Character", "Traditional Character"
-                ,"Cantonese Pronunciations", "Pinyin", "Examples"};
+        int startY = frameHeight - topAndBotMargin;
 
-        for (int i = 0; i < labelStrings.length; i = i + 1) {
+        String[] labelStrings = new String[]{"Examples", "Pinyin", "Cantonese Pronunciations",
+                "Traditional Character", "Simplified Character"};
+
+
+        for (int i = 0; i <  labelStrings.length; i = i + 1) {
             JLabel label = new JLabel(labelStrings[i]);
             label.setFont(this.labelFont);
-            int curHeight = startY - (10 * i);
+            int curHeight = startY - (marginBetweenSections * (i + 1));
             label.setBounds(leftAndRightMargin, curHeight, labelWidth, labelHeight);
 
             JTextArea textInput = new JTextArea();
-            textInput.setBounds(leftAndRightMargin + labelWidth, curHeight, inputWidth, inputHeight);
+            textInput.setBounds(leftAndRightMargin + labelWidth + marginBetweenLabelAndInput,
+                    curHeight, inputWidth, inputHeight);
+            textInput.setBackground(Color.cyan);
 
             this.inputTextList.add(textInput);
 
-            
+            this.mainFrame.add(label);
+            this.mainFrame.add(textInput);
+
         }
     }
 
@@ -69,6 +95,7 @@ public class CharacterInput {
 
     public static void main(String[] args) {
 
+        /**
         JFrame mainFrame = new JFrame("Character Input");
         mainFrame.setSize(400,400);
 
@@ -100,9 +127,9 @@ public class CharacterInput {
 
         mainFrame.setLayout(null);
 
-        mainFrame.setVisible(true);
+        mainFrame.setVisible(true); **/
 
-
+        new CharacterInput(500, 500);
 
     }
 

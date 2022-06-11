@@ -49,6 +49,7 @@ public class CharacterInput {
         this.mainFrame.setSize(this.frameWidth, this.frameHeight);
         this.addFiveTextBoxes();
         this.addAddButton();
+
         this.mainFrame.setLayout(null);
         this.mainFrame.setVisible(true);
     }
@@ -111,6 +112,7 @@ public class CharacterInput {
         int buttonHeight = (int) (this.frameHeight * 0.1);
         addButton.setBounds((int)(this.frameWidth * 0.25), yPosition, buttonWidth, buttonHeight);
         addButton.setActionCommand("Add Character");
+        addButton.addActionListener(new AddButtonListener());
         this.mainFrame.add(addButton);
     }
 
@@ -126,9 +128,6 @@ public class CharacterInput {
     }
     private class AddButtonListener implements  ActionListener {
 
-        /** Get the inputTextList from Character Input class. **/
-        Map<String, JTextArea> userInputInfo = getInputTextList();
-
         /** Regex to check no alphanumeric characters in the simplified/traditional text boxes. **/
         Pattern characterChecker = Pattern.compile("[^a-zA-Z/d]");
 
@@ -142,34 +141,35 @@ public class CharacterInput {
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
             if (command.equals("Add Character")) {
-                for (String label : userInputInfo.keySet()) {
-                    String inputtedValue = userInputInfo.get(label).getText();
-                    if (inputtedValue == null) {
-                        // put a label at the top of the window
+                for (String label : inputTextList.keySet()) {
+                    String inputtedValue = inputTextList.get(label).getText();
+                    if (inputtedValue.equals("")) {
+                        createErrorMessage("Missing " + label + " field");
                         break;
                     } else if (label.equals("Simplified Character") || label.equals("Traditional Character"))  {
                         Matcher charMatcher = characterChecker.matcher(inputtedValue);
 
-                        if (charMatcher.find() == false || inputtedValue.length() != 1) {
-                            // put label at the top of the window
+                        if (!charMatcher.find() || inputtedValue.length() != 1) {
+                            createErrorMessage("Characters must be length 1 and can not contain alphanumeric");
                             break;
                         }
                     }  else if (label.equals("Cantonese Pronunciation")) {
                         Matcher cMatcher = this.cPronunciationPattern.matcher(inputtedValue);
 
-                        if (cMatcher.find() == false) {
-                            // put label at the top of the window
+                        if (!cMatcher.find()) {
+                            createErrorMessage("Fix " + label);
                             break;
                         }
                     } else if (label.equals("Pinyin")) {
                         Matcher pMatcher = this.mPronunciationPattern.matcher(inputtedValue);
-                        if (pMatcher.find() == false) {
-                            // put label at the top of the window
+                        if (!pMatcher.find()) {
+                            createErrorMessage("Fix " + label);
                             break;
                         }
                     } else {
-                        if (!inputtedValue.contains(this.userInputInfo.get("Simplified Character").getText())) {
-                            // put label at the top of the window
+                        String chineseChar = inputTextList.get("Simplified Character").getText();
+                        if (!inputtedValue.contains(chineseChar)) {
+                            createErrorMessage("Example must contain" + chineseChar);
                             break;
                         }
                     }
@@ -177,6 +177,17 @@ public class CharacterInput {
 
                 }
             }
+        }
+
+        /** Put the error message on the main frame.
+         * @param  message  The message to display. **/
+        private void createErrorMessage(String message) {
+            JLabel errorLabel = new JLabel(message);
+            errorLabel.setFont(labelFont);
+            errorLabel.setBounds((int)(frameWidth * 0.2), (int) (topAndBotMargin),
+                    (int)(frameWidth * 0.6), (int)(frameHeight * 0.2));
+            mainFrame.add(errorLabel);
+
         }
     }
 

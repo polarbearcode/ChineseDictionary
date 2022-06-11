@@ -25,6 +25,9 @@ public class CharacterInput {
     /** Save the JTextAreas to get the information. **/
     private List<JTextArea> inputTextList;
 
+    /** The margin percentage relative to all the window edges. **/
+    private final double marginPercentage = 0.05;
+
     /**
      * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
      * @param w int, the width of the window
@@ -46,7 +49,7 @@ public class CharacterInput {
      * pinyin, and examples to the main frame of this.
      */
     private void addFiveTextBoxes() {
-        double marginPercentage = 0.05;
+
         double labelWidthProportion = 0.4;
         double labelHeightProportion = 0.07;
         double inputWidthProportion = 0.45;

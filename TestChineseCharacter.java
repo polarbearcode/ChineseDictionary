@@ -155,8 +155,6 @@ public class TestChineseCharacter {
 
         cleanUpDictionary();
 
-        int x = 10;
-
     }
 
 

@@ -34,6 +34,9 @@ public class CharacterInput {
     /** The margin from the left and right edges for the text area. **/
     private int leftAndRightMargin;
 
+    /** The label to show error message when user inputs information. **/
+    private JLabel errorLabel;
+
     /**
      * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
      * @param w int, the width of the window
@@ -52,6 +55,12 @@ public class CharacterInput {
 
         this.mainFrame.setLayout(null);
         this.mainFrame.setVisible(true);
+
+        this.errorLabel = new JLabel();
+        this.errorLabel.setFont(this.labelFont);
+        this.errorLabel.setBounds((int)(this.frameWidth * 0.2), this.topAndBotMargin,
+                (int)(this.frameWidth * 0.6), (int)(this.frameHeight * 0.2));
+        this.mainFrame.add(this.errorLabel);
     }
 
     /**
@@ -140,36 +149,37 @@ public class CharacterInput {
         @Override
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
+
             if (command.equals("Add Character")) {
                 for (String label : inputTextList.keySet()) {
                     String inputtedValue = inputTextList.get(label).getText();
                     if (inputtedValue.equals("")) {
-                        createErrorMessage("Missing " + label + " field");
+                        errorLabel.setText("Missing " + label + " field");
                         break;
                     } else if (label.equals("Simplified Character") || label.equals("Traditional Character"))  {
                         Matcher charMatcher = characterChecker.matcher(inputtedValue);
 
                         if (!charMatcher.find() || inputtedValue.length() != 1) {
-                            createErrorMessage("Characters must be length 1 and can not contain alphanumeric");
+                            errorLabel.setText("Characters must be length 1 and can not contain alphanumeric");
                             break;
                         }
                     }  else if (label.equals("Cantonese Pronunciation")) {
                         Matcher cMatcher = this.cPronunciationPattern.matcher(inputtedValue);
 
                         if (!cMatcher.find()) {
-                            createErrorMessage("Fix " + label);
+                            errorLabel.setText("Fix " + label);
                             break;
                         }
                     } else if (label.equals("Pinyin")) {
                         Matcher pMatcher = this.mPronunciationPattern.matcher(inputtedValue);
                         if (!pMatcher.find()) {
-                            createErrorMessage("Fix " + label);
+                            errorLabel.setText("Fix " + label);
                             break;
                         }
                     } else {
                         String chineseChar = inputTextList.get("Simplified Character").getText();
                         if (!inputtedValue.contains(chineseChar)) {
-                            createErrorMessage("Example must contain" + chineseChar);
+                            errorLabel.setText("Example must contain" + chineseChar);
                             break;
                         }
                     }

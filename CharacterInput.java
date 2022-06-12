@@ -150,54 +150,71 @@ public class CharacterInput {
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
 
+            if (command.equals("Add Character")) {
+                checkForErrors();
+
+                if (errorLabel.getText().equals("")) {
+                    getUserInfo();
+                }
+
+            }
+        }
+
+        /**
+         * Check user input for errors. Add a label to the window if there are errors.
+         */
+        private void checkForErrors() {
             resetTextboxColors();
             errorLabel.setText("");
-
             JTextArea errorTextArea = null;
             String errorMessage = "";
+            for (String label : inputTextList.keySet()) {
+                JTextArea textArea = inputTextList.get(label);
+                errorTextArea = textArea;
+                String inputtedValue = textArea.getText();
+                if (inputtedValue.equals("")) {
+                    errorMessage = "Missing " + label;
+                    break;
+                } else if (label.equals("Simplified Character") || label.equals("Traditional Character"))  {
+                    Matcher charMatcher = characterChecker.matcher(inputtedValue);
 
-            if (command.equals("Add Character")) {
-                for (String label : inputTextList.keySet()) {
-                    JTextArea textArea = inputTextList.get(label);
-                    errorTextArea = textArea;
-                    String inputtedValue = textArea.getText();
-                    if (inputtedValue.equals("")) {
-                        errorMessage = "Missing " + label;
+                    if (!charMatcher.find() || inputtedValue.length() != 1) {
+                        errorMessage = "Characters must be length 1 and can not contain alphanumeric";
                         break;
-                    } else if (label.equals("Simplified Character") || label.equals("Traditional Character"))  {
-                        Matcher charMatcher = characterChecker.matcher(inputtedValue);
+                    }
+                }  else if (label.equals("Cantonese Pronunciations")) {
+                    Matcher cMatcher = this.cPronunciationPattern.matcher(inputtedValue);
 
-                        if (!charMatcher.find() || inputtedValue.length() != 1) {
-                            errorMessage = "Characters must be length 1 and can not contain alphanumeric";
-                            break;
-                        }
-                    }  else if (label.equals("Cantonese Pronunciations")) {
-                        Matcher cMatcher = this.cPronunciationPattern.matcher(inputtedValue);
-
-                        if (!cMatcher.find()) {
-                            errorMessage = "Fix " + label;
-                            break;
-                        }
-                    } else if (label.equals("Pinyin")) {
-                        Matcher pMatcher = this.mPronunciationPattern.matcher(inputtedValue);
-                        if (!pMatcher.find()) {
-                            errorMessage = "Fix " + label;
-                            break;
-                        }
-                    } else {
-                        String chineseChar = inputTextList.get("Simplified Character").getText();
-                        String example = textArea.getText();
-                        if (!example.contains(chineseChar)) {
-                            errorMessage = "Example must contain " + chineseChar;
-                            break;
-                        }
+                    if (!cMatcher.find()) {
+                        errorMessage = "Fix " + label;
+                        break;
+                    }
+                } else if (label.equals("Pinyin")) {
+                    Matcher pMatcher = this.mPronunciationPattern.matcher(inputtedValue);
+                    if (!pMatcher.find()) {
+                        errorMessage = "Fix " + label;
+                        break;
+                    }
+                } else {
+                    String chineseChar = inputTextList.get("Simplified Character").getText();
+                    String example = textArea.getText();
+                    if (!example.contains(chineseChar)) {
+                        errorMessage = "Example must contain " + chineseChar;
+                        break;
                     }
                 }
-
-                if (!errorMessage.equals("")) {
-                    createErrorMessage(errorMessage, errorTextArea);
-                }
             }
+
+            if (!errorMessage.equals("")) {
+                createErrorMessage(errorMessage, errorTextArea);
+            }
+        }
+
+        /**
+         * Take user input from the GUI text boxes and save it to the Character Input class. 
+         */
+        private void getUserInfo() {
+
         }
 
         /** Put the error message on the main frame.

@@ -150,6 +150,9 @@ public class CharacterInput {
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
 
+            resetTextboxColors();
+            errorLabel.setText("");
+
             JTextArea errorTextArea = null;
             String errorMessage = "";
 
@@ -168,7 +171,7 @@ public class CharacterInput {
                             errorMessage = "Characters must be length 1 and can not contain alphanumeric";
                             break;
                         }
-                    }  else if (label.equals("Cantonese Pronunciation")) {
+                    }  else if (label.equals("Cantonese Pronunciations")) {
                         Matcher cMatcher = this.cPronunciationPattern.matcher(inputtedValue);
 
                         if (!cMatcher.find()) {
@@ -183,8 +186,9 @@ public class CharacterInput {
                         }
                     } else {
                         String chineseChar = inputTextList.get("Simplified Character").getText();
-                        if (!inputtedValue.contains(chineseChar)) {
-                            errorMessage = "Example must contain" + chineseChar;
+                        String example = textArea.getText();
+                        if (!example.contains(chineseChar)) {
+                            errorMessage = "Example must contain " + chineseChar;
                             break;
                         }
                     }
@@ -203,6 +207,16 @@ public class CharacterInput {
             errorLabel.setText(message);
             textArea.setBackground(Color.RED);
 
+        }
+
+        /**
+         * Reset the color for each text box back to the default.
+         */
+        private void resetTextboxColors() {
+            for (String label : inputTextList.keySet()) {
+                JTextArea textArea = inputTextList.get(label);
+                textArea.setBackground(Color.cyan);
+            }
         }
     }
 

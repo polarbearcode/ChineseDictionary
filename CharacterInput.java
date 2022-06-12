@@ -154,7 +154,7 @@ public class CharacterInput {
                 checkForErrors();
 
                 if (errorLabel.getText().equals("")) {
-                    getUserInfo();
+                    processUserInfo();
                 }
 
             }
@@ -211,9 +211,32 @@ public class CharacterInput {
         }
 
         /**
-         * Take user input from the GUI text boxes and save it to the Character Input class. 
+         * Take user input from the GUI text boxes and save it to the Character Input class.
          */
-        private void getUserInfo() {
+        private void processUserInfo() {
+
+            String simplifiedChar;
+            String traditionalChar;
+            Set<String> cantoPronunciations;
+            Set<String> pinyin;
+            Set<String> examples;
+
+            for (String label : inputTextList.keySet()) {
+                String enteredInfo = inputTextList.get(label).toString();
+                if (label.equals("Simplified Character")) {
+                    simplifiedChar = enteredInfo;
+                } else if (label.equals("Traditional Character")) {
+                    traditionalChar = enteredInfo;
+                } else if (label.equals("Cantonese Pronunciations")) {
+                    //cantonPronunciations = processEnteredPronunciations();
+
+                } else if (label.equals("Pinyin")) {
+                    //pinyin = processEnteredPronunciations;
+                } else {
+                    //examples = processEnteredExamples;
+                }
+
+            }
 
         }
 

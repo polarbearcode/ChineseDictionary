@@ -37,6 +37,9 @@ public class CharacterInput {
     /** The label to show error message when user inputs information. **/
     private JLabel errorLabel;
 
+    /** A Map containing the character information the user inputted. **/
+    private Map<String, Object> characterInfoMap;
+
     /**
      * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
      * @param w int, the width of the window
@@ -48,6 +51,7 @@ public class CharacterInput {
         this.topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
         this.leftAndRightMargin = (int) (this.frameWidth * marginPercentage);
         this.inputTextList = new HashMap<>();
+        this.characterInfoMap = new HashMap<>();
         this.mainFrame = new JFrame("Character Input");
         this.mainFrame.setSize(this.frameWidth, this.frameHeight);
         this.addFiveTextBoxes();
@@ -61,6 +65,7 @@ public class CharacterInput {
         this.errorLabel.setBounds((int)(this.frameWidth * 0.2), this.topAndBotMargin,
                 (int)(this.frameWidth * 0.6), (int)(this.frameHeight * 0.2));
         this.mainFrame.add(this.errorLabel);
+
     }
 
     /**
@@ -146,6 +151,21 @@ public class CharacterInput {
         /** Regex to check pinyin is in the right format **/
         Pattern mPronunciationPattern = Pattern.compile("([a-zA-Z]+[1-4]?)+");
 
+        /** To put in characterInfo map. **/
+        String simplifiedChar;
+
+        /** To put in characterInfo map. **/
+        String traditionalChar;
+
+        /** To put in characterInfo map. **/
+        Set<String> cantonPronunciations;
+
+        /** To put in characterInfo map. **/
+        Set<String> pinyin;
+
+        /** To put in characterInfo map. **/
+        Set<String> examples;
+
         @Override
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
@@ -215,29 +235,49 @@ public class CharacterInput {
          */
         private void processUserInfo() {
 
-            String simplifiedChar;
-            String traditionalChar;
-            Set<String> cantoPronunciations;
-            Set<String> pinyin;
-            Set<String> examples;
+
 
             for (String label : inputTextList.keySet()) {
-                String enteredInfo = inputTextList.get(label).toString();
+                String enteredInfo = inputTextList.get(label).getText();
                 if (label.equals("Simplified Character")) {
                     simplifiedChar = enteredInfo;
                 } else if (label.equals("Traditional Character")) {
                     traditionalChar = enteredInfo;
                 } else if (label.equals("Cantonese Pronunciations")) {
-                    //cantonPronunciations = processEnteredPronunciations();
+                    cantonPronunciations = processEnteredPronunciations(enteredInfo);
 
                 } else if (label.equals("Pinyin")) {
-                    //pinyin = processEnteredPronunciations;
+                    pinyin = processEnteredPronunciations(enteredInfo);
                 } else {
                     //examples = processEnteredExamples;
                 }
 
             }
 
+            characterInfoMap.put("Simplified character", simplifiedChar);
+            characterInfoMap.put("Traditional character", traditionalChar);
+            characterInfoMap.put("Cantonese pronunciations", cantonPronunciations);
+            characterInfoMap.put("Pinyin", pinyin);
+            characterInfoMap.put("Examples", examples);
+
+        }
+
+        /**
+         *
+         * @param enteredInfo
+         * @return
+         */
+        private Set<String> processEnteredPronunciations(String enteredInfo) {
+            
+            Matcher m = this.cPronunciationPattern.matcher(enteredInfo);
+            Set<String> enteredPronunciations = new HashSet<>();
+
+            for (int i = 1; i < m.groupCount(); i = i + 1) {
+                System.out.println(m.group(i));
+                enteredPronunciations.add(m.group(i));
+            }
+
+            return enteredPronunciations;
         }
 
         /** Put the error message on the main frame.

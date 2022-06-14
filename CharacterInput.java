@@ -40,12 +40,16 @@ public class CharacterInput {
     /** A Map containing the character information the user inputted. **/
     private Map<String, Object> characterInfoMap;
 
+    /** The dictionary where the character inputted will be added to. **/
+    private CharacterList characterDictionary;
+
     /**
      * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
      * @param w int, the width of the window
      * @param h int, the height of the windows.
+     * @param characterDictionary CharacterList, the character dictionary to save the input to.
      */
-    CharacterInput(int w, int h) {
+    CharacterInput(int w, int h, CharacterList characterDictionary) {
         this.frameWidth = w;
         this.frameHeight = h;
         this.topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
@@ -65,6 +69,8 @@ public class CharacterInput {
         this.errorLabel.setBounds((int)(this.frameWidth * 0.2), this.topAndBotMargin,
                 (int)(this.frameWidth * 0.6), (int)(this.frameHeight * 0.2));
         this.mainFrame.add(this.errorLabel);
+
+        this.characterDictionary = characterDictionary;
 
     }
 
@@ -325,7 +331,7 @@ public class CharacterInput {
 
     public static void main(String[] args) {
 
-        new CharacterInput(500, 500);
+        new CharacterInput(500, 500, new CharacterList("./testDictionary.srl"));
 
     }
 

@@ -182,4 +182,32 @@ public class TestChineseCharacter {
 
         return 種;
     }
+
+    @Test
+    public void testCharInput() {
+        cleanUpDictionary();
+        CharacterInput characterInput = new CharacterInput(500, 500, c);
+        CharacterInput.main(new String[]{});
+
+        Set<String> expectedCPronunciation = new HashSet<>();
+        expectedCPronunciation.add("zung2");
+        expectedCPronunciation.add("zung3");
+
+        Set<String> expectedPinyin = new HashSet<>();
+        expectedPinyin.add("zhong3");
+        expectedPinyin.add("zhong");
+
+        ChineseCharacter addedChar = c.lookUp("种");
+
+        assertEquals("种", addedChar.getSimplified());
+        assertEquals("種", addedChar.getTraditional());
+        assertEquals(expectedCPronunciation, addedChar.getCantonesePronunciation());
+        assertEquals(expectedPinyin, addedChar.getMandarinPronunciation());
+
+
+
+
+    }
+
+
 }

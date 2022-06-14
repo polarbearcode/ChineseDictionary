@@ -14,10 +14,10 @@ public class CharacterInput {
     private final Font labelFont = new Font("Comic Sans MS", Font.BOLD, 16);
 
     /** The width of the GUI window. **/
-    private int frameWidth;
+    private static int frameWidth;
 
     /** The height of the GUI windows. **/
-    private int frameHeight;
+    private static int frameHeight;
 
     /** The JFrame for the character input. **/
     private JFrame mainFrame;
@@ -41,7 +41,7 @@ public class CharacterInput {
     private Map<String, Object> characterInfoMap;
 
     /** The dictionary where the character inputted will be added to. **/
-    private CharacterList characterDictionary;
+    private static CharacterList characterDictionary;
 
     /**
      * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
@@ -331,7 +331,7 @@ public class CharacterInput {
 
     public static void main(String[] args) {
 
-        new CharacterInput(500, 500, new CharacterList("./testDictionary.srl"));
+        new CharacterInput(frameWidth, frameHeight, characterDictionary);
 
     }
 

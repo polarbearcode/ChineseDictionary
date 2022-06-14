@@ -151,6 +151,9 @@ public class CharacterInput {
         /** Regex to check pinyin is in the right format **/
         Pattern mPronunciationPattern = Pattern.compile("([a-zA-Z]+[1-4]?)+");
 
+        /** Regex to check for the example uses. **/
+        Pattern examplePattern = Pattern.compile("([\u4e00-\u9fa5]{2,})");
+
         /** To put in characterInfo map. **/
         String simplifiedChar;
 
@@ -249,7 +252,7 @@ public class CharacterInput {
                 } else if (label.equals("Pinyin")) {
                     pinyin = processEnteredPronunciations(enteredInfo);
                 } else {
-                    //examples = processEnteredExamples;
+                    examples = processEnteredExamples(enteredInfo);
                 }
 
             }
@@ -268,7 +271,7 @@ public class CharacterInput {
          * @return
          */
         private Set<String> processEnteredPronunciations(String enteredInfo) {
-            
+
             Matcher m = this.cPronunciationPattern.matcher(enteredInfo);
             Set<String> enteredPronunciations = new HashSet<>();
 
@@ -278,6 +281,24 @@ public class CharacterInput {
             }
 
             return enteredPronunciations;
+        }
+
+        /**
+         * Process the inputted examples into a set.
+         * @param examples  The inputted example broken up by commas.
+         * @return  A Set that contains the inputted examples.
+         */
+        private Set<String> processEnteredExamples(String examples) {
+            Set<String> toReturn = new HashSet<>();
+            Matcher exampleMatcher = this.examplePattern.matcher(examples);
+
+            for (int i = 0; i < exampleMatcher.groupCount(); i = i + 1) {
+                toReturn.add(exampleMatcher.group(i));
+            }
+
+            return toReturn;
+
+
         }
 
         /** Put the error message on the main frame.

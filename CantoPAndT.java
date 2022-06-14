@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -143,6 +140,17 @@ public class CantoPAndT implements PronunciationAndTone {
     /** Return the pronounCharacters mapping (not a copy) for testing. **/
     Map<String, String> getPronounCharactersTest() {
         return this.pronunCharacters;
+    }
+
+    void clearMapping() {
+        Iterator<Map.Entry<String, String>> itr = pronunCharacters.entrySet().iterator();
+
+        while (itr.hasNext()) {
+            itr.next();
+            itr.remove();
+        }
+
+        updatePronunciationMap();
     }
 
 }

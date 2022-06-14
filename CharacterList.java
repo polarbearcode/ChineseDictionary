@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /** Represents the current dictionary of all the characters. **/
 public class CharacterList {
@@ -181,6 +178,17 @@ public class CharacterList {
      */
     public int size() {
         return this.dictionary.size();
+    }
+
+    void clearDictionary() {
+        Iterator<Map.Entry<String, ChineseCharacter>> itr = dictionary.entrySet().iterator();
+
+        while (itr.hasNext()) {
+            itr.next();
+            itr.remove();
+        }
+
+        writeDictionaryToFile(dictionary);
     }
 
 }

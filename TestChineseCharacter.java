@@ -1,6 +1,5 @@
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -161,27 +160,13 @@ public class TestChineseCharacter {
     /** Clean up the dictionary after testing. **/
     private void cleanUpDictionary() {
 
-        Iterator<Map.Entry<String, ChineseCharacter>> itr = c.getCurrentDictionary().entrySet().iterator();
-
-        while (itr.hasNext()) {
-            itr.next();
-            itr.remove();
-        }
-
-        c.writeDictionaryToFile(c.getCurrentDictionary());
+        c.clearDictionary();
 
     }
 
     /** Clean up the pronunciation mapping after testing. **/
     private void cleanUpMapping(CantoPAndT finder) {
-        Iterator<Map.Entry<String, String>> itr = finder.getPronounCharactersTest().entrySet().iterator();
-
-        while (itr.hasNext()) {
-            itr.next();
-            itr.remove();
-        }
-
-        finder.updatePronunciationMap();
+        finder.clearMapping();
     }
 
     /** Helper function to create a character with multiple pronunciations.

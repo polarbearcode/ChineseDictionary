@@ -43,6 +43,9 @@ public class CharacterInput {
     /** The dictionary where the character inputted will be added to. **/
     private static CharacterList characterDictionary;
 
+    /** Boolean to stop while loop once character is added. **/
+    private boolean isCharAddded;
+
     /**
      * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
      * @param w int, the width of the window
@@ -71,6 +74,8 @@ public class CharacterInput {
         this.mainFrame.add(this.errorLabel);
 
         this.characterDictionary = characterDictionary;
+
+        this.isCharAddded = false;
 
     }
 
@@ -158,7 +163,7 @@ public class CharacterInput {
         Pattern mPronunciationPattern = Pattern.compile("([a-zA-Z]+[1-4]?)+");
 
         /** Regex to check for the example uses. **/
-        Pattern examplePattern = Pattern.compile("([\u4e00-\u9fa5]{2,})");
+        Pattern examplePattern = Pattern.compile("([一-龥]{2,})+");
 
         /** To put in characterInfo map. **/
         String simplifiedChar;
@@ -184,6 +189,7 @@ public class CharacterInput {
 
                 if (errorLabel.getText().equals("")) {
                     processUserInfo();
+                    isCharAddded = true;
                 }
 
             }
@@ -281,9 +287,11 @@ public class CharacterInput {
             Matcher m = this.cPronunciationPattern.matcher(enteredInfo);
             Set<String> enteredPronunciations = new HashSet<>();
 
-            for (int i = 1; i < m.groupCount(); i = i + 1) {
-                System.out.println(m.group(i));
-                enteredPronunciations.add(m.group(i));
+            if (m.find()) {
+                for (int i = 0; i < m.groupCount(); i = i + 1) {
+                    System.out.println(m.group(i));
+                    enteredPronunciations.add(m.group(i));
+                }
             }
 
             return enteredPronunciations;
@@ -298,8 +306,10 @@ public class CharacterInput {
             Set<String> toReturn = new HashSet<>();
             Matcher exampleMatcher = this.examplePattern.matcher(examples);
 
-            for (int i = 0; i < exampleMatcher.groupCount(); i = i + 1) {
-                toReturn.add(exampleMatcher.group(i));
+            if (exampleMatcher.find()) {
+                for (int i = 0; i < exampleMatcher.groupCount(); i = i + 1) {
+                    toReturn.add(exampleMatcher.group(i));
+                }
             }
 
             return toReturn;

@@ -197,12 +197,17 @@ public class TestChineseCharacter {
         expectedPinyin.add("zhong3");
         expectedPinyin.add("zhong");
 
+        Set<String> expectedExamples = new HashSet<>();
+        expectedExamples.add("种植");
+        expectedExamples.add("种群");
+
         ChineseCharacter addedChar = c.lookUp("种");
 
         assertEquals("种", addedChar.getSimplified());
         assertEquals("種", addedChar.getTraditional());
         assertEquals(expectedCPronunciation, addedChar.getCantonesePronunciation());
         assertEquals(expectedPinyin, addedChar.getMandarinPronunciation());
+        assertEquals(expectedExamples, addedChar.getExampleUses());
 
 
 

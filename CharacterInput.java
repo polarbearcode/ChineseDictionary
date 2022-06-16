@@ -1,3 +1,5 @@
+import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
+
 import javax.swing.*;
 import java.util.*;
 
@@ -7,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 public class CharacterInput {
 
@@ -115,6 +118,7 @@ public class CharacterInput {
             label.setBounds(this.leftAndRightMargin, curHeight, labelWidth, labelHeight);
 
             JTextArea textInput = new JTextArea();
+            textInput.setName(labelStrings[i]);
             textInput.setBounds(this.leftAndRightMargin + labelWidth + marginBetweenLabelAndInput,
                     curHeight, inputWidth, inputHeight);
             textInput.setBackground(Color.cyan);
@@ -132,6 +136,7 @@ public class CharacterInput {
      */
     private void addAddButton() {
         JButton addButton = new JButton("Add Character");
+        addButton.setName("Add Character");
         int yPosition = this.frameHeight - this.topAndBotMargin * 5;
         int buttonWidth = (int) (this.frameWidth * 0.5);
         int buttonHeight = (int) (this.frameHeight * 0.1);
@@ -335,6 +340,10 @@ public class CharacterInput {
                 textArea.setBackground(Color.cyan);
             }
         }
+    }
+
+    JFrame getMainFrame() {
+        return this.mainFrame;
     }
 
 

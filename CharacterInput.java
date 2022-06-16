@@ -17,10 +17,10 @@ public class CharacterInput {
     private final Font labelFont = new Font("Comic Sans MS", Font.BOLD, 16);
 
     /** The width of the GUI window. **/
-    private static int frameWidth;
+    private int frameWidth;
 
     /** The height of the GUI windows. **/
-    private static int frameHeight;
+    private int frameHeight;
 
     /** The JFrame for the character input. **/
     private JFrame mainFrame;
@@ -40,9 +40,6 @@ public class CharacterInput {
     /** The label to show error message when user inputs information. **/
     private JLabel errorLabel;
 
-    /** A Map containing the character information the user inputted. **/
-    private Map<String, Object> characterInfoMap;
-
     /** The dictionary where the character inputted will be added to. **/
     private static CharacterList characterDictionary;
 
@@ -58,7 +55,6 @@ public class CharacterInput {
         this.topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
         this.leftAndRightMargin = (int) (this.frameWidth * marginPercentage);
         this.inputTextList = new HashMap<>();
-        this.characterInfoMap = new HashMap<>();
         this.mainFrame = new JFrame("Character Input");
         this.mainFrame.setSize(this.frameWidth, this.frameHeight);
         this.addFiveTextBoxes();
@@ -72,8 +68,6 @@ public class CharacterInput {
         this.errorLabel.setBounds((int)(this.frameWidth * 0.2), this.topAndBotMargin,
                 (int)(this.frameWidth * 0.6), (int)(this.frameHeight * 0.2));
         this.mainFrame.add(this.errorLabel);
-
-        this.characterDictionary = characterDictionary;
 
     }
 
@@ -260,63 +254,35 @@ public class CharacterInput {
                 } else if (label.equals("Traditional Character")) {
                     traditionalChar = enteredInfo;
                 } else if (label.equals("Cantonese Pronunciations")) {
-                    cantonPronunciations = processEnteredPronunciations(enteredInfo);
+                    cantonPronunciations = processPronunciationsExamples(enteredInfo, this.cPronunciationPattern);
 
                 } else if (label.equals("Pinyin")) {
-                    pinyin = processEnteredPronunciations(enteredInfo);
+                    pinyin = processPronunciationsExamples(enteredInfo, this.mPronunciationPattern);
                 } else {
-                    examples = processEnteredExamples(enteredInfo);
+                    examples = processPronunciationsExamples(enteredInfo, this.examplePattern);
                 }
 
             }
 
-            characterInfoMap.put("Simplified character", simplifiedChar);
-            characterInfoMap.put("Traditional character", traditionalChar);
-            characterInfoMap.put("Cantonese pronunciations", cantonPronunciations);
-            characterInfoMap.put("Pinyin", pinyin);
-            characterInfoMap.put("Examples", examples);
-
         }
 
         /**
-         *
-         * @param enteredInfo
-         * @return
+         * Process the inputted pronunciation or example into a Set.
+         * @param enteredInfo   A String for the text entered pronunciation or examples.
+         * @return p    The Pattern, either the cantonese, pinyin patterns, or example patterns.
          */
-        private Set<String> processEnteredPronunciations(String enteredInfo) {
+        private Set<String> processPronunciationsExamples(String enteredInfo, Pattern p) {
 
-            Matcher m = this.cPronunciationPattern.matcher(enteredInfo);
+            Matcher m = p.matcher(enteredInfo);
             Set<String> enteredPronunciations = new HashSet<>();
 
-            if (m.find()) {
-                for (int i = 0; i < m.groupCount(); i = i + 1) {
-                    System.out.println(m.group(i));
-                    enteredPronunciations.add(m.group(i));
-                }
+            while (m.find()) {
+                enteredPronunciations.add(m.group());
             }
 
             return enteredPronunciations;
         }
 
-        /**
-         * Process the inputted examples into a set.
-         * @param examples  The inputted example broken up by commas.
-         * @return  A Set that contains the inputted examples.
-         */
-        private Set<String> processEnteredExamples(String examples) {
-            Set<String> toReturn = new HashSet<>();
-            Matcher exampleMatcher = this.examplePattern.matcher(examples);
-
-            if (exampleMatcher.find()) {
-                for (int i = 0; i < exampleMatcher.groupCount(); i = i + 1) {
-                    toReturn.add(exampleMatcher.group(i));
-                }
-            }
-
-            return toReturn;
-
-
-        }
 
         /** Put the error message on the main frame.
          * @param  message  The message to display.

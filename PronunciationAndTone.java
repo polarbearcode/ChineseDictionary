@@ -24,33 +24,7 @@ public abstract class PronunciationAndTone {
      * @return A list of length 2 arrays where the 0 element is the equivalent pronunciation,
      *          the 1 index element is the equivalent tone.
      */
-    public List<String[]> characterCombo(ChineseCharacter chineseCharacter) {
-
-        boolean needUpdate = false;
-
-        List<String[]> toReturn = new ArrayList<>();
-
-        for (String pronunciation : chineseCharacter.getCantonesePronunciation()) {
-            String[] toAdd = new String[2];
-            String[] split = this.pronunciationSplit(pronunciation);
-
-            if (!this.pronunCharacters.containsKey(split[0])) {
-                this.pronunCharacters.put(split[0], chineseCharacter.getTraditional());
-                needUpdate = true;
-            }
-
-            toAdd[0] = this.pronunCharacters.get(split[0]);
-            toAdd[1] = this.toneCharacters.get(Integer.valueOf(split[1]));
-
-            toReturn.add(toAdd);
-        }
-
-        if (needUpdate) {
-            this.updatePronunciationMap();
-        }
-
-        return toReturn;
-    }
+    public abstract List<String[]> characterCombo(ChineseCharacter chineseCharacter);
 
     /**
      * Change the character associated with the pronunciation.
@@ -133,5 +107,22 @@ public abstract class PronunciationAndTone {
         }
 
         updatePronunciationMap();
+    }
+
+    /**
+     * Add the tone -> chineseCharacter mapping to the toneCharacter map.
+     * @param tone  The tone number.
+     * @param chineseCharacter The corresponding Chinese character as a string.
+     */
+    public void addToneCharacters(Integer tone, String chineseCharacter) {
+        this.toneCharacters.put(tone, chineseCharacter);
+    }
+
+    /**
+     * Set the mapPath to the saved character mapping file.
+     * @param mapPath String, file path to the saved character mapping file.
+     */
+    public void setMapPath(String mapPath) {
+        this.mapPath = mapPath;
     }
 }

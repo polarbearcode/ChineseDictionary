@@ -4,16 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /** Finds the character combo for the Cantonese Pronunciation. **/
-public class CantoPAndT implements PronunciationAndTone {
+public class CantoPAndT extends PronunciationAndTone {
 
-    /** A HashMap containing the mapping for tones to characters. **/
-    private HashMap<Integer, String> toneCharacters;
-
-    /** A HashMap containing the mapping for pronunciation to characters **/
-    private HashMap<String, String> pronunCharacters;
-
-    /** The path to the pronunciation character mapping HashMap serialized object. **/
-    private String mapPath;
 
     /** Instantiate the toneCharacters and pronunCharacters mapping.
      * Set file to read and save to mapPath.

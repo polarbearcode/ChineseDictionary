@@ -18,6 +18,16 @@ public abstract class PronunciationAndTone {
     /** The path to the pronunciation character mapping HashMap serialized object. **/
     private String mapPath;
 
+    /** Instantiate a PronunciationAndTone object that reads in from the file in the provided
+     * file path.
+     */
+    PronunciationAndTone(String mapPath) {
+        this.pronunCharacters = new HashMap<>();
+        this.toneCharacters = new HashMap<>();
+        this.mapPath = mapPath;
+        readInPronunMap();
+    }
+
     /**
      * Returns a combination of characters that equal to the pronunciation of the provided character.
      * @param chineseCharacter The character to find the pronunciation for.
@@ -49,8 +59,8 @@ public abstract class PronunciationAndTone {
 
     private void readInPronunMap() {
         try {
-            File cantonesePronunciationMap = new File(this.mapPath);
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(cantonesePronunciationMap));
+            File pronunciationMap = new File(this.mapPath);
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(pronunciationMap));
             this.pronunCharacters = (HashMap<String, String>) ois.readObject();
             ois.close();
         } catch (IOException | ClassNotFoundException | NullPointerException e) {
@@ -118,11 +128,10 @@ public abstract class PronunciationAndTone {
         this.toneCharacters.put(tone, chineseCharacter);
     }
 
-    /**
-     * Set the mapPath to the saved character mapping file.
-     * @param mapPath String, file path to the saved character mapping file.
-     */
-    public void setMapPath(String mapPath) {
-        this.mapPath = mapPath;
+
+    /** Get the tone mapping. **/
+    public Map<Integer, String> getToneMapping() {
+        return this.toneCharacters;
     }
+
 }

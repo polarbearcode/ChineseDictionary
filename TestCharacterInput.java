@@ -18,6 +18,9 @@ public class TestCharacterInput {
     @Before
     public void setUp() {
         CharacterInput c = GuiActionRunner.execute(() -> new CharacterInput(500, 500, testCharList));
+
+        testCharList.clearDictionary();
+
         window = new FrameFixture(c.getMainFrame());
         window.show();
         window.maximize();
@@ -28,7 +31,7 @@ public class TestCharacterInput {
 
         window.textBox("Simplified Character").enterText("种");
         window.textBox("Traditional Character").enterText("種");
-        window.textBox("Pinyin").enterText("zhong3");
+        window.textBox("Pinyin").enterText("zhong3, zhong");
         window.textBox("Cantonese Pronunciations").enterText("zung2, zung3");
         window.textBox("Examples").enterText("种植,种群");
         window.button("Add Character").click();
@@ -36,7 +39,6 @@ public class TestCharacterInput {
         Set<String> expectedCPronunciation = new HashSet<>();
         expectedCPronunciation.add("zung2");
         expectedCPronunciation.add("zung3");
-        expectedCPronunciation.add("zung");
 
         Set<String> expectedPinyin = new HashSet<>();
         expectedPinyin.add("zhong3");

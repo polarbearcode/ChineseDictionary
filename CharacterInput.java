@@ -46,9 +46,6 @@ public class CharacterInput {
     /** The dictionary where the character inputted will be added to. **/
     private static CharacterList characterDictionary;
 
-    /** Boolean to stop while loop once character is added. **/
-    private boolean isCharAddded;
-
     /**
      * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
      * @param w int, the width of the window
@@ -77,8 +74,6 @@ public class CharacterInput {
         this.mainFrame.add(this.errorLabel);
 
         this.characterDictionary = characterDictionary;
-
-        this.isCharAddded = false;
 
     }
 
@@ -194,7 +189,10 @@ public class CharacterInput {
 
                 if (errorLabel.getText().equals("")) {
                     processUserInfo();
-                    isCharAddded = true;
+                    ChineseCharacter newCharacter = new ChineseCharacter(this.simplifiedChar,
+                            this.traditionalChar, this.cantonPronunciations, this.pinyin,
+                            this.examples);
+                    characterDictionary.addCharacter(newCharacter);
                 }
 
             }
@@ -254,8 +252,6 @@ public class CharacterInput {
          * Take user input from the GUI text boxes and save it to the Character Input class.
          */
         private void processUserInfo() {
-
-
 
             for (String label : inputTextList.keySet()) {
                 String enteredInfo = inputTextList.get(label).getText();
@@ -347,12 +343,6 @@ public class CharacterInput {
     }
 
 
-
-    public static void main(String[] args) {
-
-        new CharacterInput(frameWidth, frameHeight, characterDictionary);
-
-    }
 
 }
 

@@ -12,18 +12,14 @@ public class CantoPAndT extends PronunciationAndTone {
      * @param mapPath   String, path to the HashMap serializable **/
     public CantoPAndT(String mapPath) {
 
-        this.toneCharacters = new HashMap<>();
+        super(mapPath);
 
-        this.toneCharacters.put(1, "番");
-        this.toneCharacters.put(2,"茄");
-        this.toneCharacters.put(3, "酱");
-        this.toneCharacters.put(4, "牛");
-        this.toneCharacters.put(5, "腩");
-        this.toneCharacters.put(6, "面");
-
-        this.mapPath = mapPath;
-
-        readInPronunMap();
+        this.addToneCharacters(1, "番");
+        this.addToneCharacters(2,"茄");
+        this.addToneCharacters(3, "酱");
+        this.addToneCharacters(4, "牛");
+        this.addToneCharacters(5, "腩");
+        this.addToneCharacters(6, "面");
 
     }
 
@@ -44,13 +40,13 @@ public class CantoPAndT extends PronunciationAndTone {
             String[] toAdd = new String[2];
             String[] split = this.pronunciationSplit(pronunciation);
 
-            if (!this.pronunCharacters.containsKey(split[0])) {
-                this.pronunCharacters.put(split[0], chineseCharacter.getTraditional());
+            if (!this.getPronunCharacters().containsKey(split[0])) {
+                this.getPronunCharacters().put(split[0], chineseCharacter.getTraditional());
                 needUpdate = true;
             }
 
-            toAdd[0] = this.pronunCharacters.get(split[0]);
-            toAdd[1] = this.toneCharacters.get(Integer.valueOf(split[1]));
+            toAdd[0] = this.getPronunCharacters().get(split[0]);
+            toAdd[1] = this.getToneMapping().get(Integer.valueOf(split[1]));
 
             toReturn.add(toAdd);
         }
@@ -62,46 +58,6 @@ public class CantoPAndT extends PronunciationAndTone {
         return toReturn;
     }
 
-    /**
-     * Change the character associated with the pronunciation.
-     * If the pronunciation doesn't exist yet, create the mapping.
-     * @param pronunciation String, the key in the dictionary for the pronunciation
-     * @param chineseCharacter  String, the character to change the mapping to.
-     */
-    public void changeCharacterMapping(String pronunciation, String chineseCharacter) {
-        this.pronunCharacters.put(pronunciation, chineseCharacter);
-        this.updatePronunciationMap();
-    }
-
-    /**
-     * Remove the pronunciation from the mapping.
-     * @param pronunciation String for the pronunciation.
-     */
-    public void deleteCharacterMapping(String pronunciation) {
-        this.pronunCharacters.remove(pronunciation);
-        this.updatePronunciationMap();
-    }
-
-
-    private void readInPronunMap() {
-        try {
-            File cantonesePronunciationMap = new File(this.mapPath);
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(cantonesePronunciationMap));
-            this.pronunCharacters = (HashMap<String, String>) ois.readObject();
-            ois.close();
-        } catch (IOException | ClassNotFoundException | NullPointerException e) {
-            this.pronunCharacters = new HashMap<>();
-            updatePronunciationMap();
-        }
-    }
-
-    /**
-     * Updates the pronunciation map file.
-     */
-    void updatePronunciationMap() {
-        WriteFile.writeFile(this.mapPath, this.pronunCharacters);
-
-    }
 
     /**
      * A helper function to split the pronunciation into pronunciation and tone.
@@ -122,27 +78,5 @@ public class CantoPAndT extends PronunciationAndTone {
         return split;
     }
 
-    /** Return a copy of the pronunCharacters mapping. **/
-    public Map<String, String> getPronunCharacters() {
-        HashMap<String, String> copy = new HashMap<>();
-        copy.putAll(this.pronunCharacters);
-        return copy;
-    }
-
-    /** Return the pronounCharacters mapping (not a copy) for testing. **/
-    Map<String, String> getPronounCharactersTest() {
-        return this.pronunCharacters;
-    }
-
-    void clearMapping() {
-        Iterator<Map.Entry<String, String>> itr = pronunCharacters.entrySet().iterator();
-
-        while (itr.hasNext()) {
-            itr.next();
-            itr.remove();
-        }
-
-        updatePronunciationMap();
-    }
 
 }

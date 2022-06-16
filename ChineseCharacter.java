@@ -34,7 +34,8 @@ public class ChineseCharacter implements Serializable {
     public ChineseCharacter(String simplified, String traditional, String cp,
                             String py) {
 
-        this(simplified, traditional, Collections.singletonList(cp), py);
+        this(simplified, traditional, new HashSet<>(Arrays.asList(cp)),
+                new HashSet<>(Arrays.asList(py)), new HashSet<>());
 
     }
 
@@ -45,24 +46,21 @@ public class ChineseCharacter implements Serializable {
      * the provided parameters are different.
      * @param simplified String for simplified character.
      * @param traditional String for traditional character.
-     * @param cp    String for the cantonese pronunciation.
-     * @param py    String for the pinyin.
+     * @param cp    Set of the cantonese pronunciation(s).
+     * @param py    Set of the pinyin pronunciation(s).
+     * @param examples   Set of example(s)
      */
-    public ChineseCharacter(String simplified, String traditional, List<String> cp,
-                            String py) {
+    public ChineseCharacter(String simplified, String traditional, Set<String> cp,
+                            Set<String> py, Set<String> examples) {
 
 
         this.simplified = simplified;
         this.traditional = traditional;
 
-        this.cantonesePronunciation = new HashSet<>();
-        this.pinyin = new HashSet<>();
+        this.cantonesePronunciation = new HashSet<>(cp);
+        this.pinyin = new HashSet<>(py);
 
-        this.cantonesePronunciation.addAll(cp);
-
-        this.pinyin.add(py);
-
-        this.exampleUses = new HashSet<>();
+        this.exampleUses = new HashSet<>(examples);
 
     }
 

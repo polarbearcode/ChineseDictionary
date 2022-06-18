@@ -118,7 +118,7 @@ public abstract class PronunciationAndTone {
      * Updates the pronunciation map file.
      */
     void updatePronunciationMap() {
-        WriteFile.writeFile(this.mapPath, this.pronunCharacters);
+        Utils.writeFile(this.mapPath, this.pronunCharacters);
 
     }
 

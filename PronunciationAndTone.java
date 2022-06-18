@@ -70,6 +70,15 @@ public abstract class PronunciationAndTone {
     }
 
     /**
+     * Add a pronunciation mapping to the pronunciation map.
+     * @param pronunciation String, pronunciation "aaa2"
+     * @param chineseChar String, the simplified Chinese character.
+     */
+    public void addPronunciationMapping(String pronunciation, String chineseChar) {
+        this.pronunCharacters.put(pronunciation,chineseChar);
+    }
+
+    /**
      * Updates the pronunciation map file.
      */
     void updatePronunciationMap() {

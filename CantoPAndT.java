@@ -41,7 +41,7 @@ public class CantoPAndT extends PronunciationAndTone {
             String[] split = this.pronunciationSplit(pronunciation);
 
             if (!this.getPronunCharacters().containsKey(split[0])) {
-                this.getPronunCharacters().put(split[0], chineseCharacter.getTraditional());
+               this.addPronunciationMapping(split[0], chineseCharacter.getTraditional());
                 needUpdate = true;
             }
 

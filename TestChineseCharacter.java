@@ -165,7 +165,10 @@ public class TestChineseCharacter {
 
     @Test
     public void testNoTone() {
-        
+        ChineseCharacter noToneChar = new ChineseCharacter("的","的","dik1", "de");
+
+        String[] expected = new String[]{"的", "的"};
+        assertArrayEquals(expected, pinyinFinder.characterCombo(noToneChar).get(0));
     }
     @Test
     public void testAudioFinder() {

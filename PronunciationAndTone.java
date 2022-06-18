@@ -19,16 +19,21 @@ public abstract class PronunciationAndTone {
     private String mapPath;
 
     /** Function to use in character combo to get either cantonese or mandarin pronunciation. **/
-    GetPronunciationLanguage getPronunciationLanguage;
+    private GetPronunciationLanguage getPronunciationLanguage;
+
+    /** The pattern to use for the pronunciation split regex. **/
+    private Pattern pronunciationPattern;
 
     /** Instantiate a PronunciationAndTone object that reads in from the file in the provided
      * file path and uses the specified getPronunciationLanguage implementation.
      */
-    PronunciationAndTone(String mapPath, GetPronunciationLanguage getPronunciationLanguage) {
+    PronunciationAndTone(String mapPath, GetPronunciationLanguage getPronunciationLanguage,
+                         Pattern pronunciationPattern) {
         this.pronunCharacters = new HashMap<>();
         this.toneCharacters = new HashMap<>();
         this.mapPath = mapPath;
         this.getPronunciationLanguage = getPronunciationLanguage;
+        this.pronunciationPattern = pronunciationPattern;
         readInPronunMap();
     }
 
@@ -125,8 +130,7 @@ public abstract class PronunciationAndTone {
      */
     private String[] pronunciationSplit(String pronunciation) {
         String[] split = new String[2];
-        Pattern p = Pattern.compile("([a-zA-Z]+)([1-6])");
-        Matcher m = p.matcher(pronunciation);
+        Matcher m = this.pronunciationPattern.matcher(pronunciation);
 
         if (m.find()) {
             split[0] = m.group(1);

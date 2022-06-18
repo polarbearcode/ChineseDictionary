@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class TestCharacterInput {
     private FrameFixture window;
 
-    private final CharacterList testCharList = new CharacterList("./testdictionary.srl");
+    private final CharacterList testCharList = new CharacterList("./testDictionary.srl");
 
     @Before
     public void setUp() {
@@ -33,7 +33,7 @@ public class TestCharacterInput {
         window.textBox("Traditional Character").enterText("種");
         window.textBox("Pinyin").enterText("zhong3, zhong");
         window.textBox("Cantonese Pronunciations").enterText("zung2, zung3");
-        window.textBox("Examples").enterText("种植,种群");
+        window.textBox("Examples").enterText("种植,种群,你好");
         window.button("Add Character").click();
 
         Set<String> expectedCPronunciation = new HashSet<>();

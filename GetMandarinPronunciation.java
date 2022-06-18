@@ -26,11 +26,12 @@ public class GetMandarinPronunciation implements GetPronunciationLanguage, Input
     /**
      * Check if pinyin pronunciation box is empty.
      * @param userInput What the user inputs in a textbox in the GUI as a string.
+     * @param label The label of the text box.
      * @return A String "Fix Pinyin" if the Pinyin pronunciation box is empty.
      * Return an empty string otherwise.
      */
     @Override
-    public String setErrorMessage(String userInput) {
+    public String setErrorMessage(String userInput, String label) {
         if (userInput.isEmpty()) {
             return "Fix Pinyin Pronunciation";
         } else {

@@ -31,11 +31,12 @@ public class GetCantonesePronunciation implements GetPronunciationLanguage, Inpu
     /**
      * Check if Cantonese pronunciation box is empty.
      * @param userInput What the user inputs in a textbox in the GUI as a string.
+     * @param label The label of the text box.
      * @return A String "Fix Cantonese Pronunciation" if the Cantonese pronunciation box is empty.
      * Return an empty string otherwise.
      */
     @Override
-    public String setErrorMessage(String userInput) {
+    public String setErrorMessage(String userInput, String label) {
         if (userInput.isEmpty()) {
             return "Fix Cantonese Pronunciation";
         } else {

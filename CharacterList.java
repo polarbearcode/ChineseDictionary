@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.*;
 
+
+
 /** Represents the current dictionary of all the characters. **/
 public class CharacterList {
     private String dictionaryPath;
@@ -55,7 +57,7 @@ public class CharacterList {
      * @param curDictionary A HashMap representing the dictionary to save.
      */
     void writeDictionaryToFile(Map<String, ChineseCharacter> curDictionary) {
-        WriteFile.writeFile(this.dictionaryPath, curDictionary);
+        Utils.writeFile(this.dictionaryPath, curDictionary);
     }
 
     /**

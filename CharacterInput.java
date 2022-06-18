@@ -41,7 +41,11 @@ public class CharacterInput {
     private JLabel errorLabel;
 
     /** The dictionary where the character inputted will be added to. **/
-    private static CharacterList characterDictionary;
+    private CharacterList characterDictionary;
+
+    /** The labels for the input boxes. **/
+    private String[] labelStrings = new String[]{"Examples", "Pinyin", "Cantonese Pronunciations",
+            "Traditional Character", "Simplified Character"};
 
     /**
      * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
@@ -50,6 +54,7 @@ public class CharacterInput {
      * @param characterDictionary CharacterList, the character dictionary to save the input to.
      */
     CharacterInput(int w, int h, CharacterList characterDictionary) {
+        this.characterDictionary = characterDictionary;
         this.frameWidth = w;
         this.frameHeight = h;
         this.topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
@@ -95,10 +100,6 @@ public class CharacterInput {
         int marginBetweenSections = (int)(this.frameHeight * marginBetweenSectionsProportion);
 
         int startY = frameHeight - this.topAndBotMargin * 6;
-
-        String[] labelStrings = new String[]{"Examples", "Pinyin", "Cantonese Pronunciations",
-                "Traditional Character", "Simplified Character"};
-
 
         for (int i = 0; i <  labelStrings.length; i = i + 1) {
             JLabel label = new JLabel(labelStrings[i]);
@@ -149,15 +150,6 @@ public class CharacterInput {
 
         /** Regex to check no alphanumeric characters in the simplified/traditional text boxes. **/
         Pattern characterChecker = Pattern.compile("[^a-zA-Z/d]");
-
-        /** Regex to check pronunciations are in the right format for Cantonese pronunciation. **/
-        Pattern cPronunciationPattern = Pattern.compile("([a-zA-Z]+[1-6])+");
-
-        /** Regex to check pinyin is in the right format **/
-        Pattern mPronunciationPattern = Pattern.compile("([a-zA-Z]+[1-4]?)+");
-
-        /** Regex to check for the example uses. **/
-        Pattern examplePattern = Pattern.compile("([一-龥]{2,})+");
 
         /** To put in characterInfo map. **/
         String simplifiedChar;
@@ -215,14 +207,14 @@ public class CharacterInput {
                         break;
                     }
                 }  else if (label.equals("Cantonese Pronunciations")) {
-                    Matcher cMatcher = this.cPronunciationPattern.matcher(inputtedValue);
+                    Matcher cMatcher = Utils.cantonesePronunciationPattern.matcher(inputtedValue);
 
                     if (!cMatcher.find()) {
                         errorMessage = "Fix " + label;
                         break;
                     }
                 } else if (label.equals("Pinyin")) {
-                    Matcher pMatcher = this.mPronunciationPattern.matcher(inputtedValue);
+                    Matcher pMatcher = Utils.mandarinPronunciationPattern.matcher(inputtedValue);
                     if (!pMatcher.find()) {
                         errorMessage = "Fix " + label;
                         break;
@@ -247,19 +239,22 @@ public class CharacterInput {
          */
         private void processUserInfo() {
 
-            for (String label : inputTextList.keySet()) {
+            List<String> labelStringsList = Arrays.asList(labelStrings);
+            Collections.reverse(labelStringsList);
+
+            for (String label : labelStringsList) {
                 String enteredInfo = inputTextList.get(label).getText();
                 if (label.equals("Simplified Character")) {
                     simplifiedChar = enteredInfo;
                 } else if (label.equals("Traditional Character")) {
                     traditionalChar = enteredInfo;
                 } else if (label.equals("Cantonese Pronunciations")) {
-                    cantonPronunciations = processPronunciationsExamples(enteredInfo, this.cPronunciationPattern);
+                    cantonPronunciations = processPronunciationsExamples(enteredInfo,Utils.cantonesePronunciationPattern);
 
                 } else if (label.equals("Pinyin")) {
-                    pinyin = processPronunciationsExamples(enteredInfo, this.mPronunciationPattern);
+                    pinyin = processPronunciationsExamples(enteredInfo, Utils.mandarinPronunciationPattern);
                 } else {
-                    examples = processPronunciationsExamples(enteredInfo, this.examplePattern);
+                    examples = processPronunciationsExamples(enteredInfo, Utils.examplePattern);
                 }
 
             }

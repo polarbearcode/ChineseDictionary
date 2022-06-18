@@ -11,12 +11,18 @@ public class Utils {
     /** String to use for mandarinPronunciationPattern. **/
     public static final String pinyinPronunciationPatternString = "([a-zA-Z]+)([1-4]?)";
 
+    /** String to use for examplePattern. **/
+    public static final String examplePatternString = "([一-龥]{2,})+";
+
 
     /** Pattern to check Cantonese pronunciations. **/
     public static final Pattern cantonesePronunciationPattern = Pattern.compile(cantonesePronunciationPatternString);
 
     /** Pattern to check Pinyin. **/
     public static final Pattern mandarinPronunciationPattern = Pattern.compile(pinyinPronunciationPatternString);
+
+    /** Regex to check for the example uses. **/
+    public static final Pattern examplePattern = Pattern.compile(examplePatternString);
 
     /**
      * Write the object to the file specified by file path.

@@ -18,13 +18,17 @@ public abstract class PronunciationAndTone {
     /** The path to the pronunciation character mapping HashMap serialized object. **/
     private String mapPath;
 
+    /** Function to use in character combo to get either cantonese or mandarin pronunciation. **/
+    GetPronunciationLanguage getPronunciationLanguage;
+
     /** Instantiate a PronunciationAndTone object that reads in from the file in the provided
-     * file path.
+     * file path and uses the specified getPronunciationLanguage implementation.
      */
-    PronunciationAndTone(String mapPath) {
+    PronunciationAndTone(String mapPath, GetPronunciationLanguage getPronunciationLanguage) {
         this.pronunCharacters = new HashMap<>();
         this.toneCharacters = new HashMap<>();
         this.mapPath = mapPath;
+        this.getPronunciationLanguage = getPronunciationLanguage;
         readInPronunMap();
     }
 
@@ -34,7 +38,32 @@ public abstract class PronunciationAndTone {
      * @return A list of length 2 arrays where the 0 element is the equivalent pronunciation,
      *          the 1 index element is the equivalent tone.
      */
-    public abstract List<String[]> characterCombo(ChineseCharacter chineseCharacter);
+    public List<String[]> characterCombo(ChineseCharacter chineseCharacter) {
+        boolean needUpdate = false;
+
+        List<String[]> toReturn = new ArrayList<>();
+
+        for (String pronunciation : this.getPronunciationLanguage.getPronunciation(chineseCharacter)) {
+            String[] toAdd = new String[2];
+            String[] split = this.pronunciationSplit(pronunciation);
+
+            if (!this.getPronunCharacters().containsKey(split[0])) {
+                this.addPronunciationMapping(split[0], chineseCharacter.getTraditional());
+                needUpdate = true;
+            }
+
+            toAdd[0] = this.getPronunCharacters().get(split[0]);
+            toAdd[1] = this.getToneMapping().get(Integer.valueOf(split[1]));
+
+            toReturn.add(toAdd);
+        }
+
+        if (needUpdate) {
+            this.updatePronunciationMap();
+        }
+
+        return toReturn;
+    }
 
     /**
      * Change the character associated with the pronunciation.
@@ -68,6 +97,8 @@ public abstract class PronunciationAndTone {
             updatePronunciationMap();
         }
     }
+
+
 
     /**
      * Add a pronunciation mapping to the pronunciation map.
@@ -142,5 +173,7 @@ public abstract class PronunciationAndTone {
     public Map<Integer, String> getToneMapping() {
         return this.toneCharacters;
     }
+
+
 
 }

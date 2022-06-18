@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class FlashCards {
+
+/** The actual display for the flash cards. **/
+
+public class FlashCards {
 }

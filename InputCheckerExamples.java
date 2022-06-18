@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public class InputCheckerExamples {
+/** Check inputted examples. **/
+public class InputCheckerExamples {
 }

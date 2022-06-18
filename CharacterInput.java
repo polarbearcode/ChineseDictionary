@@ -249,12 +249,15 @@ public class CharacterInput {
                 } else if (label.equals("Traditional Character")) {
                     traditionalChar = enteredInfo;
                 } else if (label.equals("Cantonese Pronunciations")) {
-                    cantonPronunciations = processPronunciationsExamples(enteredInfo,Utils.cantonesePronunciationPattern);
+                    cantonPronunciations = processPronunciationsExamples(enteredInfo,
+                            Utils.cantonesePronunciationPattern, new GetCantonesePronunciation());
 
                 } else if (label.equals("Pinyin")) {
-                    pinyin = processPronunciationsExamples(enteredInfo, Utils.mandarinPronunciationPattern);
+                    pinyin = processPronunciationsExamples(enteredInfo,
+                            Utils.mandarinPronunciationPattern, new GetMandarinPronunciation());
                 } else {
-                    examples = processPronunciationsExamples(enteredInfo, Utils.examplePattern);
+                    examples = processPronunciationsExamples(enteredInfo,
+                            Utils.examplePattern, new InputCheckerExamples());
                 }
 
             }
@@ -264,14 +267,19 @@ public class CharacterInput {
         /**
          * Process the inputted pronunciation or example into a Set.
          * @param enteredInfo   A String for the text entered pronunciation or examples.
-         * @return p    The Pattern, either the cantonese, pinyin patterns, or example patterns.
+         * @param checker   An InputChecker to check the input is in the right format.
+         * @param p The Pattern to check the input against.
+         * @return Return the processed input as a set.
          */
-        private Set<String> processPronunciationsExamples(String enteredInfo, Pattern p) {
+        private Set<String> processPronunciationsExamples(String enteredInfo, Pattern p, InputChecker checker) {
 
             Matcher m = p.matcher(enteredInfo);
             Set<String> enteredPronunciations = new HashSet<>();
 
             while (m.find()) {
+                if (!checker.checkInput(m.group(), simplifiedChar)) {
+                    continue;
+                }
                 enteredPronunciations.add(m.group());
             }
 

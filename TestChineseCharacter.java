@@ -15,6 +15,14 @@ public class TestChineseCharacter {
 
     private final ChineseCharacter 種 = multiplePronunciationChar();
 
+    private final String mTestMapPath = "./testMPAndT.srl";
+
+    private CantoPAndT cantoFinder = new CantoPAndT(testMapPath);
+
+    private MPAndT pinyinFinder = new MPAndT(mTestMapPath);
+
+
+
     @Test
     public void testAlreadyAdded() {
 
@@ -108,24 +116,23 @@ public class TestChineseCharacter {
 
     @Test
     public void testChangeCharacterMapping() {
-        CantoPAndT finder = new CantoPAndT(testMapPath);
-        finder.characterCombo(汉);
 
-        finder.changeCharacterMapping("hon", "看");
+        cantoFinder.characterCombo(汉);
+
+        cantoFinder.changeCharacterMapping("hon", "看");
 
         String[] expected = new String[]{"看", "酱"};
 
-        assertArrayEquals(expected, finder.characterCombo(汉).get(0));
+        assertArrayEquals(expected, cantoFinder.characterCombo(汉).get(0));
 
-        cleanUpMapping(finder);
+        cleanUpMapping(cantoFinder);
     }
 
     @Test
     public void testMultiplePronunciations() {
 
-        CantoPAndT finder = new CantoPAndT(testMapPath);
 
-        finder.changeCharacterMapping("zung", "中");
+        cantoFinder.changeCharacterMapping("zung", "中");
 
         List<String[]> expected = new ArrayList<>();
         String[] firstCombo = new String[]{"中", "茄"};
@@ -134,12 +141,32 @@ public class TestChineseCharacter {
         expected.add(firstCombo);
         expected.add(secondCombo);
 
-        assertArrayEquals(expected.get(0), finder.characterCombo(種).get(0));
-        assertArrayEquals(expected.get(1), finder.characterCombo(種).get(1));
+        assertArrayEquals(expected.get(0), cantoFinder.characterCombo(種).get(0));
+        assertArrayEquals(expected.get(1), cantoFinder.characterCombo(種).get(1));
 
        cleanUpDictionary();
+       cleanUpMapping(cantoFinder);
     }
 
+    @Test
+    public void testPinyinCombo() {
+        cleanUpDictionary();
+
+        pinyinFinder.changeCharacterMapping("zhong", "中");
+
+        String[] expectedFirst = new String[]{"中", "好"};
+        String[] expectedSecond = new String[]{"中","快"};
+
+
+        assertArrayEquals(expectedFirst, pinyinFinder.characterCombo(種).get(0));
+        assertArrayEquals(expectedSecond, pinyinFinder.characterCombo(種).get(1));
+
+    }
+
+    @Test
+    public void testNoTone() {
+        
+    }
     @Test
     public void testAudioFinder() {
 
@@ -165,7 +192,7 @@ public class TestChineseCharacter {
     }
 
     /** Clean up the pronunciation mapping after testing. **/
-    private void cleanUpMapping(CantoPAndT finder) {
+    private void cleanUpMapping(PronunciationAndTone finder) {
         finder.clearMapping();
     }
 
@@ -177,42 +204,12 @@ public class TestChineseCharacter {
         pronunciations.add("zung2");
         pronunciations.add("zung3");
 
-        ChineseCharacter 種 = new ChineseCharacter("種", "种", pronunciations,
-                "zhong3");
+        ChineseCharacter 種 = new ChineseCharacter("種", "种", new HashSet<String>(pronunciations),
+                new HashSet<String>(Arrays.asList("zhong3", "zhong4")), new HashSet<>());
 
         return 種;
     }
 
-    @Test
-    public void testCharInput() {
-        cleanUpDictionary();
-        CharacterInput characterInput = new CharacterInput(500, 500, c);
-        CharacterInput.main(new String[]{});
-
-        Set<String> expectedCPronunciation = new HashSet<>();
-        expectedCPronunciation.add("zung2");
-        expectedCPronunciation.add("zung3");
-
-        Set<String> expectedPinyin = new HashSet<>();
-        expectedPinyin.add("zhong3");
-        expectedPinyin.add("zhong");
-
-        Set<String> expectedExamples = new HashSet<>();
-        expectedExamples.add("种植");
-        expectedExamples.add("种群");
-
-        ChineseCharacter addedChar = c.lookUp("种");
-
-        assertEquals("种", addedChar.getSimplified());
-        assertEquals("種", addedChar.getTraditional());
-        assertEquals(expectedCPronunciation, addedChar.getCantonesePronunciation());
-        assertEquals(expectedPinyin, addedChar.getMandarinPronunciation());
-        assertEquals(expectedExamples, addedChar.getExampleUses());
-
-
-
-
-    }
 
 
 }

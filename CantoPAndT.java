@@ -12,7 +12,7 @@ public class CantoPAndT extends PronunciationAndTone {
      * @param mapPath   String, path to the HashMap serializable **/
     public CantoPAndT(String mapPath) {
 
-        super(mapPath, new GetCantonesePronunciation(), Pattern.compile("([a-zA-Z]+)([1-6])"));
+        super(mapPath, new GetCantonesePronunciation(), Utils.cantonesePronunciationPattern);
 
         this.addToneCharacters(1, "番");
         this.addToneCharacters(2,"茄");

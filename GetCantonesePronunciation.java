@@ -27,4 +27,19 @@ public class GetCantonesePronunciation implements GetPronunciationLanguage, Inpu
         Matcher m = Pattern.compile(patternString).matcher(input);
         return m.find();
     }
+
+    /**
+     * Check if Cantonese pronunciation box is empty.
+     * @param userInput What the user inputs in a textbox in the GUI as a string.
+     * @return A String "Fix Cantonese Pronunciation" if the Cantonese pronunciation box is empty.
+     * Return an empty string otherwise.
+     */
+    @Override
+    public String setErrorMessage(String userInput) {
+        if (userInput.isEmpty()) {
+            return "Fix Cantonese Pronunciation";
+        } else {
+            return "";
+        }
+    }
 }

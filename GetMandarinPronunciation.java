@@ -22,4 +22,19 @@ public class GetMandarinPronunciation implements GetPronunciationLanguage, Input
         Matcher m = Pattern.compile(patternString).matcher(input);
         return m.find();
     }
+
+    /**
+     * Check if pinyin pronunciation box is empty.
+     * @param userInput What the user inputs in a textbox in the GUI as a string.
+     * @return A String "Fix Pinyin" if the Pinyin pronunciation box is empty.
+     * Return an empty string otherwise.
+     */
+    @Override
+    public String setErrorMessage(String userInput) {
+        if (userInput.isEmpty()) {
+            return "Fix Pinyin Pronunciation";
+        } else {
+            return "";
+        }
+    }
 }

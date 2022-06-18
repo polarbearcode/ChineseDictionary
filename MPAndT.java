@@ -6,7 +6,8 @@ public class MPAndT extends PronunciationAndTone{
      * Set file to read and save to mapPath.
      * @param mapPath   String, path to the HashMap serializable **/
     public MPAndT(String mapPath) {
-        super(mapPath, new GetMandarinPronunciation(), Pattern.compile("([a-zA-Z]+)([1-4]?)"));
+        super(mapPath, new GetMandarinPronunciation(), Utils.mandarinPronunciationPattern);
+        this.addToneCharacters(0, "的");
         this.addToneCharacters(1, "中");
         this.addToneCharacters(2, "国");
         this.addToneCharacters(3, "好");

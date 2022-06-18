@@ -58,7 +58,7 @@ public abstract class PronunciationAndTone {
             }
 
             toAdd[0] = this.getPronunCharacters().get(split[0]);
-            toAdd[1] = this.getToneMapping().get(Integer.valueOf(split[1]));
+            toAdd[1] = this.getToneMapping().getOrDefault(Integer.valueOf(split[1]), "");
 
             toReturn.add(toAdd);
         }
@@ -135,6 +135,10 @@ public abstract class PronunciationAndTone {
         if (m.find()) {
             split[0] = m.group(1);
             split[1] = m.group(2);
+        }
+
+        if (split[1].equals("")) {
+            split[1] = "0";
         }
 
         return split;

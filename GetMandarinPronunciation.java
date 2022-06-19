@@ -17,7 +17,7 @@ public class GetMandarinPronunciation implements GetPronunciationLanguage, Input
      * @return  True if the input is in the right format, false otherwise.
      */
     @Override
-    public boolean checkInput(String input, String chineseCharToContain) {
+    public boolean checkInput(String input) {
         String patternString = Utils.addRegexCarrotAndDollarSign(Utils.pinyinPronunciationPatternString);
         Matcher m = Pattern.compile(patternString).matcher(input);
         return m.find();

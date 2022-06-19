@@ -257,7 +257,7 @@ public class CharacterInput {
                             Utils.mandarinPronunciationPattern, new GetMandarinPronunciation());
                 } else {
                     examples = processPronunciationsExamples(enteredInfo,
-                            Utils.examplePattern, new InputCheckerExamples());
+                            Utils.examplePattern, new InputCheckerExamples(simplifiedChar));
                 }
 
             }

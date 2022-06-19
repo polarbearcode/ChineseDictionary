@@ -17,38 +17,35 @@ public class CharacterInput {
     private final Font labelFont = new Font("Comic Sans MS", Font.BOLD, 16);
 
     /** The width of the GUI window. **/
-    private int frameWidth;
+    private final int frameWidth;
 
     /** The height of the GUI windows. **/
-    private int frameHeight;
+    private final int frameHeight;
 
     /** The JFrame for the character input. **/
-    private JFrame mainFrame;
+    private final JFrame mainFrame;
 
     /** Save the JTextAreas to get the information. **/
-    private Map<String, JTextArea> inputTextList;
-
-    /** The margin percentage relative to all the window edges. **/
-    private final double marginPercentage = 0.05;
+    private final Map<String, JTextArea> inputTextList;
 
     /** The margin from the top and bottom window edges for the text area. **/
-    private int topAndBotMargin;
+    private final int topAndBotMargin;
 
     /** The margin from the left and right edges for the text area. **/
-    private int leftAndRightMargin;
+    private final int leftAndRightMargin;
 
     /** The label to show error message when user inputs information. **/
-    private JLabel errorLabel;
+    private final JLabel errorLabel;
 
     /** The dictionary where the character inputted will be added to. **/
-    private CharacterList characterDictionary;
+    private final CharacterList characterDictionary;
 
     /** The labels for the input boxes. **/
-    private String[] labelStrings = new String[]{"Examples", "Pinyin", "Cantonese Pronunciations",
+    private final String[] labelStrings = new String[]{"Examples", "Pinyin", "Cantonese Pronunciations",
             "Traditional Character", "Simplified Character"};
 
     /** Maps labels to the relevant input checker.  **/
-    private Map<String, InputChecker> labelToCheckerMap;
+    private final Map<String, InputChecker> labelToCheckerMap;
 
     /**
      * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
@@ -60,8 +57,11 @@ public class CharacterInput {
         this.characterDictionary = characterDictionary;
         this.frameWidth = w;
         this.frameHeight = h;
+
+        double marginPercentage = 0.05;
         this.topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
         this.leftAndRightMargin = (int) (this.frameWidth * marginPercentage);
+
         this.inputTextList = new HashMap<>();
         this.labelToCheckerMap = new HashMap<>();
 
@@ -206,36 +206,19 @@ public class CharacterInput {
                 JTextArea textArea = inputTextList.get(label);
                 errorTextArea = textArea;
                 String inputtedValue = textArea.getText();
-                if (inputtedValue.equals("")) {
-                    errorMessage = "Missing " + label;
-                    break;
-                } else if (label.equals("Simplified Character") || label.equals("Traditional Character"))  {
-                    Matcher charMatcher = characterChecker.matcher(inputtedValue);
 
-                    if (!charMatcher.find() || inputtedValue.length() != 1) {
-                        errorMessage = "Characters must be length 1 and can not contain alphanumeric";
-                        break;
-                    }
-                }  else if (label.equals("Cantonese Pronunciations")) {
-                    Matcher cMatcher = Utils.cantonesePronunciationPattern.matcher(inputtedValue);
-
-                    if (!cMatcher.find()) {
-                        errorMessage = "Fix " + label;
-                        break;
-                    }
-                } else if (label.equals("Pinyin")) {
-                    Matcher pMatcher = Utils.mandarinPronunciationPattern.matcher(inputtedValue);
-                    if (!pMatcher.find()) {
-                        errorMessage = "Fix " + label;
-                        break;
+                if (label.equals("Examples")) {
+                    Matcher m = Pattern.compile("[一-龥，。]{2,}").matcher(inputtedValue);
+                    if (!m.find()) {
+                        errorMessage = "Fix Examples";
                     }
                 } else {
-                    String chineseChar = inputTextList.get("Simplified Character").getText();
-                    String example = textArea.getText();
-                    if (!example.contains(chineseChar)) {
-                        errorMessage = "Example must contain " + chineseChar;
-                        break;
-                    }
+                    InputChecker checker = labelToCheckerMap.get(label);
+                    errorMessage = checker.setErrorMessage(inputtedValue, label);
+                }
+
+                if (!errorMessage.equals(""))  {
+                    break;
                 }
             }
 
@@ -265,9 +248,11 @@ public class CharacterInput {
                 } else if (label.equals("Pinyin")) {
                     pinyin = processPronunciationsExamples(enteredInfo,
                             Utils.mandarinPronunciationPattern, new GetMandarinPronunciation());
-                } else {
+                } else if (label.equals("Examples")){
                     examples = processPronunciationsExamples(enteredInfo,
                             Utils.examplePattern, new InputCheckerExamples(simplifiedChar));
+                } else {
+                    break;
                 }
 
             }
@@ -320,8 +305,5 @@ public class CharacterInput {
     JFrame getMainFrame() {
         return this.mainFrame;
     }
-
-
-
 }
 

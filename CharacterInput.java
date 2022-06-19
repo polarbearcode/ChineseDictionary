@@ -47,6 +47,9 @@ public class CharacterInput {
     private String[] labelStrings = new String[]{"Examples", "Pinyin", "Cantonese Pronunciations",
             "Traditional Character", "Simplified Character"};
 
+    /** Maps labels to the relevant input checker.  **/
+    private Map<String, InputChecker> labelToCheckerMap;
+
     /**
      * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
      * @param w int, the width of the window
@@ -60,6 +63,13 @@ public class CharacterInput {
         this.topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
         this.leftAndRightMargin = (int) (this.frameWidth * marginPercentage);
         this.inputTextList = new HashMap<>();
+        this.labelToCheckerMap = new HashMap<>();
+
+        this.labelToCheckerMap.put("Simplified Character", new CharacterInputChecker());
+        this.labelToCheckerMap.put("Traditional Character", new CharacterInputChecker());
+        this.labelToCheckerMap.put("Cantonese Pronunciations", new GetCantonesePronunciation());
+        this.labelToCheckerMap.put("Pinyin", new GetMandarinPronunciation());
+
         this.mainFrame = new JFrame("Character Input");
         this.mainFrame.setSize(this.frameWidth, this.frameHeight);
         this.addFiveTextBoxes();
@@ -277,7 +287,7 @@ public class CharacterInput {
             Set<String> enteredPronunciations = new HashSet<>();
 
             while (m.find()) {
-                if (!checker.checkInput(m.group(), simplifiedChar)) {
+                if (!checker.checkInput(m.group())) {
                     continue;
                 }
                 enteredPronunciations.add(m.group());

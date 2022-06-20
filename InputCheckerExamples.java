@@ -27,7 +27,7 @@ public class InputCheckerExamples implements InputChecker {
             return false;
         }
 
-        String patternString = Utils.addRegexCarrotAndDollarSign(Utils.examplePatternString);
+        String patternString = Utils.individualRegex(Utils.examplePatternString);
         Matcher m = Pattern.compile(patternString).matcher(input);
 
         return m.find();

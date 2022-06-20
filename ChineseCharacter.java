@@ -7,19 +7,19 @@ import java.util.*;
 public class ChineseCharacter implements Serializable {
 
     /** String for simplified character. **/
-    private String simplified;
+    private final String simplified;
 
     /**String for the traditional character. **/
-    private String traditional;
+    private final String traditional;
 
     /** A Map for the Cantonese pronunciation(s) of the character **/
-    private Set<String> cantonesePronunciation;
+    private final Set<String> cantonesePronunciation;
 
     /** Strings for the pinyin pronunciation of the character. **/
-    private Set<String> pinyin;
+    private final Set<String> pinyin;
 
     /** Sentences and/or phrases using the character. **/
-    private Set<String> exampleUses;
+    private final Set<String> exampleUses;
 
 
     /**
@@ -34,8 +34,8 @@ public class ChineseCharacter implements Serializable {
     public ChineseCharacter(String simplified, String traditional, String cp,
                             String py) {
 
-        this(simplified, traditional, new HashSet<>(Arrays.asList(cp)),
-                new HashSet<>(Arrays.asList(py)), new HashSet<>());
+        this(simplified, traditional, new HashSet<>(Collections.singletonList(cp)),
+                new HashSet<>(Collections.singletonList(py)), new HashSet<>());
 
     }
 
@@ -116,19 +116,10 @@ public class ChineseCharacter implements Serializable {
         }
     }
 
-    /**
-     * Finds the combo of characters to make the PronunciationAndTone object.
-     * @param pronunciation The Cantonese or Mandarin pronunciation.
-     */
-    private PronunciationAndTone findPronunciationCombo(String pronunciation) {
-        // some regex
-        return null;
-    }
     @Override
     public int hashCode() {
         char c = this.simplified.charAt(0);
-        int x = (int) c;
-        return (int) c;
+        return c;
     }
 
     @Override

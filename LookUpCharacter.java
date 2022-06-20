@@ -78,6 +78,13 @@ public class LookUpCharacter {
                 if (!checkCharacterInputValid(input)) {
                     errorLabel.setText("Input must be 1 Chinese character");
                     charBox.setBackground(Color.RED);
+                } else {
+                    if (charList.lookUp(input) != null) {
+                        CharacterRenderer cRenderer = new CharacterRenderer(charList.lookUp(input));
+
+                    } else {
+                        new CharacterInput(500, 500, charList);
+                    }
                 }
             }
 

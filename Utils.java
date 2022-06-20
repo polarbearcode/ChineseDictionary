@@ -11,6 +11,9 @@ public class Utils {
     /** String to use for mandarinPronunciationPattern. **/
     public static final String pinyinPronunciationPatternString = "([a-zA-Z]+)([1-4]?)";
 
+    /** String to use for a pattern to match all Chinese characters. **/
+    public static final String chineseCharacterMatcher = "[一-龥]";
+
     /** String to use for examplePattern. **/
     public static final String examplePatternString = "([一-龥]{2,})+";
 
@@ -41,11 +44,11 @@ public class Utils {
     }
 
     /**
-     * Add ^ and $ to the pattern string so that it becomes ^patternString$ for checking inputs.
+     * Add ^ and $ to the pattern string so that it becomes ^patternString$ for checking individual inputs.
      * @param patternString The pattern string to change.
      * @return  Return a String in the format of  ^patternString$
      */
-    public static String addRegexCarrotAndDollarSign(String patternString) {
+    public static String individualRegex(String patternString) {
         return "^" + patternString + "$";
     }
 

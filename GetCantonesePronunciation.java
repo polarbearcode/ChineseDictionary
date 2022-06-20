@@ -22,7 +22,7 @@ public class GetCantonesePronunciation implements GetPronunciationLanguage, Inpu
      */
     @Override
     public boolean checkInput(String input) {
-        String patternString = Utils.addRegexCarrotAndDollarSign(Utils.cantonesePronunciationPatternString);
+        String patternString = Utils.individualRegex(Utils.cantonesePronunciationPatternString);
         Matcher m = Pattern.compile(patternString).matcher(input);
         return m.find();
     }

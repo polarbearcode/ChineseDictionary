@@ -11,7 +11,7 @@ public class CharacterInputChecker implements InputChecker{
      */
     @Override
     public boolean checkInput(String input) {
-        Matcher m = Pattern.compile(Utils.addRegexCarrotAndDollarSign(Utils.chineseCharacterMatcher)).matcher(input);
+        Matcher m = Pattern.compile(Utils.individualRegex(Utils.chineseCharacterMatcher)).matcher(input);
         return m.find();
     }
 

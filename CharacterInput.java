@@ -1,4 +1,3 @@
-import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 
 import javax.swing.*;
 import java.util.*;
@@ -48,7 +47,7 @@ public class CharacterInput {
     private final Map<String, InputChecker> labelToCheckerMap;
 
     /**
-     * Instantiate a CharacterInput GUI with window size w by h and with 5 input boxes.
+     * Initialize a CharacterInput GUI with window size w by h and with 5 input boxes.
      * @param w int, the width of the window
      * @param h int, the height of the windows.
      * @param characterDictionary CharacterList, the character dictionary to save the input to.
@@ -158,8 +157,6 @@ public class CharacterInput {
     }
     private class AddButtonListener implements  ActionListener {
 
-        /** Regex to check no alphanumeric characters in the simplified/traditional text boxes. **/
-        Pattern characterChecker = Pattern.compile("[^a-zA-Z/d]");
 
         /** To put in characterInfo map. **/
         String simplifiedChar;
@@ -189,6 +186,7 @@ public class CharacterInput {
                             this.traditionalChar, this.cantonPronunciations, this.pinyin,
                             this.examples);
                     characterDictionary.addCharacter(newCharacter);
+                    mainFrame.setVisible(false);
                 }
 
             }

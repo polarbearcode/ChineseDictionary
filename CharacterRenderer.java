@@ -28,13 +28,12 @@ public class CharacterRenderer {
     }
 
     public void drawToScreen() {
-
-        StdDraw.clear();
+        
         StdDraw.setPenColor(Color.BLACK);
-        Font mainFont = new Font("Times New Roman", Font.PLAIN, 30);
+        Font mainFont = new Font("Open Sans, Lucida Sans", Font.PLAIN, 50);
         StdDraw.setFont(mainFont);
-        //StdDraw.text(this.windowWidth * 0.5, this.windowHeight * 0.5, this.chineseChar.getSimplified());
-        StdDraw.text(200, 200, "green");
+        StdDraw.text(0.3, 0.6, this.chineseChar.getSimplified());
+        StdDraw.text(0.6, 0.6, this.chineseChar.getTraditional());
         StdDraw.show();
 
     }

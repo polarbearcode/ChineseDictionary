@@ -5,7 +5,7 @@ import java.util.*;
 
 /** Represents the current dictionary of all the characters. **/
 public class CharacterList {
-    private String dictionaryPath;
+    private final String dictionaryPath;
     private Map<String, ChineseCharacter> dictionary;
 
     /**

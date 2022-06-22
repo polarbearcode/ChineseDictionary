@@ -24,6 +24,8 @@ public class Start {
         StdDraw.setFont(optionsFont);
         StdDraw.text(0.5, 0.6, "Look Up (L)");
         StdDraw.text(0.5, 0.5, "Add Character (A)");
+        StdDraw.text(0.5, 0.4, "Random Character (X)");
+        StdDraw.text(0.5, 0.3, "Exit (Q)");
 
     }
 
@@ -36,6 +38,9 @@ public class Start {
     }
 
     public static void main(String[] args) {
+
+        CharacterList charList = new CharacterList(pathToDictionary);
+
         mainMenu();
 
         while(true) {
@@ -43,7 +48,9 @@ public class Start {
             char command = getNextCommand();
 
             if (command == 'l') {
-                LookUpCharacter lookUpChar = new LookUpCharacter(new CharacterList(pathToDictionary));
+                LookUpCharacter lookUpChar = new LookUpCharacter(charList);
+            } else if (command == 'a') {
+                CharacterInput characterInput = new CharacterInput(500, 500, charList);
             }
         }
 

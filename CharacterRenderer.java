@@ -3,22 +3,29 @@ import edu.princeton.cs.introcs.StdDraw;
 import java.awt.*;
 
 /** Put the character information onto the window. **/
-public class CharacterRenderer {
+public class CharacterRenderer implements DictionaryScreen {
+
+    /** The character whose information will be shown. **/
+    private final ChineseCharacter chineseChar;
 
     private final int windowWidth = 500;
 
     private final int windowHeight = 300;
 
-    private static boolean showScreen = true;
+    private boolean showScreen = true;
 
-    static boolean showPronunciation = true;
+    private boolean showPronunciation = true;
+
+    CharacterRenderer(ChineseCharacter chineseChar) {
+        this.chineseChar = chineseChar;
+    }
 
 
     /**
      * Display information from the chinese character
-     * @param chineseChar The character to display information.
      */
-    public static void drawToScreen(ChineseCharacter chineseChar) {
+    @Override
+    public void drawToScreen() {
         while (true) {
             while (StdDraw.hasNextKeyTyped()) {
                 if (StdDraw.hasNextKeyTyped()) {
@@ -43,11 +50,5 @@ public class CharacterRenderer {
                 StdDraw.show();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        CharacterList c = new CharacterList("./testDictionary.srl");
-        CharacterRenderer.drawToScreen(c.lookUp("种"));
-
     }
 }

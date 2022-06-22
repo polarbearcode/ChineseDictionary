@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -26,6 +27,9 @@ public class Utils {
 
     /** Regex to check for the example uses. **/
     public static final Pattern examplePattern = Pattern.compile(examplePatternString);
+
+    /** Font for Chinese characters. **/
+    public static Font chineseFont = new Font("Open Sans, Lucida Sans", Font.PLAIN, 50);
 
     /**
      * Write the object to the file specified by file path.

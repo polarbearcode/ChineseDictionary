@@ -17,9 +17,11 @@ public class TestCharacterInput {
 
     @Before
     public void setUp() {
-        CharacterInput c = GuiActionRunner.execute(() -> new CharacterInput(500, 500, testCharList));
+        CharacterInput c = GuiActionRunner.execute(() -> new CharacterInput(testCharList));
 
         testCharList.clearDictionary();
+
+        c.drawToScreen();
 
         window = new FrameFixture(c.getMainFrame());
         window.show();

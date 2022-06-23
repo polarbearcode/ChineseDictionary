@@ -50,7 +50,7 @@ public class Start {
             if (command == 'l') {
                 LookUpCharacter lookUpChar = new LookUpCharacter(charList);
             } else if (command == 'a') {
-                CharacterInput characterInput = new CharacterInput(500, 500, charList);
+                CharacterInput characterInput = new CharacterInput(charList);
             }
         }
 

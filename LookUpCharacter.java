@@ -1,3 +1,5 @@
+import edu.princeton.cs.introcs.StdDraw;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,10 @@ public class LookUpCharacter {
 
     /** The error label. **/
     private JLabel errorLabel;
+
+    private CharacterRenderer characterRenderer;
+
+    private DictionaryScreen nextScreen;
 
     /** Instantiate the character lookup GUI.
      * @param charList  The CharacterList to lookup characters in.
@@ -75,16 +81,19 @@ public class LookUpCharacter {
                 charBox.setBackground(Color.WHITE);
                 errorLabel.setText("");
                 String input = charBox.getText();
-                if (!checkCharacterInputValid(input)) {
+                while (!checkCharacterInputValid(input)) {
                     errorLabel.setText("Input must be 1 Chinese character");
                     charBox.setBackground(Color.RED);
-                } else {
-                    if (charList.lookUp(input) != null) {
-                        CharacterRenderer cRenderer = new CharacterRenderer(charList.lookUp(input));
+                }
 
+                    if (charList.lookUp(input) != null) {
+                        ChineseCharacter c = charList.lookUp(input);
+                        nextScreen = new CharacterRenderer(c);
                     } else {
-                        new CharacterInput(500, 500, charList);
+                       nextScreen =  new CharacterInput( charList);
                     }
+
+                    mainFrame.setVisible(false);
                 }
             }
 
@@ -101,11 +110,13 @@ public class LookUpCharacter {
             return m.find();
 
         }
-    }
+
 
 
     public static void main(String[] args) {
         CharacterList c = new CharacterList("./testDictionary.srl");
-        new LookUpCharacter(c);
+        LookUpCharacter lookUpCharacter = new LookUpCharacter(c);
+
+
     }
 }

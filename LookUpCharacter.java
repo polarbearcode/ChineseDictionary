@@ -111,6 +111,16 @@ public class LookUpCharacter {
 
         }
 
+    /**
+     * Get the next screen either Input or Renderer.
+     * @return The nextScreen instance variable.
+     */
+    public DictionaryScreen getNextScreen() {
+        return this.nextScreen;
+    }
+
+
+
 
 
     public static void main(String[] args) {

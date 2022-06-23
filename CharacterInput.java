@@ -10,16 +10,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class CharacterInput {
+public class CharacterInput implements DictionaryScreen {
 
     /** Font for the text box labels on the left side. **/
     private final Font labelFont = new Font("Comic Sans MS", Font.BOLD, 16);
 
     /** The width of the GUI window. **/
-    private final int frameWidth;
+    private final int frameWidth = 500;
 
     /** The height of the GUI windows. **/
-    private final int frameHeight;
+    private final int frameHeight = 500;
 
     /** The JFrame for the character input. **/
     private final JFrame mainFrame;
@@ -47,15 +47,11 @@ public class CharacterInput {
     private final Map<String, InputChecker> labelToCheckerMap;
 
     /**
-     * Initialize a CharacterInput GUI with window size w by h and with 5 input boxes.
-     * @param w int, the width of the window
-     * @param h int, the height of the windows.
+     * Initialize a CharacterInput GUI tied to the provided character dictionary.
      * @param characterDictionary CharacterList, the character dictionary to save the input to.
      */
-    CharacterInput(int w, int h, CharacterList characterDictionary) {
+    CharacterInput(CharacterList characterDictionary) {
         this.characterDictionary = characterDictionary;
-        this.frameWidth = w;
-        this.frameHeight = h;
 
         double marginPercentage = 0.05;
         this.topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
@@ -83,6 +79,11 @@ public class CharacterInput {
                 (int)(this.frameWidth * 0.6), (int)(this.frameHeight * 0.2));
         this.mainFrame.add(this.errorLabel);
 
+    }
+
+    @Override
+    public void drawToScreen() {
+        ;
     }
 
     /**

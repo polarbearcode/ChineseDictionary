@@ -301,8 +301,10 @@ public class CharacterInput implements DictionaryScreen {
         }
     }
 
+    /** Return the JFrame. **/
     JFrame getMainFrame() {
         return this.mainFrame;
     }
+
 }
 

@@ -49,6 +49,13 @@ public class Start {
 
             if (command == 'l') {
                 LookUpCharacter lookUpChar = new LookUpCharacter(charList);
+
+                while (lookUpChar.getNextScreen() == null) {
+                    continue;
+                }
+
+                lookUpChar.getNextScreen().drawToScreen();
+
             } else if (command == 'a') {
                 CharacterInput characterInput = new CharacterInput(charList);
             }

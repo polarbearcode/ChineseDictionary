@@ -27,7 +27,6 @@ public class CharacterRenderer implements DictionaryScreen {
     @Override
     public void drawToScreen() {
         while (true) {
-            while (StdDraw.hasNextKeyTyped()) {
                 if (StdDraw.hasNextKeyTyped()) {
                     char command = StdDraw.nextKeyTyped();
                     if (command == 'h') {
@@ -48,7 +47,11 @@ public class CharacterRenderer implements DictionaryScreen {
                 StdDraw.setFont(englishFont);
                 StdDraw.text(0.2, 0.2, "Examples");
                 StdDraw.show();
+
+                while (!StdDraw.hasNextKeyTyped()) {
+                    continue;
+                }
             }
         }
+
     }
-}

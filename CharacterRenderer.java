@@ -40,12 +40,20 @@ public class CharacterRenderer implements DictionaryScreen {
                 StdDraw.clear(Color.ORANGE);
 
                 StdDraw.setPenColor(Color.BLACK);
-                StdDraw.setFont(Utils.chineseFont);
+                StdDraw.setFont(Utils.createChineseFont(50));
                 StdDraw.text(0.3, 0.8, chineseChar.getSimplified());
                 StdDraw.text(0.6, 0.8, chineseChar.getTraditional());
                 Font englishFont = new Font("Comic Sans MS", Font.PLAIN, 20);
                 StdDraw.setFont(englishFont);
-                StdDraw.text(0.2, 0.2, "Examples");
+                StdDraw.text(0.2, 0.5, "Examples");
+
+                StdDraw.setFont(Utils.createChineseFont(20));
+                int i = 0;
+                for (String example : chineseChar.getExampleUses()) {
+                    StdDraw.text(0.2, 0.15 - (0.05 * i), example);
+                    i = i + 1;
+                }
+
                 StdDraw.show();
 
                 while (!StdDraw.hasNextKeyTyped()) {

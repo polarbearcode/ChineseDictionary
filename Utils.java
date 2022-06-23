@@ -28,9 +28,6 @@ public class Utils {
     /** Regex to check for the example uses. **/
     public static final Pattern examplePattern = Pattern.compile(examplePatternString);
 
-    /** Font for Chinese characters. **/
-    public static Font chineseFont = new Font("Open Sans, Lucida Sans", Font.PLAIN, 50);
-
     /**
      * Write the object to the file specified by file path.
      * @param filePath  String path to the file
@@ -54,6 +51,15 @@ public class Utils {
      */
     public static String individualRegex(String patternString) {
         return "^" + patternString + "$";
+    }
+
+    /**
+     * Create a font for Chinese characters with the specified size.
+     * @param size  int, size of the font.
+     * @return A Font object.
+     */
+    public static Font createChineseFont(int size) {
+        return new Font("Open Sans, Lucida Sans", Font.PLAIN, size);
     }
 
 }

@@ -17,7 +17,7 @@ public class Start {
         StdDraw.setFont(mainMenuFont);
         StdDraw.text(0.5, 0.9, "Chinese Dictionary");
 
-        StdDraw.setFont(Utils.chineseFont);
+        StdDraw.setFont(Utils.createChineseFont(50));
         StdDraw.text(0.5, 0.8, "字典");
 
         Font optionsFont = new Font("Comic Sans MS", Font.PLAIN, 17);

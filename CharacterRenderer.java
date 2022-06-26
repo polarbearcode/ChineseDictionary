@@ -48,6 +48,9 @@ public class CharacterRenderer implements DictionaryScreen {
                         Start.mainMenu();
                         showScreen = false;
                         return;
+                    } else if (command == 'q') {
+                        Start.setShowScreen(false);
+                        return;
                     }
                 }
 

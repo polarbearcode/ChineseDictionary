@@ -8,6 +8,8 @@ public class Start {
     /** Path to the dictionary file. **/
     private static String pathToDictionary = "./testDictionary.srl";
 
+    private static boolean showScreen = true;
+    /** Draw the main menu screen. **/
     static void mainMenu() {
         StdDraw.setCanvasSize(500, 500);
         StdDraw.clear(Color.orange);
@@ -29,6 +31,13 @@ public class Start {
 
     }
 
+    /** Set show screen.
+     * @param   trueOrFalse Set to true to keep screen shown, false to close screen.
+     */
+    public static void setShowScreen(boolean trueOrFalse) {
+        showScreen = trueOrFalse;
+    }
+
     private static char getNextCommand() {
         while (!StdDraw.hasNextKeyTyped()) {
             continue;
@@ -37,13 +46,15 @@ public class Start {
         return StdDraw.nextKeyTyped();
     }
 
+
+
     public static void main(String[] args) {
 
         CharacterList charList = new CharacterList(pathToDictionary);
 
         mainMenu();
 
-        while(true) {
+        while(showScreen) {
 
             char command = getNextCommand();
 
@@ -58,17 +69,12 @@ public class Start {
 
             } else if (command == 'a') {
                 CharacterInput characterInput = new CharacterInput(charList);
+            } else if (command == 'q') {
+                break;
             }
         }
 
-        /**
-         while (true) {
-         while (StdDraw.hasNextKeyTyped()) {
-         //if hit the L key, then lookup screen
-         //while (something)
-         }
-         } **/
-
+        System.exit(0);
     }
 }
 

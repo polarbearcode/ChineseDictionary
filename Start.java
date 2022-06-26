@@ -1,6 +1,12 @@
 import edu.princeton.cs.introcs.StdDraw;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 /** Main entry point to the program. **/
 public class Start {
@@ -69,6 +75,15 @@ public class Start {
 
             } else if (command == 'a') {
                 CharacterInput characterInput = new CharacterInput(charList);
+            } else if (command == 'x') {
+                Set<String> dictionaryChars = charList.getCurrentDictionary().keySet();
+                List<String> characterKeys = new ArrayList<>();
+                characterKeys.addAll(dictionaryChars);
+                Collections.shuffle(characterKeys);
+
+                CharacterRenderer c = new CharacterRenderer(charList.lookUp(characterKeys.get(0)));
+                c.drawToScreen();
+
             } else if (command == 'q') {
                 break;
             }

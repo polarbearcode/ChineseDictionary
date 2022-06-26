@@ -45,6 +45,7 @@ public class CharacterRenderer implements DictionaryScreen {
                     if (command == 'h') {
                         showPronunciation = !showPronunciation;
                     } else if (command == 'm') {
+                        Start.mainMenu();
                         showScreen = false;
                         return;
                     }

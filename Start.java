@@ -8,7 +8,7 @@ public class Start {
     /** Path to the dictionary file. **/
     private static String pathToDictionary = "./testDictionary.srl";
 
-    private static void mainMenu() {
+    static void mainMenu() {
         StdDraw.setCanvasSize(500, 500);
         StdDraw.clear(Color.orange);
         Font mainMenuFont = new Font("Comic Sans MS", Font.PLAIN, 30);

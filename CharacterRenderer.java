@@ -70,7 +70,7 @@ public class CharacterRenderer implements DictionaryScreen {
                     drawPronunciation(mFinder.characterCombo(this.chineseChar), simplifiedSide);
                 }
 
-                Font englishFont = new Font("Comic Sans MS", Font.PLAIN, 20);
+                Font englishFont = Utils.comicSansFont(20);
                 StdDraw.setFont(englishFont);
                 StdDraw.text(0.2, 0.3, "Examples");
 

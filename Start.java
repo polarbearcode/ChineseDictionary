@@ -19,7 +19,7 @@ public class Start {
     static void mainMenu() {
         StdDraw.setCanvasSize(500, 500);
         StdDraw.clear(Color.orange);
-        Font mainMenuFont = new Font("Comic Sans MS", Font.PLAIN, 30);
+        Font mainMenuFont = Utils.comicSansFont(30);
         StdDraw.setPenColor(Color.BLACK);
 
         StdDraw.setFont(mainMenuFont);
@@ -28,12 +28,13 @@ public class Start {
         StdDraw.setFont(Utils.createChineseFont(50));
         StdDraw.text(0.5, 0.8, "字典");
 
-        Font optionsFont = new Font("Comic Sans MS", Font.PLAIN, 17);
+        Font optionsFont = Utils.comicSansFont(17);
         StdDraw.setFont(optionsFont);
         StdDraw.text(0.5, 0.6, "Look Up (L)");
         StdDraw.text(0.5, 0.5, "Add Character (A)");
         StdDraw.text(0.5, 0.4, "Random Character (X)");
-        StdDraw.text(0.5, 0.3, "Exit (Q)");
+        StdDraw.text(0.5, 0.3, "Edit (E)");
+        StdDraw.text(0.5, 0.2, "Exit (Q)");
 
     }
 

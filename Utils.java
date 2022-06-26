@@ -62,4 +62,13 @@ public class Utils {
         return new Font("Open Sans, Lucida Sans", Font.PLAIN, size);
     }
 
+    /**
+     * Create a font for English text.
+     * @param size  The size of the font.
+     * @return  A Comic Sans font.
+     */
+    public static Font comicSansFont(int size) {
+        return new Font("Comic Sans MS", Font.PLAIN, size);
+    }
+
 }

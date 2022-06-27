@@ -22,7 +22,6 @@ public class LookUpCharacter {
     /** The error label. **/
     private JLabel errorLabel;
 
-    private CharacterRenderer characterRenderer;
 
     private DictionaryScreen nextScreen;
 
@@ -84,6 +83,7 @@ public class LookUpCharacter {
                 while (!checkCharacterInputValid(input)) {
                     errorLabel.setText("Input must be 1 Chinese character");
                     charBox.setBackground(Color.RED);
+                    return;
                 }
 
                     if (charList.lookUp(input) != null) {

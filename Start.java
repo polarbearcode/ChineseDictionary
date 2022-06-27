@@ -87,6 +87,8 @@ public class Start {
 
             } else if (command == 'q') {
                 break;
+            } else if (command == 'e') {
+                EditScreen.drawToScreen();
             }
         }
 

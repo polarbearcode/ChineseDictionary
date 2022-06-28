@@ -10,7 +10,7 @@ public class EditScreen {
         StdDraw.setFont(Utils.comicSansFont(30));
         StdDraw.setPenColor(Color.BLACK);
 
-        StdDraw.text(0.5, 0.7, "Edit Dictionary (E)");
+        StdDraw.text(0.5, 0.7, "Edit Character Info (E)");
         StdDraw.text(0.5, 0.6, "Edit Pronunciations (P)");
         StdDraw.text(0.5, 0.5, "Return to Menu (M)");
     }
@@ -22,7 +22,7 @@ public class EditScreen {
            if (StdDraw.hasNextKeyTyped()) {
                char command = StdDraw.nextKeyTyped();
                if (command == 'e') {
-
+                    EditCharacter editChar = new EditCharacter();
                } else if (command == 'p') {
 
                } else if (command == 'm') {

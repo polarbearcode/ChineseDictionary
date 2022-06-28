@@ -1,4 +1,5 @@
 import edu.princeton.cs.introcs.StdDraw;
+import org.assertj.swing.fixture.FrameFixture;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +22,9 @@ public class LookUpCharacter {
 
     /** The error label. **/
     private JLabel errorLabel;
+
+    /** Lookup button. **/
+    private JButton lookUpButton;
 
 
     private DictionaryScreen nextScreen;
@@ -55,9 +59,11 @@ public class LookUpCharacter {
         enterCharBox.setName("Character Box");
         this.charBox = enterCharBox;
         this.errorLabel = errorLabel;
+        this.lookUpButton = lookUpButton;
 
 
         lookUpButton.addActionListener(new LookUpButtonListener(this));
+        lookUpButton.setName("lookup");
 
         mainFrame.setLayout(null);
         mainFrame.add(charToLookupLabel);
@@ -111,8 +117,24 @@ public class LookUpCharacter {
         return this.charList;
     }
 
+    JButton getLookUpButton() {
+        return this.lookUpButton;
+    }
+
+    JFrame getMainFrame() {
+        return this.mainFrame;
+    }
+
     void setNextScreen(DictionaryScreen ds) {
         this.nextScreen = ds;
+    }
+
+    /**
+     * Add a componenet to the main frame.
+     * @param component The component to add.
+     */
+    void addToMainFrame(JComponent component) {
+        this.mainFrame.add(component);
     }
 
 

@@ -53,6 +53,11 @@ public class Start {
         return StdDraw.nextKeyTyped();
     }
 
+    /**Get the path to the dictionary program is tied to. **/
+    public static String getPathToDictionary() {
+        return pathToDictionary;
+    }
+
 
 
     public static void main(String[] args) {

@@ -56,7 +56,8 @@ public class LookUpCharacter {
         this.charBox = enterCharBox;
         this.errorLabel = errorLabel;
 
-        lookUpButton.addActionListener(new LookUpButtonListener());
+
+        lookUpButton.addActionListener(new LookUpButtonListener(this));
 
         mainFrame.setLayout(null);
         mainFrame.add(charToLookupLabel);
@@ -70,42 +71,12 @@ public class LookUpCharacter {
 
     }
 
-    private class LookUpButtonListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String command = e.getActionCommand();
-
-            if (command.equals("Look Up")) {
-                charBox.setBackground(Color.WHITE);
-                errorLabel.setText("");
-                String input = charBox.getText();
-                while (!checkCharacterInputValid(input)) {
-                    errorLabel.setText("Input must be 1 Chinese character");
-                    charBox.setBackground(Color.RED);
-                    return;
-                }
-
-                    if (charList.lookUp(input) != null) {
-                        ChineseCharacter c = charList.lookUp(input);
-                        nextScreen = new CharacterRenderer(c);
-                    } else {
-                       nextScreen =  new CharacterInput( charList);
-                    }
-
-                    mainFrame.setVisible(false);
-                }
-            }
-
-
-        }
-
         /**
          * Check that the user entered 1 Chinese Character.
          * @param input The text from the character box.
          * @return True if input is 1 Chinese character, false otherwise.
          */
-        private boolean checkCharacterInputValid(String input) {
+        boolean checkCharacterInputValid(String input) {
             Matcher m = Pattern.compile(Utils.individualRegex(Utils.chineseCharacterMatcher)).matcher(input);
             return m.find();
 
@@ -126,7 +97,26 @@ public class LookUpCharacter {
     public static void main(String[] args) {
         CharacterList c = new CharacterList("./testDictionary.srl");
         LookUpCharacter lookUpCharacter = new LookUpCharacter(c);
+    }
+
+    JLabel getErrorLabel() {
+        return this.errorLabel;
+    }
+
+    JTextArea getCharBox() {
+        return this.charBox;
+    }
+
+    CharacterList getCharList() {
+        return this.charList;
+    }
+
+    void setNextScreen(DictionaryScreen ds) {
+        this.nextScreen = ds;
+    }
 
 
+    void hidMainFrame() {
+        this.mainFrame.setVisible(false);
     }
 }

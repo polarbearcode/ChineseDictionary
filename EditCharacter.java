@@ -21,6 +21,7 @@ public class EditCharacter extends LookUpCharacter{
         this.addToMainFrame(removeButton);
 
         JButton editButton = new JButton("Edit");
+        editButton.setName("Edit");
         editButton.setBounds((int)(mainFrame.getWidth() * 0.5), (int)(mainFrame.getHeight() * 0.5),
                 (int)(mainFrame.getWidth() * 0.3), (int)(mainFrame.getHeight() * 0.1));
         this.addToMainFrame(editButton);

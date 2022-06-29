@@ -17,7 +17,7 @@ public class EditCharacter extends LookUpCharacter{
         removeButton.setName("Remove Char");
         removeButton.setBounds((int)(mainFrame.getWidth() * 0.1), (int)(mainFrame.getHeight() * 0.5),
                 (int)(mainFrame.getWidth() * 0.35), (int)(mainFrame.getHeight() * 0.1));
-        removeButton.addActionListener(new RemoveButtonListener());
+        removeButton.addActionListener(new RemoveButtonListener(this));
         this.addToMainFrame(removeButton);
 
         JButton editButton = new JButton("Edit");
@@ -26,17 +26,10 @@ public class EditCharacter extends LookUpCharacter{
         this.addToMainFrame(editButton);
     }
 
+
+
     /**
-     * Check the character input is valid and is in the dictionary.
-     * @param input The character entered into the text box.
-     * @return  True if the input is 1 Chinese character in the dictionary. False otherwise.
-     */
-    public boolean checkInput(String input) {
-        return input.length() == 1 && getCharList().lookUp(input) != null;
-    }
-
-
-    private class RemoveButtonListener implements ActionListener {
+    private class EditButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String input = getCharBox().getText();
@@ -48,10 +41,5 @@ public class EditCharacter extends LookUpCharacter{
                 getCharBox().setBackground(Color.red);
             }
         }
-    }
-
-
-
-
-
+    } **/
 }

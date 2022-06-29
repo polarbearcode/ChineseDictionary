@@ -14,6 +14,7 @@ public class EditCharacter extends LookUpCharacter{
 
 
         removeButton.setText("Remove Char");
+        removeButton.setName("Remove Char");
         removeButton.setBounds((int)(mainFrame.getWidth() * 0.1), (int)(mainFrame.getHeight() * 0.5),
                 (int)(mainFrame.getWidth() * 0.35), (int)(mainFrame.getHeight() * 0.1));
         removeButton.addActionListener(new RemoveButtonListener());
@@ -31,7 +32,7 @@ public class EditCharacter extends LookUpCharacter{
      * @return  True if the input is 1 Chinese character in the dictionary. False otherwise.
      */
     public boolean checkInput(String input) {
-        return false;
+        return input.length() == 1 && getCharList().lookUp(input) != null;
     }
 
 

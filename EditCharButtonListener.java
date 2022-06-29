@@ -31,17 +31,14 @@ public class EditCharButtonListener extends EditScreenButtons implements ActionL
             } else if (field.equals("Traditional Character")) {
                 inputField.setText(chineseChar.getTraditional());
             } else if (field.equals("Cantonese Pronunciations")) {
-
+                inputField.setText(String.join(",", chineseChar.getCantonesePronunciation()));
+            } else if (field.equals("Pinyin")) {
+                inputField.setText(String.join(",", chineseChar.getMandarinPronunciation()));
+            } else if (field.equals("Examples")) {
+                inputField.setText(String.join(",", chineseChar.getExampleUses()));
             }
         }
     }
 
-    /**
-     * Take the set and return it's items as a single string separated by a comma.
-     * @param info  Set containing the items
-     * @return A String in the format of "a1, a2, ..."
-     */
-    public String turnSetIntoInput(Set<String> info) {
 
-    }
 }

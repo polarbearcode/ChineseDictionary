@@ -58,6 +58,13 @@ public class Start {
         return pathToDictionary;
     }
 
+    /** Set the path to the dictionaryu program is tied to.
+     * @param pathToDictionary  String, path to the dictionary file.
+     */
+    public static void setPathToDictionary(String pathToDictionary) {
+        Start.pathToDictionary = pathToDictionary;
+    }
+
 
 
     public static void main(String[] args) {

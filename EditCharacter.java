@@ -15,6 +15,8 @@ public class EditCharacter extends LookUpCharacter{
 
         removeButton.setText("Remove Char");
         removeButton.setName("Remove Char");
+        this.removeListeners(removeButton);
+
         removeButton.setBounds((int)(mainFrame.getWidth() * 0.1), (int)(mainFrame.getHeight() * 0.5),
                 (int)(mainFrame.getWidth() * 0.35), (int)(mainFrame.getHeight() * 0.1));
         removeButton.addActionListener(new RemoveButtonListener(this));
@@ -22,25 +24,22 @@ public class EditCharacter extends LookUpCharacter{
 
         JButton editButton = new JButton("Edit");
         editButton.setName("Edit");
+        editButton.addActionListener(new EditCharButtonListener(this));
         editButton.setBounds((int)(mainFrame.getWidth() * 0.5), (int)(mainFrame.getHeight() * 0.5),
                 (int)(mainFrame.getWidth() * 0.3), (int)(mainFrame.getHeight() * 0.1));
         this.addToMainFrame(editButton);
     }
 
-
-
     /**
-    private class EditButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String input = getCharBox().getText();
+     * Remove all listeners on the button.
+     * @param button The button to remove listeners from.
+     */
+    private void removeListeners(JButton button) {
 
-            if (checkInput(input)) {
-                getCharList().removeChar(input);
-            } else {
-                getErrorLabel().setText("Fix input");
-                getCharBox().setBackground(Color.red);
-            }
+        for (ActionListener a : button.getActionListeners()) {
+            button.removeActionListener(a);
         }
-    } **/
+
+    }
+
 }

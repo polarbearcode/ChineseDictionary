@@ -183,8 +183,27 @@ public class TestChineseCharacter {
         assertEquals(expected2, c.findAudio(種));
 
         cleanUpDictionary();
-
     }
+
+    @Test
+    public void testAddSameCharacter() {
+        cleanUpDictionary();
+
+        ChineseCharacter chineseChar = multiplePronunciationChar();
+
+        c.addCharacter(chineseChar);
+
+        chineseChar.addExamples("种类");
+
+        c.addCharacter(chineseChar);
+
+        ChineseCharacter charLookUp = c.lookUp("种");
+
+        assertTrue(charLookUp.getExampleUses().contains("种类"));
+        assertEquals(3, charLookUp.getExampleUses().size());
+        
+    }
+
 
 
     /** Clean up the dictionary after testing. **/
@@ -201,14 +220,15 @@ public class TestChineseCharacter {
 
     /** Helper function to create a character with multiple pronunciations.
      * @return  A Chinese character that has a list of pronunciations.  **/
-    private ChineseCharacter multiplePronunciationChar() {
+    static ChineseCharacter multiplePronunciationChar() {
 
         List<String> pronunciations = new ArrayList<>();
         pronunciations.add("zung2");
         pronunciations.add("zung3");
 
-        ChineseCharacter 種 = new ChineseCharacter("種", "种", new HashSet<String>(pronunciations),
-                new HashSet<String>(Arrays.asList("zhong3", "zhong4")), new HashSet<>());
+        ChineseCharacter 種 = new ChineseCharacter("种", "種", new HashSet<String>(pronunciations),
+                new HashSet<String>(Arrays.asList("zhong3", "zhong4")),
+                new HashSet<>(Arrays.asList("种群", "种植")));
 
         return 種;
     }

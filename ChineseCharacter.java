@@ -116,6 +116,14 @@ public class ChineseCharacter implements Serializable {
         }
     }
 
+    /**
+     * Remove the example from the character. Do nothing if example is not in the example set.
+     * @param example   String, the example to remove.
+     */
+    public void removeExample(String example) {
+        this.exampleUses.remove(example);
+    }
+
     @Override
     public int hashCode() {
         char c = this.simplified.charAt(0);

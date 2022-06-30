@@ -201,6 +201,18 @@ public class TestChineseCharacter {
 
         assertTrue(charLookUp.getExampleUses().contains("种类"));
         assertEquals(3, charLookUp.getExampleUses().size());
+
+        ChineseCharacter chineseCharLessExamples = multiplePronunciationChar();
+        chineseCharLessExamples.removeExample("种植");
+        chineseCharLessExamples.removeExample("种群");
+
+
+        c.addCharacter(chineseCharLessExamples);
+        charLookUp = c.lookUp("种");
+
+        assertTrue(charLookUp.getExampleUses().contains("种植"));
+        assertEquals(3, charLookUp.getExampleUses().size());
+
     }
 
 

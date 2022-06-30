@@ -124,7 +124,7 @@ public class CharacterList {
      */
     public void removeExample(String chineseChar, String example) {
         if (this.dictionary.containsKey(chineseChar)) {
-            this.lookUp(chineseChar).getExampleUses().remove(example);
+            this.lookUp(chineseChar).removeExample(example);
         }
     }
 

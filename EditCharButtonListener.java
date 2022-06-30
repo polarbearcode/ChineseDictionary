@@ -6,6 +6,8 @@ import java.util.Set;
 /** Listener for the edit character button on the EditCharacter screen. **/
 public class EditCharButtonListener extends EditScreenButtons implements ActionListener {
 
+    private CharacterInput characterInputScreen;
+
     /**
      * Tie button to the EditScreen.
      * @param editScreen    The screen to get the character input.
@@ -22,6 +24,8 @@ public class EditCharButtonListener extends EditScreenButtons implements ActionL
         CharacterList charList = new CharacterList(Start.getPathToDictionary());
         ChineseCharacter chineseChar = charList.lookUp(this.editScreen.getCharBox().getText());
         CharacterInput charInput = new CharacterInput(charList);
+        this.characterInputScreen = charInput;
+        editScreen.setNextScreen(charInput);
         Map<String, JTextArea> charFields = charInput.getInputTextList();
 
         for (String field : charFields.keySet()) {
@@ -38,6 +42,10 @@ public class EditCharButtonListener extends EditScreenButtons implements ActionL
                 inputField.setText(String.join(",", chineseChar.getExampleUses()));
             }
         }
+    }
+
+    public CharacterInput getCharacterInputScreen() {
+        return this.characterInputScreen;
     }
 
 

@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 /** Edit character information in the dictionary. **/
 public class EditCharacter extends LookUpCharacter{
 
+    private CharacterInput charInputScreen;
+
     public EditCharacter() {
         super(new CharacterList(Start.getPathToDictionary()));
 
@@ -24,7 +26,10 @@ public class EditCharacter extends LookUpCharacter{
 
         JButton editButton = new JButton("Edit");
         editButton.setName("Edit");
-        editButton.addActionListener(new EditCharButtonListener(this));
+
+        EditCharButtonListener editListener = new EditCharButtonListener(this);
+        editButton.addActionListener(editListener);
+
         editButton.setBounds((int)(mainFrame.getWidth() * 0.5), (int)(mainFrame.getHeight() * 0.5),
                 (int)(mainFrame.getWidth() * 0.3), (int)(mainFrame.getHeight() * 0.1));
         this.addToMainFrame(editButton);
@@ -39,7 +44,7 @@ public class EditCharacter extends LookUpCharacter{
         for (ActionListener a : button.getActionListeners()) {
             button.removeActionListener(a);
         }
-
     }
+
 
 }

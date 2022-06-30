@@ -201,7 +201,6 @@ public class TestChineseCharacter {
 
         assertTrue(charLookUp.getExampleUses().contains("种类"));
         assertEquals(3, charLookUp.getExampleUses().size());
-        
     }
 
 

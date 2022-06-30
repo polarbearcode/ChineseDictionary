@@ -13,10 +13,12 @@ public class TestEditCharInfo {
 
     private FrameFixture window;
 
+    private EditCharacter e;
+
     @Before
     public void setUp() {
         Start.setPathToDictionary("./testDictionary.srl");
-        EditCharacter e = GuiActionRunner.execute(EditCharacter::new);
+        e = GuiActionRunner.execute(EditCharacter::new);
 
         window = new FrameFixture(e.getMainFrame());
         window.show();
@@ -25,13 +27,25 @@ public class TestEditCharInfo {
 
     @Test
     public void testRemoveChar() {
+
         window.textBox("Character Box").enterText("种");
         window.button("Remove Char").click();
 
         CharacterList c = new CharacterList(Start.getPathToDictionary());
+
         assertNull(c.lookUp("种"));
 
         c.addCharacter(TestChineseCharacter.multiplePronunciationChar());
+
+    }
+
+    @Test
+    public void testEditChar() {
+        window.textBox("Character Box").enterText("种");
+        window.button("Edit").click();
+
+        CharacterInput charInputScreen = (CharacterInput) e.getNextScreen();
+        FrameFixture charInputWindow = new FrameFixture(charInputScreen.getMainFrame());
     }
     
 

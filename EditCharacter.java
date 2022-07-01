@@ -35,6 +35,10 @@ public class EditCharacter extends LookUpCharacter{
         this.addToMainFrame(editButton);
     }
 
+    public void drawToScreen() {
+        this.getMainFrame().setVisible(true);
+    }
+
     /**
      * Remove all listeners on the button.
      * @param button The button to remove listeners from.

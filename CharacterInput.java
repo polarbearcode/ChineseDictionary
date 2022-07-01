@@ -190,6 +190,8 @@ public class CharacterInput implements DictionaryScreen {
                     mainFrame.setVisible(false);
                 }
 
+                mainFrame.dispose();
+
             }
         }
 

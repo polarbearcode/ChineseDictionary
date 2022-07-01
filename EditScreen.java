@@ -18,7 +18,9 @@ public class EditScreen {
     public static void drawToScreen() {
        editMenu();
 
-       while(true) {
+       boolean showScreen = true;
+
+       while(showScreen) {
            if (StdDraw.hasNextKeyTyped()) {
                char command = StdDraw.nextKeyTyped();
                if (command == 'e') {
@@ -26,8 +28,8 @@ public class EditScreen {
                } else if (command == 'p') {
 
                } else if (command == 'm') {
+                   showScreen = false;
                    Start.mainMenu();
-                   return;
                }
            }
        }

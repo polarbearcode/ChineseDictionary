@@ -17,6 +17,7 @@ public class Start {
     private static boolean showScreen = true;
     /** Draw the main menu screen. **/
     static void mainMenu() {
+        StdDraw.clear(Color.orange);
         StdDraw.setCanvasSize(500, 500);
         StdDraw.clear(Color.orange);
         Font mainMenuFont = Utils.comicSansFont(30);
@@ -65,8 +66,6 @@ public class Start {
         Start.pathToDictionary = pathToDictionary;
     }
 
-
-
     public static void main(String[] args) {
 
         CharacterList charList = new CharacterList(pathToDictionary);
@@ -102,6 +101,8 @@ public class Start {
             } else if (command == 'e') {
                 EditScreen.drawToScreen();
             }
+
+            charList = new CharacterList(Start.pathToDictionary);
         }
 
         System.exit(0);

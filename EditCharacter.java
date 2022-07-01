@@ -14,6 +14,8 @@ public class EditCharacter extends LookUpCharacter{
         JFrame mainFrame = this.getMainFrame();
         JButton removeButton = this.getLookUpButton();
 
+        mainFrame.setVisible(false);
+
 
         removeButton.setText("Remove Char");
         removeButton.setName("Remove Char");
@@ -33,10 +35,8 @@ public class EditCharacter extends LookUpCharacter{
         editButton.setBounds((int)(mainFrame.getWidth() * 0.5), (int)(mainFrame.getHeight() * 0.5),
                 (int)(mainFrame.getWidth() * 0.3), (int)(mainFrame.getHeight() * 0.1));
         this.addToMainFrame(editButton);
-    }
 
-    public void drawToScreen() {
-        this.getMainFrame().setVisible(true);
+        mainFrame.setVisible(true);
     }
 
     /**

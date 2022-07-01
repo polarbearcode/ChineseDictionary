@@ -210,8 +210,8 @@ public class TestChineseCharacter {
         c.addCharacter(chineseCharLessExamples);
         charLookUp = c.lookUp("种");
 
-        assertTrue(charLookUp.getExampleUses().contains("种植"));
-        assertEquals(3, charLookUp.getExampleUses().size());
+        assertFalse(charLookUp.getExampleUses().contains("种植"));
+        assertEquals(0, charLookUp.getExampleUses().size());
 
     }
 

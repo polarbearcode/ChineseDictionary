@@ -47,11 +47,13 @@ public class CharacterList {
             charInDictionary.getMandarinPronunciation().addAll(c.getMandarinPronunciation());
             this.dictionary.put(c.getSimplified(), charInDictionary);
 
+            Set<String> examplesToAdd = c.getExampleUses();
+
             for (String example : charInDictionary.getExampleUses()) {
                 charInDictionary.removeExample(example);
             }
 
-            for (String example : c.getExampleUses()) {
+            for (String example : examplesToAdd) {
                 charInDictionary.addExamples(example);
             }
 

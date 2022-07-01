@@ -12,7 +12,7 @@ import java.util.Set;
 public class Start {
 
     /** Path to the dictionary file. **/
-    private static String pathToDictionary = "./testDictionary.srl";
+    private static String pathToDictionary = "./Test/testDictionary.srl";
 
     private static boolean showScreen = true;
     /** Draw the main menu screen. **/
@@ -77,6 +77,7 @@ public class Start {
 
             if (command == 'l') {
                 LookUpCharacter lookUpChar = new LookUpCharacter(charList);
+                lookUpChar.drawToScreen();
 
                 while (lookUpChar.getNextScreen() == null) {
                     continue;
@@ -86,6 +87,7 @@ public class Start {
 
             } else if (command == 'a') {
                 CharacterInput characterInput = new CharacterInput(charList);
+                characterInput.drawToScreen();
             } else if (command == 'x') {
                 Set<String> dictionaryChars = charList.getCurrentDictionary().keySet();
                 List<String> characterKeys = new ArrayList<>();
@@ -98,7 +100,8 @@ public class Start {
             } else if (command == 'q') {
                 break;
             } else if (command == 'e') {
-                EditScreen.drawToScreen();
+                EditScreen e = new EditScreen();
+                e.drawToScreen();
             }
 
             charList = new CharacterList(Start.pathToDictionary);

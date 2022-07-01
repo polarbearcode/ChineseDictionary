@@ -12,11 +12,11 @@ import java.util.Set;
 public class Start {
 
     /** Path to the dictionary file. **/
-    private String pathToDictionary = "./testDictionary.srl";
+    private static String pathToDictionary = "./testDictionary.srl";
 
-    private boolean showScreen = true;
+    private static boolean showScreen = true;
     /** Draw the main menu screen. **/
-    void mainMenu() {
+    static void mainMenu() {
         StdDraw.clear(Color.orange);
         StdDraw.setCanvasSize(500, 500);
         StdDraw.clear(Color.orange);
@@ -42,11 +42,11 @@ public class Start {
     /** Set show screen.
      * @param   trueOrFalse Set to true to keep screen shown, false to close screen.
      */
-    public void setShowScreen(boolean trueOrFalse) {
+    public static void setShowScreen(boolean trueOrFalse) {
         showScreen = trueOrFalse;
     }
 
-    private char getNextCommand() {
+    private static char getNextCommand() {
         while (!StdDraw.hasNextKeyTyped()) {
             continue;
         }
@@ -55,19 +55,17 @@ public class Start {
     }
 
     /**Get the path to the dictionary program is tied to. **/
-    public String getPathToDictionary() {
+    public static String getPathToDictionary() {
         return pathToDictionary;
     }
 
     /** Set the path to the dictionaryu program is tied to.
      * @param pathToDictionary  String, path to the dictionary file.
      */
-    public void setPathToDictionary(String pathToDictionary) {
-        this.pathToDictionary = pathToDictionary;
+    public static void setPathToDictionary(String pathToDictionary) {
+        Start.pathToDictionary = pathToDictionary;
     }
 
-
-    /** Initialize the program. **/
     public void drawToScreen() {
         CharacterList charList = new CharacterList(pathToDictionary);
 
@@ -103,15 +101,16 @@ public class Start {
                 EditScreen.drawToScreen();
             }
 
-            charList = new CharacterList(this.pathToDictionary);
+            charList = new CharacterList(Start.pathToDictionary);
         }
-
-        System.exit(0);
 
     }
 
     public static void main(String[] args) {
 
+        Start s = new Start();
+        s.drawToScreen();
+        System.exit(0);
     }
 }
 

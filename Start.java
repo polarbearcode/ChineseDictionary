@@ -70,9 +70,9 @@ public class Start {
 
         CharacterList charList = new CharacterList(pathToDictionary);
 
-        mainMenu();
-
         while(showScreen) {
+
+            mainMenu();
 
             char command = getNextCommand();
 

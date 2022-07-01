@@ -29,7 +29,6 @@ public class EditScreen {
 
                } else if (command == 'm') {
                    showScreen = false;
-                   Start.mainMenu();
                }
            }
        }

@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.awt.*;
+import java.util.Set;
 
 public class TestEditCharInfo {
 
@@ -39,15 +40,6 @@ public class TestEditCharInfo {
 
     }
 
-    @Test
-    public void testEditChar() {
-        window.textBox("Character Box").enterText("种");
-        window.button("Edit").click();
-
-        CharacterInput charInputScreen = (CharacterInput) e.getNextScreen();
-        FrameFixture charInputWindow = new FrameFixture(charInputScreen.getMainFrame());
-    }
-    
 
     @After
     public void tearDown() {

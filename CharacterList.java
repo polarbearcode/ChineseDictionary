@@ -45,11 +45,21 @@ public class CharacterList {
             ChineseCharacter charInDictionary = this.dictionary.get(c.getSimplified());
             charInDictionary.getCantonesePronunciation().addAll(c.getCantonesePronunciation());
             charInDictionary.getMandarinPronunciation().addAll(c.getMandarinPronunciation());
-            charInDictionary.getExampleUses().addAll(c.getExampleUses());
+            this.dictionary.put(c.getSimplified(), charInDictionary);
+
+            for (String example : charInDictionary.getExampleUses()) {
+                charInDictionary.removeExample(example);
+            }
+
+            for (String example : c.getExampleUses()) {
+                charInDictionary.addExamples(example);
+            }
+
         } else {
             this.dictionary.put(c.getSimplified(), c);
-            writeDictionaryToFile(this.dictionary);
         }
+
+        writeDictionaryToFile(this.dictionary);
     }
 
     /**

@@ -1,7 +1,11 @@
+package Screens;
+
 import Characters.CharacterList;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+
+
 
 /** Edit character information in the dictionary. **/
 public class EditCharacter extends LookUpCharacter implements DictionaryScreen{

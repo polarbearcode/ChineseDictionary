@@ -72,12 +72,12 @@ public class CharacterRenderer implements DictionaryScreen {
 
                 Font englishFont = Utils.comicSansFont(20);
                 StdDraw.setFont(englishFont);
-                StdDraw.text(0.2, 0.3, "Examples");
+                StdDraw.text(0.2, 0.4, "Examples");
 
                 StdDraw.setFont(Utils.createChineseFont(20));
                 int i = 0;
                 for (String example : chineseChar.getExampleUses()) {
-                    StdDraw.text(0.2, 0.15 - (0.05 * i), example);
+                    StdDraw.text(0.2, 0.3 - (0.05 * i), example);
                     i = i + 1;
                 }
 

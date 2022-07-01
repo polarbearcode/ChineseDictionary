@@ -4,14 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /** Edit character information in the dictionary. **/
-public class EditCharacter extends LookUpCharacter{
+public class EditCharacter extends LookUpCharacter implements DictionaryScreen{
 
     private CharacterInput charInputScreen;
+
+    private JFrame mainFrame;
 
     public EditCharacter() {
         super(new CharacterList(Start.getPathToDictionary()));
 
-        JFrame mainFrame = this.getMainFrame();
+        mainFrame = this.getMainFrame();
         JButton removeButton = this.getLookUpButton();
 
         mainFrame.setVisible(false);
@@ -35,8 +37,12 @@ public class EditCharacter extends LookUpCharacter{
         editButton.setBounds((int)(mainFrame.getWidth() * 0.5), (int)(mainFrame.getHeight() * 0.5),
                 (int)(mainFrame.getWidth() * 0.3), (int)(mainFrame.getHeight() * 0.1));
         this.addToMainFrame(editButton);
+    }
 
-        mainFrame.setVisible(true);
+    @Override
+    public void drawToScreen() {
+
+        this.mainFrame.setVisible(true);
     }
 
     /**

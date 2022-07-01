@@ -3,9 +3,9 @@ import edu.princeton.cs.introcs.StdDraw;
 import java.awt.Color;
 
 /** Screen to edit character information or edit the pronunciation and tone mappings. **/
-public class EditScreen {
+public class EditScreen implements DictionaryScreen {
 
-    public static void editMenu() {
+    public void editMenu() {
         StdDraw.clear(Color.orange);
         StdDraw.setFont(Utils.comicSansFont(30));
         StdDraw.setPenColor(Color.BLACK);
@@ -15,8 +15,9 @@ public class EditScreen {
         StdDraw.text(0.5, 0.5, "Return to Menu (M)");
     }
 
-    public static void drawToScreen() {
-       editMenu();
+    @Override
+    public void drawToScreen() {
+       this.editMenu();
 
        boolean showScreen = true;
 

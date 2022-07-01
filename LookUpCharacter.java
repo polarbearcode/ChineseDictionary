@@ -9,33 +9,49 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /** A GUI for looking up characters. **/
-public class LookUpCharacter {
+public class LookUpCharacter implements DictionaryScreen {
 
-    /** The CharacterList to lookup characters in. **/
+    /**
+     * The CharacterList to lookup characters in.
+     **/
     private final CharacterList charList;
 
-    /** The GUI main frame. **/
+    /**
+     * The GUI main frame.
+     **/
     private JFrame mainFrame;
 
-    /** The JTextArea where user enters a character. Use to get the entered character. **/
+    /**
+     * The JTextArea where user enters a character. Use to get the entered character.
+     **/
     private JTextArea charBox;
 
-    /** The error label. **/
+    /**
+     * The error label.
+     **/
     private JLabel errorLabel;
 
-    /** Lookup button. **/
+    /**
+     * Lookup button.
+     **/
     private JButton lookUpButton;
 
 
     private DictionaryScreen nextScreen;
 
-    /** Instantiate the character lookup GUI.
-     * @param charList  The CharacterList to lookup characters in.
-     * **/
+    /**
+     * Instantiate the character lookup GUI.
+     *
+     * @param charList The CharacterList to lookup characters in.
+     **/
     public LookUpCharacter(CharacterList charList) {
 
         this.charList = charList;
+    }
 
+
+    @Override
+    public void drawToScreen() {
         int frameWidth = 500;
         int frameHeight = 500;
         JFrame mainFrame = new JFrame("Character Lookup");
@@ -46,14 +62,14 @@ public class LookUpCharacter {
         JTextArea enterCharBox = new JTextArea();
         JLabel errorLabel = new JLabel();
 
-        charToLookupLabel.setBounds((int)(frameWidth * 0.1), (int)(frameHeight * 0.3),
-                (int)(frameWidth * 0.3), (int)(frameHeight * 0.05));
-        lookUpButton.setBounds((int)(frameWidth * 0.25), (int)(frameHeight * 0.5),
-                (int)(frameWidth * 0.3), (int)(frameHeight * 0.15));
-        enterCharBox.setBounds((int)(frameWidth * 0.25), (int)(frameHeight * 0.3),
-                (int)(frameWidth * 0.3), (int)(frameHeight * 0.05));
-        errorLabel.setBounds((int)(frameWidth * 0.3), (int)(frameHeight * 0.15),
-                (int)(frameWidth * 0.6), (int)(frameHeight * 0.15));
+        charToLookupLabel.setBounds((int) (frameWidth * 0.1), (int) (frameHeight * 0.3),
+                (int) (frameWidth * 0.3), (int) (frameHeight * 0.05));
+        lookUpButton.setBounds((int) (frameWidth * 0.25), (int) (frameHeight * 0.5),
+                (int) (frameWidth * 0.3), (int) (frameHeight * 0.15));
+        enterCharBox.setBounds((int) (frameWidth * 0.25), (int) (frameHeight * 0.3),
+                (int) (frameWidth * 0.3), (int) (frameHeight * 0.05));
+        errorLabel.setBounds((int) (frameWidth * 0.3), (int) (frameHeight * 0.15),
+                (int) (frameWidth * 0.6), (int) (frameHeight * 0.15));
 
 
         enterCharBox.setName("Character Box");
@@ -77,16 +93,17 @@ public class LookUpCharacter {
 
     }
 
-        /**
-         * Check that the user entered 1 Chinese Character.
-         * @param input The text from the character box.
-         * @return True if input is 1 Chinese character, false otherwise.
-         */
-        boolean checkCharacterInputValid(String input) {
-            Matcher m = Pattern.compile(Utils.individualRegex(Utils.chineseCharacterMatcher)).matcher(input);
-            return m.find();
 
-        }
+    /**
+     * Check that the user entered 1 Chinese Character.
+     * @param input The text from the character box.
+     * @return True if input is 1 Chinese character, false otherwise.
+     */
+    boolean checkCharacterInputValid(String input) {
+        Matcher m = Pattern.compile(Utils.individualRegex(Utils.chineseCharacterMatcher)).matcher(input);
+        return m.find();
+
+    }
 
     /**
      * Get the next screen either Input or Renderer.

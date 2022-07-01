@@ -22,19 +22,19 @@ public class CharacterInput implements DictionaryScreen {
     private final int frameHeight = 500;
 
     /** The JFrame for the character input. **/
-    private final JFrame mainFrame;
+    private JFrame mainFrame;
 
     /** Save the JTextAreas to get the information. **/
     private final Map<String, JTextArea> inputTextList;
 
     /** The margin from the top and bottom window edges for the text area. **/
-    private final int topAndBotMargin;
+    private int topAndBotMargin;
 
     /** The margin from the left and right edges for the text area. **/
-    private final int leftAndRightMargin;
+    private int leftAndRightMargin;
 
     /** The label to show error message when user inputs information. **/
-    private final JLabel errorLabel;
+    private JLabel errorLabel;
 
     /** The dictionary where the character inputted will be added to. **/
     private final CharacterList characterDictionary;
@@ -52,13 +52,16 @@ public class CharacterInput implements DictionaryScreen {
      */
     CharacterInput(CharacterList characterDictionary) {
         this.characterDictionary = characterDictionary;
+        this.inputTextList = new HashMap<>();
+        this.labelToCheckerMap = new HashMap<>();
 
+    }
+
+    @Override
+    public void drawToScreen() {
         double marginPercentage = 0.05;
         this.topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
         this.leftAndRightMargin = (int) (this.frameWidth * marginPercentage);
-
-        this.inputTextList = new HashMap<>();
-        this.labelToCheckerMap = new HashMap<>();
 
         this.labelToCheckerMap.put("Simplified Character", new CharacterInputChecker());
         this.labelToCheckerMap.put("Traditional Character", new CharacterInputChecker());
@@ -79,11 +82,6 @@ public class CharacterInput implements DictionaryScreen {
                 (int)(this.frameWidth * 0.6), (int)(this.frameHeight * 0.2));
         this.mainFrame.add(this.errorLabel);
 
-    }
-
-    @Override
-    public void drawToScreen() {
-        ;
     }
 
     /**

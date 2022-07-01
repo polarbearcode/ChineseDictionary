@@ -1,8 +1,12 @@
+package ButtonListeners;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import Utils.*;
 
 /** Check entered examples. **/
 public class InputCheckerExamples implements InputChecker {
+
 
     /** The Chinese character the input checker is tied to. **/
     private String chineseChar;
@@ -11,7 +15,7 @@ public class InputCheckerExamples implements InputChecker {
      * Instantiate an example input checker tied to the specified chinese character.
      * @param chineseChar   The Chinese character this input checker is tied to.
      */
-    InputCheckerExamples(String chineseChar) {
+    public InputCheckerExamples(String chineseChar) {
         this.chineseChar = chineseChar;
     }
 

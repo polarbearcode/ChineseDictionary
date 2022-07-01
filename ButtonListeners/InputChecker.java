@@ -1,3 +1,5 @@
+package ButtonListeners;
+
 /** Checks inputs are valid.  **/
 public interface InputChecker {
     /**

@@ -1,6 +1,7 @@
 package Characters;
 
 import java.util.regex.Pattern;
+import Utils.*;
 
 /** Find the character combo that matches the pinyin. **/
 public class MPAndT extends PronunciationAndTone{

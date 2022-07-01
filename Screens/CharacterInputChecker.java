@@ -1,5 +1,10 @@
+package Screens;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import ButtonListeners.*;
+import Utils.*;
 
 /** check if the inputs for Simplified and Traditional characters are valid. **/
 public class CharacterInputChecker implements InputChecker{

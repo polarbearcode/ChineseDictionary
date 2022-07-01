@@ -3,7 +3,7 @@ package Characters;
 import java.io.*;
 import java.util.*;
 
-import static Utils.*;
+import Utils.*;
 
 /** Represents the current dictionary of all the characters. **/
 public class CharacterList {

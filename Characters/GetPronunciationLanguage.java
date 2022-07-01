@@ -1,4 +1,7 @@
+package Characters;
+
 import java.util.Set;
+
 
 /** A function to get the pronunciation of a character in either Cantonese or Mandarin. **/
 public interface GetPronunciationLanguage {

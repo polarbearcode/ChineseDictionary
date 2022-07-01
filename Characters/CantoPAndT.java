@@ -5,6 +5,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Utils.*;
+
 /** Finds the character combo for the Cantonese Pronunciation. **/
 public class CantoPAndT extends PronunciationAndTone {
 

@@ -1,3 +1,5 @@
+package Screens;
+
 /** Tie CharacterRenderer and Character Input together.
  * Ties all screens together. **/
 public interface DictionaryScreen {

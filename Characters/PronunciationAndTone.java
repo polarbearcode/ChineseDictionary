@@ -8,6 +8,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Utils.*;
+
 /** Stores two characters: one for pronunciation and one for tone. Like 切韵 **/
 public abstract class PronunciationAndTone {
 

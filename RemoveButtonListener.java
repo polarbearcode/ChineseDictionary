@@ -12,7 +12,7 @@ public class RemoveButtonListener extends EditScreenButtons implements ActionLis
     }
 
     /**
-     * Remove the character from the CharacterList.
+     * Remove the character from the Characters.CharacterList.
      */
     @Override
     public void action() {

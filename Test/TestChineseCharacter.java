@@ -1,8 +1,12 @@
+package Test;
+
 import org.junit.Test;
 
 import java.util.*;
 
 import static org.junit.Assert.*;
+
+import Characters.*;
 
 public class TestChineseCharacter {
 

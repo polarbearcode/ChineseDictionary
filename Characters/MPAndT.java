@@ -1,3 +1,5 @@
+package Characters;
+
 import java.util.regex.Pattern;
 
 /** Find the character combo that matches the pinyin. **/

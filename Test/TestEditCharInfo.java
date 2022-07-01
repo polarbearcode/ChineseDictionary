@@ -1,3 +1,4 @@
+package Test;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
 import org.junit.After;
@@ -6,9 +7,6 @@ import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.awt.*;
-import java.util.Set;
 
 public class TestEditCharInfo {
 

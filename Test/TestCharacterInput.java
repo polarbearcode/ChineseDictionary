@@ -1,8 +1,6 @@
 package Test;
 
-
 import org.assertj.swing.edt.GuiActionRunner;
-import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 import org.assertj.swing.fixture.FrameFixture;
 import org.junit.After;
 import org.junit.Before;
@@ -10,10 +8,10 @@ import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Set;
+import Characters.*;
+import Screens.*;
 
 import static org.junit.Assert.assertEquals;
-
-import 
 
 public class TestCharacterInput {
     private FrameFixture window;

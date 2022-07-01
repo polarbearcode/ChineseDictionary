@@ -1,6 +1,6 @@
+import Characters.CharacterList;
+
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /** Edit character information in the dictionary. **/

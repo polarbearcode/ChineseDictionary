@@ -1,7 +1,8 @@
+import Characters.CharacterList;
+
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.Map;
-import java.util.Set;
 
 /** Listener for the edit character button on the EditCharacter screen. **/
 public class EditCharButtonListener extends EditScreenButtons implements ActionListener {

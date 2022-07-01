@@ -1,10 +1,6 @@
-import edu.princeton.cs.introcs.StdDraw;
-import org.assertj.swing.fixture.FrameFixture;
+import Characters.CharacterList;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +8,7 @@ import java.util.regex.Pattern;
 public class LookUpCharacter implements DictionaryScreen {
 
     /**
-     * The CharacterList to lookup characters in.
+     * The Characters.CharacterList to lookup characters in.
      **/
     private final CharacterList charList;
 
@@ -42,7 +38,7 @@ public class LookUpCharacter implements DictionaryScreen {
     /**
      * Instantiate the character lookup GUI.
      *
-     * @param charList The CharacterList to lookup characters in.
+     * @param charList The Characters.CharacterList to lookup characters in.
      **/
     public LookUpCharacter(CharacterList charList) {
 

@@ -1,3 +1,5 @@
+package Characters;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -156,7 +158,7 @@ public abstract class PronunciationAndTone {
         return this.pronunCharacters;
     }
 
-    void clearMapping() {
+    public void clearMapping() {
         Iterator<Map.Entry<String, String>> itr = pronunCharacters.entrySet().iterator();
 
         while (itr.hasNext()) {

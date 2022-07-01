@@ -1,3 +1,4 @@
+import Characters.CharacterList;
 import edu.princeton.cs.introcs.StdDraw;
 
 import java.awt.Color;

@@ -1,7 +1,9 @@
+package Characters;
+
 import java.io.*;
 import java.util.*;
 
-
+import static Utils.*;
 
 /** Represents the current dictionary of all the characters. **/
 public class CharacterList {
@@ -9,7 +11,7 @@ public class CharacterList {
     private Map<String, ChineseCharacter> dictionary;
 
     /**
-     * Instantiate a CharacterList representing the specified dictionary.
+     * Instantiate a Characters.CharacterList representing the specified dictionary.
      * @param dictionaryPath String for the path to the dictionary file.
      */
     public CharacterList(String dictionaryPath) {
@@ -194,7 +196,7 @@ public class CharacterList {
         return this.dictionary.size();
     }
 
-    void clearDictionary() {
+    public void clearDictionary() {
         Iterator<Map.Entry<String, ChineseCharacter>> itr = dictionary.entrySet().iterator();
 
         while (itr.hasNext()) {

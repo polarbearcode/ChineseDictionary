@@ -1,3 +1,6 @@
+package Screens;
+
+import Characters.CharacterList;
 
 import javax.swing.*;
 import java.util.*;
@@ -48,9 +51,9 @@ public class CharacterInput implements DictionaryScreen {
 
     /**
      * Initialize a CharacterInput GUI tied to the provided character dictionary.
-     * @param characterDictionary CharacterList, the character dictionary to save the input to.
+     * @param characterDictionary Characters.CharacterList, the character dictionary to save the input to.
      */
-    CharacterInput(CharacterList characterDictionary) {
+    public CharacterInput(CharacterList characterDictionary) {
         this.characterDictionary = characterDictionary;
         this.inputTextList = new HashMap<>();
         this.labelToCheckerMap = new HashMap<>();
@@ -302,7 +305,7 @@ public class CharacterInput implements DictionaryScreen {
     }
 
     /** Return the JFrame. **/
-    JFrame getMainFrame() {
+    public JFrame getMainFrame() {
         return this.mainFrame;
     }
 

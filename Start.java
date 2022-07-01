@@ -12,11 +12,11 @@ import java.util.Set;
 public class Start {
 
     /** Path to the dictionary file. **/
-    private static String pathToDictionary = "./testDictionary.srl";
+    private String pathToDictionary = "./testDictionary.srl";
 
-    private static boolean showScreen = true;
+    private boolean showScreen = true;
     /** Draw the main menu screen. **/
-    static void mainMenu() {
+    void mainMenu() {
         StdDraw.clear(Color.orange);
         StdDraw.setCanvasSize(500, 500);
         StdDraw.clear(Color.orange);
@@ -42,11 +42,11 @@ public class Start {
     /** Set show screen.
      * @param   trueOrFalse Set to true to keep screen shown, false to close screen.
      */
-    public static void setShowScreen(boolean trueOrFalse) {
+    public void setShowScreen(boolean trueOrFalse) {
         showScreen = trueOrFalse;
     }
 
-    private static char getNextCommand() {
+    private char getNextCommand() {
         while (!StdDraw.hasNextKeyTyped()) {
             continue;
         }
@@ -55,19 +55,20 @@ public class Start {
     }
 
     /**Get the path to the dictionary program is tied to. **/
-    public static String getPathToDictionary() {
+    public String getPathToDictionary() {
         return pathToDictionary;
     }
 
     /** Set the path to the dictionaryu program is tied to.
      * @param pathToDictionary  String, path to the dictionary file.
      */
-    public static void setPathToDictionary(String pathToDictionary) {
-        Start.pathToDictionary = pathToDictionary;
+    public void setPathToDictionary(String pathToDictionary) {
+        this.pathToDictionary = pathToDictionary;
     }
 
-    public static void main(String[] args) {
 
+    /** Initialize the program. **/
+    public void drawToScreen() {
         CharacterList charList = new CharacterList(pathToDictionary);
 
         while(showScreen) {
@@ -102,10 +103,15 @@ public class Start {
                 EditScreen.drawToScreen();
             }
 
-            charList = new CharacterList(Start.pathToDictionary);
+            charList = new CharacterList(this.pathToDictionary);
         }
 
         System.exit(0);
+
+    }
+
+    public static void main(String[] args) {
+
     }
 }
 

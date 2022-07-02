@@ -1,3 +1,6 @@
+package ButtonListeners;
+
+import Screens.*;
 import java.awt.event.ActionListener;
 
 /** Listener for the Remove Button on the edit character screen. **/
@@ -7,7 +10,7 @@ public class RemoveButtonListener extends EditScreenButtons implements ActionLis
      * Tie button to the EditCharacter screen.
      * @param editScreen    The EditCharacter screen to get the character input.
      */
-    RemoveButtonListener(LookUpCharacter editScreen) {
+    public RemoveButtonListener(LookUpCharacter editScreen) {
         super(editScreen);
     }
 

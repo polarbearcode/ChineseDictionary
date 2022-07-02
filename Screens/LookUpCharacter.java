@@ -99,7 +99,7 @@ public class LookUpCharacter implements DictionaryScreen {
      * @param input The text from the character box.
      * @return True if input is 1 Chinese character, false otherwise.
      */
-    boolean checkCharacterInputValid(String input) {
+    public boolean checkCharacterInputValid(String input) {
         Matcher m = Pattern.compile(Utils.individualRegex(Utils.chineseCharacterMatcher)).matcher(input);
         return m.find();
 
@@ -122,15 +122,15 @@ public class LookUpCharacter implements DictionaryScreen {
         LookUpCharacter lookUpCharacter = new LookUpCharacter(c);
     }
 
-    JLabel getErrorLabel() {
+    public JLabel getErrorLabel() {
         return this.errorLabel;
     }
 
-    JTextArea getCharBox() {
+    public JTextArea getCharBox() {
         return this.charBox;
     }
 
-    CharacterList getCharList() {
+    public CharacterList getCharList() {
         return this.charList;
     }
 
@@ -142,7 +142,7 @@ public class LookUpCharacter implements DictionaryScreen {
         return this.mainFrame;
     }
 
-    void setNextScreen(DictionaryScreen ds) {
+    public void setNextScreen(DictionaryScreen ds) {
         this.nextScreen = ds;
     }
 
@@ -155,7 +155,7 @@ public class LookUpCharacter implements DictionaryScreen {
     }
 
 
-    void hidMainFrame() {
+    public void hideMainFrame() {
         this.mainFrame.setVisible(false);
     }
 }

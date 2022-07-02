@@ -1,8 +1,13 @@
+package Screens;
+
 import edu.princeton.cs.introcs.StdDraw;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
 import java.util.Set;
+
+import Characters.*;
+import Utils.*;
 
 
 /** Put the character information onto the window. **/
@@ -24,7 +29,7 @@ public class CharacterRenderer implements DictionaryScreen {
 
     private final String mFinderMapPath = "./testMPAndT.srl";
 
-    CharacterRenderer(ChineseCharacter chineseChar) {
+    public CharacterRenderer(ChineseCharacter chineseChar) {
         this.chineseChar = chineseChar;
     }
 

@@ -1,6 +1,7 @@
 package ButtonListeners;
 
 import Screens.*;
+import Characters.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -37,7 +38,7 @@ public class LookUpButtonListener implements ActionListener {
                 lookUpScreen.setNextScreen(new CharacterInput(lookUpScreen.getCharList()));
             }
 
-            lookUpScreen.hidMainFrame();
+            lookUpScreen.hideMainFrame();
         }
     }
 

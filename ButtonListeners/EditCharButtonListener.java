@@ -1,6 +1,6 @@
 package ButtonListeners;
 
-import Characters.CharacterList;
+import Characters.*;
 import Screens.*;
 
 import javax.swing.*;

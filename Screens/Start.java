@@ -11,11 +11,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import Utils.*;
+
 /** Main entry point to the program. **/
 public class Start {
 
     /** Path to the dictionary file. **/
-    private static String pathToDictionary = "./Test/testDictionary.srl";
+    private static String pathToDictionary = "Test/testDictionary.srl";
 
     private static boolean showScreen = true;
     /** Draw the main menu screen. **/

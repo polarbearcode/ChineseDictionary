@@ -24,7 +24,6 @@ public class TestCharacterInput {
 
         testCharList.clearDictionary();
 
-        c.drawToScreen();
 
         window = new FrameFixture(c.getMainFrame());
         window.show();

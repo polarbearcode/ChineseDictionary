@@ -52,6 +52,8 @@ public class CharacterInput implements DictionaryScreen {
     /** Maps labels to the relevant input checker.  **/
     private final Map<String, InputChecker> labelToCheckerMap;
 
+    private boolean showScreen;
+
     /**
      * Initialize a CharacterInput GUI tied to the provided character dictionary.
      * @param characterDictionary Characters.CharacterList, the character dictionary to save the input to.
@@ -60,11 +62,8 @@ public class CharacterInput implements DictionaryScreen {
         this.characterDictionary = characterDictionary;
         this.inputTextList = new HashMap<>();
         this.labelToCheckerMap = new HashMap<>();
+        this.showScreen = true;
 
-    }
-
-    @Override
-    public void drawToScreen() {
         double marginPercentage = 0.05;
         this.topAndBotMargin =  (int) (this.frameHeight * marginPercentage);
         this.leftAndRightMargin = (int) (this.frameWidth * marginPercentage);
@@ -88,6 +87,14 @@ public class CharacterInput implements DictionaryScreen {
                 (int)(this.frameWidth * 0.6), (int)(this.frameHeight * 0.2));
         this.mainFrame.add(this.errorLabel);
 
+    }
+
+    @Override
+    public void drawToScreen() {
+
+        while (showScreen || this.mainFrame.g) {
+            ;
+        }
     }
 
     /**
@@ -192,6 +199,7 @@ public class CharacterInput implements DictionaryScreen {
                             this.examples);
                     characterDictionary.addCharacter(newCharacter);
                     mainFrame.setVisible(false);
+                    showScreen = false;
                 }
 
                 mainFrame.dispose();

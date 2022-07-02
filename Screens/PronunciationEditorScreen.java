@@ -1,4 +1,6 @@
+package Screens;
 
+import Utils.*;
 import edu.princeton.cs.introcs.StdDraw;
 
 import java.awt.*;

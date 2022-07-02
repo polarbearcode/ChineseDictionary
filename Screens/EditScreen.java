@@ -30,6 +30,7 @@ public class EditScreen implements DictionaryScreen {
                char command = StdDraw.nextKeyTyped();
                if (command == 'e') {
                     EditCharacter editChar = new EditCharacter();
+                    editChar.drawToScreen();
                } else if (command == 'p') {
 
                } else if (command == 'm') {

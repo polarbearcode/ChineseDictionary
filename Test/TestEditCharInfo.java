@@ -8,6 +8,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import Screens.*;
+import Characters.*;
+
 public class TestEditCharInfo {
 
     private FrameFixture window;
@@ -18,6 +21,7 @@ public class TestEditCharInfo {
     public void setUp() {
         Start.setPathToDictionary("./testDictionary.srl");
         e = GuiActionRunner.execute(EditCharacter::new);
+        e.drawToScreen();
 
         window = new FrameFixture(e.getMainFrame());
         window.show();

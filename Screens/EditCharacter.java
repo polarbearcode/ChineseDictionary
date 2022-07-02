@@ -18,7 +18,10 @@ public class EditCharacter extends LookUpCharacter implements DictionaryScreen{
     public EditCharacter() {
         super(new CharacterList(Start.getPathToDictionary()));
 
+        super.drawToScreen();
+
         mainFrame = this.getMainFrame();
+
         JButton removeButton = this.getLookUpButton();
 
         mainFrame.setVisible(false);

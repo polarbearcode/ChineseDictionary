@@ -47,6 +47,7 @@ public class LookUpCharacter implements DictionaryScreen {
     public LookUpCharacter(CharacterList charList) {
 
         this.charList = charList;
+        this.mainFrame = new JFrame("Character Lookup");
     }
 
 
@@ -54,7 +55,6 @@ public class LookUpCharacter implements DictionaryScreen {
     public void drawToScreen() {
         int frameWidth = 500;
         int frameHeight = 500;
-        JFrame mainFrame = new JFrame("Character Lookup");
         mainFrame.setSize(frameWidth, frameHeight);
 
         JLabel charToLookupLabel = new JLabel("Character");
@@ -138,7 +138,7 @@ public class LookUpCharacter implements DictionaryScreen {
         return this.lookUpButton;
     }
 
-    JFrame getMainFrame() {
+    public JFrame getMainFrame() {
         return this.mainFrame;
     }
 

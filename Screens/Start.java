@@ -1,3 +1,5 @@
+package Screens;
+
 import Characters.CharacterList;
 import edu.princeton.cs.introcs.StdDraw;
 

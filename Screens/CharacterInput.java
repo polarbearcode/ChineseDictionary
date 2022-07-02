@@ -87,14 +87,27 @@ public class CharacterInput implements DictionaryScreen {
                 (int)(this.frameWidth * 0.6), (int)(this.frameHeight * 0.2));
         this.mainFrame.add(this.errorLabel);
 
+        this.mainFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(mainFrame,
+                        "Are you sure you want to close this window?", "Close Window?",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                    showScreen = false;
+                }
+            }
+        });
+
     }
 
     @Override
     public void drawToScreen() {
 
-        while (showScreen || this.mainFrame.g) {
-            ;
+        while (showScreen) {
+            this.mainFrame.setVisible(true);
         }
+
     }
 
     /**

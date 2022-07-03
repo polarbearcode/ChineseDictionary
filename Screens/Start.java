@@ -19,6 +19,10 @@ public class Start {
     /** Path to the dictionary file. **/
     private static String pathToDictionary = "Test/testDictionary.srl";
 
+    private static String pathToCantoPAndT = "Test/testCPAndT.srl";
+
+    private static String pathToMPAndT = "Test/testMPAndT.srl";
+
     private static boolean showScreen = true;
     /** Draw the main menu screen. **/
     static void mainMenu() {
@@ -56,6 +60,7 @@ public class Start {
             continue;
         }
 
+
         return StdDraw.nextKeyTyped();
     }
 
@@ -75,6 +80,8 @@ public class Start {
         CharacterList charList = new CharacterList(pathToDictionary);
 
         while(showScreen) {
+
+
 
             mainMenu();
 

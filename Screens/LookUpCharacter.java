@@ -62,15 +62,14 @@ public class LookUpCharacter implements DictionaryScreen {
         JTextArea enterCharBox = new JTextArea();
         JLabel errorLabel = new JLabel();
 
-        charToLookupLabel.setBounds((int) (frameWidth * 0.1), (int) (frameHeight * 0.3),
-                (int) (frameWidth * 0.3), (int) (frameHeight * 0.05));
-        lookUpButton.setBounds((int) (frameWidth * 0.25), (int) (frameHeight * 0.5),
-                (int) (frameWidth * 0.3), (int) (frameHeight * 0.15));
-        enterCharBox.setBounds((int) (frameWidth * 0.25), (int) (frameHeight * 0.3),
-                (int) (frameWidth * 0.3), (int) (frameHeight * 0.05));
-        errorLabel.setBounds((int) (frameWidth * 0.3), (int) (frameHeight * 0.15),
-                (int) (frameWidth * 0.6), (int) (frameHeight * 0.15));
-
+        Utils.setJComponentBounds(charToLookupLabel, 0.1, 0.3, 0.3, 0.05,
+                frameWidth, frameHeight);
+        Utils.setJComponentBounds(lookUpButton, 0.25, 0.5, 0.3, 0.15,
+                frameWidth, frameHeight);
+       Utils.setJComponentBounds(enterCharBox, 0.25, 0.3, 0.3, 0.05,
+               frameWidth, frameHeight);
+        Utils.setJComponentBounds(errorLabel, 0.3, 0.15, 0.6, 0.15,
+                frameWidth, frameHeight);
 
         enterCharBox.setName("Character Box");
         this.charBox = enterCharBox;

@@ -2,6 +2,7 @@ package Screens;
 
 import Characters.CharacterList;
 import ButtonListeners.*;
+import Utils.Utils;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -31,8 +32,8 @@ public class EditCharacter extends LookUpCharacter implements DictionaryScreen{
         removeButton.setName("Remove Char");
         this.removeListeners(removeButton);
 
-        removeButton.setBounds((int)(mainFrame.getWidth() * 0.1), (int)(mainFrame.getHeight() * 0.5),
-                (int)(mainFrame.getWidth() * 0.35), (int)(mainFrame.getHeight() * 0.1));
+        Utils.setJComponentBounds(removeButton, 0.1, 0.5, 0.35, 0.1,
+                mainFrame.getWidth(), mainFrame.getHeight());
         removeButton.addActionListener(new RemoveButtonListener(this));
         this.addToMainFrame(removeButton);
 
@@ -42,8 +43,8 @@ public class EditCharacter extends LookUpCharacter implements DictionaryScreen{
         EditCharButtonListener editListener = new EditCharButtonListener(this);
         editButton.addActionListener(editListener);
 
-        editButton.setBounds((int)(mainFrame.getWidth() * 0.5), (int)(mainFrame.getHeight() * 0.5),
-                (int)(mainFrame.getWidth() * 0.3), (int)(mainFrame.getHeight() * 0.1));
+        Utils.setJComponentBounds(editButton, 0.5, 0.5, 0.3, 0.1,
+                mainFrame.getWidth(), mainFrame.getHeight());
         this.addToMainFrame(editButton);
     }
 

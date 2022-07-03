@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 public class TestCharacterInput {
     private FrameFixture window;
 
-    private final CharacterList testCharList = new CharacterList("./testDictionary.srl");
+    private final CharacterList testCharList = new CharacterList("./Test/testDictionary.srl");
 
     @Before
     public void setUp() {

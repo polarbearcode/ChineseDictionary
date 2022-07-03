@@ -19,7 +19,7 @@ public class TestEditCharInfo {
 
     @Before
     public void setUp() {
-        Start.setPathToDictionary("./testDictionary.srl");
+        Start.setPathToDictionary("./Test/testDictionary.srl");
         e = GuiActionRunner.execute(EditCharacter::new);
         e.drawToScreen();
 

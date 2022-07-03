@@ -10,16 +10,16 @@ import Characters.*;
 
 public class TestChineseCharacter {
 
-    private final String testDictionaryPath = "./testDictionary.srl";
+    private final String testDictionaryPath = "./Test/testDictionary.srl";
 
-    private final String testMapPath = "./testCPAndT.srl";
+    private final String testMapPath = "./Test/testCPAndT.srl";
     private final CharacterList c = new CharacterList(testDictionaryPath);
     private final ChineseCharacter 汉 = new ChineseCharacter("汉", "漢",
             "hon3", "han4");
 
     private final ChineseCharacter 種 = multiplePronunciationChar();
 
-    private final String mTestMapPath = "./testMPAndT.srl";
+    private final String mTestMapPath = "./Test/testMPAndT.srl";
 
     private CantoPAndT cantoFinder = new CantoPAndT(testMapPath);
 

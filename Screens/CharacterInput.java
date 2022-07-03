@@ -83,8 +83,8 @@ public class CharacterInput implements DictionaryScreen {
 
         this.errorLabel = new JLabel();
         this.errorLabel.setFont(this.labelFont);
-        this.errorLabel.setBounds((int)(this.frameWidth * 0.2), this.topAndBotMargin,
-                (int)(this.frameWidth * 0.6), (int)(this.frameHeight * 0.2));
+        Utils.setJComponentBounds(this.errorLabel, 0.2, marginPercentage, 0.6, 0.2,
+                this.frameWidth, this.frameHeight);
         this.mainFrame.add(this.errorLabel);
 
         this.mainFrame.addWindowListener(new java.awt.event.WindowAdapter() {

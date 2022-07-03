@@ -1,5 +1,6 @@
 package Utils;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -71,6 +72,23 @@ public class Utils {
      */
     public static Font comicSansFont(int size) {
         return new Font("Comic Sans MS", Font.PLAIN, size);
+    }
+
+    /**
+     * Set position and size of component relative the the frame size.
+     * @param component The component (JTextArea, JLabel, JButton).
+     * @param xPos  Where on the screen along horizontal axis the component should go given as a percentage.
+     * @param yPos  Where on the screen along vertical axis the component should go given as a percentage.
+     * @param width The width as a percentage of the screen width.
+     * @param height The height as a percentage of the screen height.
+     * @param frameWidth The screen width.
+     * @param frameHeight  The screen height.
+     */
+    public static void setJComponentBounds(JComponent component, double xPos, double yPos, double width,
+                                           double height, int frameWidth, int frameHeight) {
+        component.setBounds((int) (frameWidth * xPos), (int)(frameHeight * yPos),
+                (int)(frameWidth * width), (int)(frameHeight * height));
+
     }
 
 }

@@ -31,7 +31,7 @@ public abstract class PronunciationAndTone {
     /** Instantiate a PronunciationAndTone object that reads in from the file in the provided
      * file path and uses the specified getPronunciationLanguage implementation.
      */
-    PronunciationAndTone(String mapPath, GetPronunciationLanguage getPronunciationLanguage,
+    public PronunciationAndTone(String mapPath, GetPronunciationLanguage getPronunciationLanguage,
                          Pattern pronunciationPattern) {
         this.pronunCharacters = new HashMap<>();
         this.toneCharacters = new HashMap<>();

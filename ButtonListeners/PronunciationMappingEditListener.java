@@ -28,6 +28,10 @@ public class PronunciationMappingEditListener implements ActionListener {
             while (!checkInput(editScreen.getMapping())) {
                 continue;
             }
+
+            String[] editScreenMapping = editScreen.getMapping();
+
+            editScreen.getP().addPronunciationMapping(editScreenMapping[0], editScreenMapping[1]);
         }
     }
 
@@ -53,6 +57,8 @@ public class PronunciationMappingEditListener implements ActionListener {
             editScreen.getErrorLabel().setText("Fix Pronunciation");
             return false;
         } else {
+            editScreen.getPronunciationBox().setBackground(Color.cyan);
+            editScreen.getErrorLabel().setText("");
             return true;
         }
 

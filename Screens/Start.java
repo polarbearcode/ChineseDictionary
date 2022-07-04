@@ -69,6 +69,16 @@ public class Start {
         return pathToDictionary;
     }
 
+    /** Get path to Cantonese mapping file. **/
+    public static String getPathToCantoPAndT() {
+        return pathToCantoPAndT;
+    }
+
+    /** Get path to Mandarin mapping file. **/
+    public static String getPathToMPAndT() {
+        return pathToMPAndT;
+    }
+
     /** Set the path to the dictionaryu program is tied to.
      * @param pathToDictionary  String, path to the dictionary file.
      */

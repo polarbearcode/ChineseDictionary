@@ -11,21 +11,20 @@ public class PronunciationEditorScreen implements DictionaryScreen {
     private void mainMenu() {
         StdDraw.clear(Color.orange);
         StdDraw.setFont(Utils.comicSansFont(20));
-        StdDraw.text(0.5, 0.5, "Edit Tone Mapping (T)");
-        StdDraw.text(0.5, 0.4, "Edit Pronunciation Mapping (P)");
-        StdDraw.text(0.5, 0.3, "Main Menu (M)");
+        StdDraw.text(0.5, 0.5, "Edit Pronunciation Mapping (C)");
+        StdDraw.text(0.5, 0.4, "Edit Pronunciation Mapping (M)");
+        StdDraw.text(0.5, 0.3, "Main Menu (B)");
     }
 
     @Override
     public void drawToScreen() {
         while (true) {
-
             if (StdDraw.hasNextKeyTyped()) {
-                if (StdDraw.nextKeyTyped() == 't') {
-                    // tone editor GUI
-                } else if (StdDraw.nextKeyTyped() == 'p') {
-                    // pronunciation editor GUI
+                if (StdDraw.nextKeyTyped() == 'c') {
+                    // cantonese
                 } else if (StdDraw.nextKeyTyped() == 'm') {
+                    // pinyin
+                } else if (StdDraw.nextKeyTyped() == 'b') {
                     // back to main menu
                 }
             }

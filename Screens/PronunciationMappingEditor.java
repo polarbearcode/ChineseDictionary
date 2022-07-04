@@ -86,6 +86,11 @@ public class PronunciationMappingEditor implements DictionaryScreen{
         return this.p;
     }
 
+    /** Get the main frame. **/
+    public JFrame getMainFrame() {
+        return this.mainFrame;
+    }
+
 
 
 }

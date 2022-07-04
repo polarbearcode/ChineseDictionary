@@ -32,7 +32,8 @@ public class EditScreen implements DictionaryScreen {
                     EditCharacter editChar = new EditCharacter();
                     editChar.drawToScreen();
                } else if (command == 'p') {
-
+                    PronunciationEditorScreen p = new PronunciationEditorScreen();
+                    p.drawToScreen();
                } else if (command == 'm') {
                    showScreen = false;
                }

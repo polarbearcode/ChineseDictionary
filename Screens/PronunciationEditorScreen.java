@@ -1,9 +1,14 @@
 package Screens;
 
+import Characters.CantoPAndT;
+import Characters.GetCantonesePronunciation;
+import Characters.MPAndT;
+import Characters.PronunciationAndTone;
 import Utils.*;
 import edu.princeton.cs.introcs.StdDraw;
 
 import java.awt.*;
+import java.util.regex.Pattern;
 
 /** Screen with edit pronunciation options for tone character or pronunciation character mappings. **/
 public class PronunciationEditorScreen implements DictionaryScreen {
@@ -18,14 +23,21 @@ public class PronunciationEditorScreen implements DictionaryScreen {
 
     @Override
     public void drawToScreen() {
+        mainMenu();
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
+                PronunciationAndTone pAndT;
+                PronunciationMappingEditor p;
                 if (StdDraw.nextKeyTyped() == 'c') {
-                    // cantonese
+                    pAndT = new CantoPAndT(Start.getPathToCantoPAndT());
+                    p = new PronunciationMappingEditor(pAndT);
+                    p.drawToScreen();
                 } else if (StdDraw.nextKeyTyped() == 'm') {
-                    // pinyin
+                    pAndT = new MPAndT(Start.getPathToMPAndT());
+                    p = new PronunciationMappingEditor(pAndT);
+                    p.drawToScreen();
                 } else if (StdDraw.nextKeyTyped() == 'b') {
-                    // back to main menu
+                    return;
                 }
             }
 

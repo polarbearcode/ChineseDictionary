@@ -1,5 +1,6 @@
 package Screens;
 
+import ButtonListeners.PronunciationMappingEditListener;
 import Characters.PronunciationAndTone;
 import Utils.Utils;
 
@@ -50,19 +51,35 @@ public class PronunciationMappingEditor implements DictionaryScreen{
 
     @Override
     public void drawToScreen() {
-        JLabel labelPronunciation = new JLabel();
+        JLabel labelPronunciation = new JLabel("Pronunciation");
 
-        JLabel characterMap = new JLabel();
+        JLabel characterMap = new JLabel("Character");
         JButton editButton = new JButton("Edit");
         editButton.setName("Edit");
+        editButton.addActionListener(new PronunciationMappingEditListener(this));
 
-        Utils.setJComponentBounds(labelPronunciation, 0.3, 0.5, 0.3, 0.3,
+        Utils.setJComponentBounds(labelPronunciation, 0.2, 0.2, 0.2, 0.1,
                 this.windowWidth, this.windowHeight);
-        Utils.setJComponentBounds(characterMap, 0.6, 0.5, 0.3, 0.3,
+        Utils.setJComponentBounds(characterMap, 0.5, 0.2, 0.2, 0.1,
+                this.windowWidth, this.windowHeight);
+        Utils.setJComponentBounds(this.charBox, 0.2, 0.3, 0.2, 0.1,
+                this.windowWidth, this.windowHeight);
+        Utils.setJComponentBounds(this.pronunciationBox, 0.5, 0.3, 0.2, 0.1,
+                this.windowWidth, this.windowHeight);
+        Utils.setJComponentBounds(editButton, 0.4, 0.5, 0.5, 0.1,
+                this.windowWidth, this.windowHeight);
+        Utils.setJComponentBounds(this.errorLabel, 0.3, 0.1, 0.5, 0.1,
                 this.windowWidth, this.windowHeight);
 
+        this.mainFrame.setLayout(null);
         this.mainFrame.add(labelPronunciation);
         this.mainFrame.add(characterMap);
+        this.mainFrame.add(editButton);
+        this.mainFrame.add(errorLabel);
+        this.mainFrame.add(this.charBox);
+        this.mainFrame.add(this.pronunciationBox);
+
+        this.mainFrame.setVisible(true);
     }
 
     /** Get the pronunciation->character mapping entered by the user in a length-2 String array.

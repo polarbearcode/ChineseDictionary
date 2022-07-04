@@ -81,6 +81,11 @@ public class PronunciationMappingEditor implements DictionaryScreen{
         return this.errorLabel;
     }
 
+    /** Get the PronunciationAndTone object to save the mapping. **/
+    public PronunciationAndTone getP() {
+        return this.p;
+    }
+
 
 
 }

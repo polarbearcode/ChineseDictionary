@@ -25,8 +25,8 @@ public class PronunciationMappingEditListener implements ActionListener {
         String command = e.getActionCommand();
 
         if (command.equals("Edit")) {
-            while (!checkInput(editScreen.getMapping())) {
-                continue;
+            if (!checkInput(editScreen.getMapping())) {
+                return;
             }
 
             String[] editScreenMapping = editScreen.getMapping();

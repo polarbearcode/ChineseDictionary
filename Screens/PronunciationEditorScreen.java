@@ -26,17 +26,18 @@ public class PronunciationEditorScreen implements DictionaryScreen {
         mainMenu();
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
+                char command = StdDraw.nextKeyTyped();
                 PronunciationAndTone pAndT;
                 PronunciationMappingEditor p;
-                if (StdDraw.nextKeyTyped() == 'c') {
+                if (command == 'c') {
                     pAndT = new CantoPAndT(Start.getPathToCantoPAndT());
                     p = new PronunciationMappingEditor(pAndT);
                     p.drawToScreen();
-                } else if (StdDraw.nextKeyTyped() == 'm') {
+                } else if (command == 'm') {
                     pAndT = new MPAndT(Start.getPathToMPAndT());
                     p = new PronunciationMappingEditor(pAndT);
                     p.drawToScreen();
-                } else if (StdDraw.nextKeyTyped() == 'b') {
+                } else if (command == 'b') {
                     return;
                 }
             }

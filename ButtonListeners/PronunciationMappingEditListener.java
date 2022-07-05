@@ -42,13 +42,13 @@ public class PronunciationMappingEditListener implements ActionListener {
      */
     private boolean checkInput(String[] input) {
 
-        Pattern nonEnglishChars = Pattern.compile("^[a-zA-z]");
+        Pattern nonEnglishChars = Pattern.compile("^[a-zA-z]+");
         Matcher pronunciationMatcher = nonEnglishChars.matcher(input[0]);
 
         Pattern singleCharPattern = Pattern.compile(Utils.individualRegex(Utils.chineseCharacterMatcher));
         Matcher charMatcher = singleCharPattern.matcher(input[1]);
 
-        if (input[0].length() == 0 || pronunciationMatcher.find()) {
+        if (input[0].length() == 0 || !pronunciationMatcher.find()) {
             editScreen.getPronunciationBox().setBackground(Color.red);
             editScreen.getErrorLabel().setText("Fix Pronunciation");
             return false;

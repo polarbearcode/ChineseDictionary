@@ -62,9 +62,9 @@ public class PronunciationMappingEditor implements DictionaryScreen{
                 this.windowWidth, this.windowHeight);
         Utils.setJComponentBounds(characterMap, 0.5, 0.2, 0.2, 0.1,
                 this.windowWidth, this.windowHeight);
-        Utils.setJComponentBounds(this.charBox, 0.2, 0.3, 0.2, 0.1,
+        Utils.setJComponentBounds(this.charBox, 0.5, 0.3, 0.2, 0.1,
                 this.windowWidth, this.windowHeight);
-        Utils.setJComponentBounds(this.pronunciationBox, 0.5, 0.3, 0.2, 0.1,
+        Utils.setJComponentBounds(this.pronunciationBox, 0.2, 0.3, 0.2, 0.1,
                 this.windowWidth, this.windowHeight);
         Utils.setJComponentBounds(editButton, 0.4, 0.5, 0.5, 0.1,
                 this.windowWidth, this.windowHeight);
@@ -78,7 +78,6 @@ public class PronunciationMappingEditor implements DictionaryScreen{
         this.mainFrame.add(errorLabel);
         this.mainFrame.add(this.charBox);
         this.mainFrame.add(this.pronunciationBox);
-
         this.mainFrame.setVisible(true);
     }
 

@@ -106,10 +106,13 @@ public class CharacterRenderer implements DictionaryScreen {
 
         double yStart = 0.6;
         int ySubtract = 0;
+
+        int count = 1;
         for (String[] pronunciation : pronunciations) {
             StdDraw.text(xCoord, yStart - (0.05 * ySubtract),
-                    pronunciation[0] + pronunciation[1]);
+                    pronunciation[0] + pronunciation[1] + " " + count);
             ySubtract = ySubtract + 1;
+            count = count + 1;
         }
 
     }

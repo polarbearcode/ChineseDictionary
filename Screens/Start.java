@@ -55,15 +55,6 @@ public class Start {
         showScreen = trueOrFalse;
     }
 
-    private static char getNextCommand() {
-        while (!StdDraw.hasNextKeyTyped()) {
-            continue;
-        }
-
-
-        return StdDraw.nextKeyTyped();
-    }
-
     /**Get the path to the dictionary program is tied to. **/
     public static String getPathToDictionary() {
         return pathToDictionary;

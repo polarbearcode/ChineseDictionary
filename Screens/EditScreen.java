@@ -10,6 +10,7 @@ import Utils.*;
 public class EditScreen implements DictionaryScreen {
 
     public void editMenu() {
+
         StdDraw.clear(Color.orange);
         StdDraw.setFont(Utils.comicSansFont(30));
         StdDraw.setPenColor(Color.BLACK);
@@ -21,13 +22,16 @@ public class EditScreen implements DictionaryScreen {
 
     @Override
     public void drawToScreen() {
-       this.editMenu();
 
        boolean showScreen = true;
 
+
        while(showScreen) {
-           if (StdDraw.hasNextKeyTyped()) {
-               char command = StdDraw.nextKeyTyped();
+
+           this.editMenu();
+
+           char command = Utils.getNextCommand();
+
                if (command == 'e') {
                     EditCharacter editChar = new EditCharacter();
                     editChar.drawToScreen();
@@ -39,5 +43,4 @@ public class EditScreen implements DictionaryScreen {
                }
            }
        }
-    }
 }

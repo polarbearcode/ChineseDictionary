@@ -91,25 +91,28 @@ public class Start {
 
         while(showScreen) {
 
-
-
             mainMenu();
 
-            char command = getNextCommand();
+            char command = Utils.getNextCommand();
 
             if (command == 'l') {
                 LookUpCharacter lookUpChar = new LookUpCharacter(charList);
                 lookUpChar.drawToScreen();
 
-                while (lookUpChar.getNextScreen() == null) {
+                while (lookUpChar.getNextScreen() == null && lookUpChar.getShowScreen()) {
                     continue;
                 }
 
-                lookUpChar.getNextScreen().drawToScreen();
+                if (!lookUpChar.getShowScreen()) {
+                    lookUpChar.getMainFrame().dispose();
+                } else if (lookUpChar.getNextScreen() != null) {
+                    lookUpChar.getNextScreen().drawToScreen();
+                }
 
             } else if (command == 'a') {
                 CharacterInput characterInput = new CharacterInput(charList);
                 characterInput.drawToScreen();
+                characterInput.getMainFrame().dispose();
             } else if (command == 'x') {
                 Set<String> dictionaryChars = charList.getCurrentDictionary().keySet();
                 List<String> characterKeys = new ArrayList<>();
@@ -125,7 +128,6 @@ public class Start {
                 EditScreen e = new EditScreen();
                 e.drawToScreen();
             }
-
             charList = new CharacterList(Start.pathToDictionary);
         }
 

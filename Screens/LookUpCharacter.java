@@ -39,6 +39,8 @@ public class LookUpCharacter implements DictionaryScreen {
 
     private DictionaryScreen nextScreen;
 
+    private boolean showScreen;
+
     /**
      * Instantiate the character lookup GUI.
      *
@@ -48,6 +50,20 @@ public class LookUpCharacter implements DictionaryScreen {
 
         this.charList = charList;
         this.mainFrame = new JFrame("Character Lookup");
+        this.showScreen = true;
+
+        this.mainFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(mainFrame,
+                        "Are you sure you want to close this window?", "Close Window?",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                }
+
+                showScreen = false;
+            }
+        });
     }
 
 
@@ -85,8 +101,6 @@ public class LookUpCharacter implements DictionaryScreen {
         mainFrame.add(lookUpButton);
         mainFrame.add(enterCharBox);
         mainFrame.add(errorLabel);
-
-        this.mainFrame = mainFrame;
 
         mainFrame.setVisible(true);
 
@@ -156,5 +170,9 @@ public class LookUpCharacter implements DictionaryScreen {
 
     public void hideMainFrame() {
         this.mainFrame.setVisible(false);
+    }
+
+    public boolean getShowScreen() {
+        return this.showScreen;
     }
 }

@@ -25,9 +25,7 @@ public class CharacterRenderer implements DictionaryScreen {
 
     private boolean showPronunciation = true;
 
-    private final String cantoFinderMapPath = "./testCPAndT.srl";
 
-    private final String mFinderMapPath = "./testMPAndT.srl";
 
     public CharacterRenderer(ChineseCharacter chineseChar) {
         this.chineseChar = chineseChar;
@@ -68,8 +66,8 @@ public class CharacterRenderer implements DictionaryScreen {
                 StdDraw.text(traditionalSide, characterDrawY, chineseChar.getTraditional());
 
                 if (showPronunciation) {
-                    CantoPAndT cantoFinder = new CantoPAndT(this.cantoFinderMapPath);
-                    MPAndT mFinder = new MPAndT(this.mFinderMapPath);
+                    CantoPAndT cantoFinder = new CantoPAndT(Start.getPathToCantoPAndT());
+                    MPAndT mFinder = new MPAndT(Start.getPathToMPAndT());
 
                     drawPronunciation(cantoFinder.characterCombo(this.chineseChar), traditionalSide);
                     drawPronunciation(mFinder.characterCombo(this.chineseChar), simplifiedSide);

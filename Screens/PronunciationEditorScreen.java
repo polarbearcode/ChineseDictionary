@@ -24,7 +24,8 @@ public class PronunciationEditorScreen implements DictionaryScreen {
     @Override
     public void drawToScreen() {
         mainMenu();
-        while (true) {
+        boolean showScreen = true;
+        while (showScreen) {
             if (StdDraw.hasNextKeyTyped()) {
                 char command = StdDraw.nextKeyTyped();
                 PronunciationAndTone pAndT;
@@ -38,7 +39,7 @@ public class PronunciationEditorScreen implements DictionaryScreen {
                     p = new PronunciationMappingEditor(pAndT);
                     p.drawToScreen();
                 } else if (command == 'b') {
-                    return;
+                    showScreen = false;
                 }
             }
 

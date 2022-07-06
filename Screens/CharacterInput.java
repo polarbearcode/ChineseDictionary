@@ -12,8 +12,11 @@ import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 import ButtonListeners.*;
 import Utils.*;
+
+
 
 
 public class CharacterInput implements DictionaryScreen {

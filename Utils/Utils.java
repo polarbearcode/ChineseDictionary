@@ -1,5 +1,7 @@
 package Utils;
 
+import edu.princeton.cs.introcs.StdDraw;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileOutputStream;
@@ -89,6 +91,16 @@ public class Utils {
         component.setBounds((int) (frameWidth * xPos), (int)(frameHeight * yPos),
                 (int)(frameWidth * width), (int)(frameHeight * height));
 
+    }
+
+    /** Wait until a key is typed to get the next command. **/
+    public static char getNextCommand() {
+        while (!StdDraw.hasNextKeyTyped()) {
+            continue;
+        }
+
+
+        return StdDraw.nextKeyTyped();
     }
 
 }

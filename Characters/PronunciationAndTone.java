@@ -19,6 +19,9 @@ public abstract class PronunciationAndTone {
     /** A HashMap containing the mapping for pronunciation to characters **/
     private HashMap<String, String> pronunCharacters;
 
+    /** The reverse of the proonunCharacters mapping. **/
+    private HashMap<String, String> reversePronounChars;
+
     /** The path to the pronunciation character mapping HashMap serialized object. **/
     private String mapPath;
 
@@ -39,6 +42,10 @@ public abstract class PronunciationAndTone {
         this.getPronunciationLanguage = getPronunciationLanguage;
         this.pronunciationPattern = pronunciationPattern;
         readInPronunMap();
+
+        for (var entry : this.pronunCharacters.entrySet()) {
+            this.reversePronounChars.put(entry.getValue(), entry.getKey());
+        }
     }
 
     /**
@@ -82,6 +89,7 @@ public abstract class PronunciationAndTone {
      */
     public void changeCharacterMapping(String pronunciation, String chineseCharacter) {
         this.pronunCharacters.put(pronunciation, chineseCharacter);
+        this.reversePronounChars.put(chineseCharacter, pronunciation);
         this.updatePronunciationMap();
     }
 
@@ -91,6 +99,7 @@ public abstract class PronunciationAndTone {
      */
     public void deleteCharacterMapping(String pronunciation) {
         this.pronunCharacters.remove(pronunciation);
+        this.reversePronounChars.remove(pronunciation);
         this.updatePronunciationMap();
     }
 
@@ -117,6 +126,7 @@ public abstract class PronunciationAndTone {
      */
     public void addPronunciationMapping(String pronunciation, String chineseChar) {
         this.pronunCharacters.put(pronunciation,chineseChar);
+        this.reversePronounChars.put(chineseChar, pronunciation);
         updatePronunciationMap();
     }
 

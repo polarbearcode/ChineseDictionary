@@ -23,7 +23,7 @@ public class CharacterRenderer implements DictionaryScreen {
 
     private boolean showScreen = true;
 
-    private boolean showPronunciation = true;
+    private boolean showPronunciation = false;
 
 
 

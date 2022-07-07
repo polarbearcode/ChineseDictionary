@@ -16,6 +16,9 @@ public abstract class PronunciationAndTone {
     /** A HashMap containing the mapping for tones to characters. **/
     private HashMap<Integer, String> toneCharacters;
 
+    /** The reverse mapping of the tone characters mapping. **/
+    private HashMap<String, Integer> reverseToneChars;
+
     /** A HashMap containing the mapping for pronunciation to characters **/
     private HashMap<String, String> pronunCharacters;
 
@@ -41,6 +44,8 @@ public abstract class PronunciationAndTone {
         this.mapPath = mapPath;
         this.getPronunciationLanguage = getPronunciationLanguage;
         this.pronunciationPattern = pronunciationPattern;
+        this.reversePronounChars = new HashMap<>();
+        this.reverseToneChars = new HashMap<>();
         readInPronunMap();
 
         for (var entry : this.pronunCharacters.entrySet()) {
@@ -79,6 +84,16 @@ public abstract class PronunciationAndTone {
         }
 
         return toReturn;
+    }
+
+    /**
+     * Find the pronunciation from the provided combo.
+     * @param combo A length two string array with the 0-index being the pronunciation character
+     *              mapping and the 1-index being the tone character mapping.
+     * @return A String for the combined pronunciation.
+     */
+    public String pronunciationFromCombo(String[] combo) {
+        return this.reversePronounChars.get(combo[0]) + this.reverseToneChars.get(combo[1]);
     }
 
     /**
@@ -190,6 +205,7 @@ public abstract class PronunciationAndTone {
      */
     public void addToneCharacters(Integer tone, String chineseCharacter) {
         this.toneCharacters.put(tone, chineseCharacter);
+        this.reverseToneChars.put(chineseCharacter, tone);
     }
 
 

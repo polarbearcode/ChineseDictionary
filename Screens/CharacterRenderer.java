@@ -3,9 +3,7 @@ package Screens;
 import edu.princeton.cs.introcs.StdDraw;
 import java.awt.Color;
 import java.awt.Font;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import Characters.*;
 import Utils.*;
@@ -17,6 +15,9 @@ public class CharacterRenderer implements DictionaryScreen {
     /** The character whose information will be shown. **/
     private final ChineseCharacter chineseChar;
 
+    /** The character list the information is tied to. **/
+    private final CharacterList charList;
+
     private final int windowWidth = 500;
 
     private final int windowHeight = 300;
@@ -26,17 +27,17 @@ public class CharacterRenderer implements DictionaryScreen {
 
     private boolean showPronunciation = false;
 
-    private Set<Character> pronunciationCommands;
+    private Map<Character, String> pronunciationCommands;
+
+    private final CantoPAndT cantoPAndT = new CantoPAndT(Start.getPathToCantoPAndT());
+
 
 
 
     public CharacterRenderer(ChineseCharacter chineseChar) {
         this.chineseChar = chineseChar;
-        this.pronunciationCommands = new HashSet<>();
-
-        for (int i = 1; i <= chineseChar.getCantonesePronunciation().size(); i = i + 1) {
-            this.pronunciationCommands.add((char) i);
-        }
+        this.pronunciationCommands = new HashMap<>();
+        this.charList = new CharacterList(Start.getPathToDictionary());
     }
 
 
@@ -67,8 +68,8 @@ public class CharacterRenderer implements DictionaryScreen {
                 } else if (command == 'q') {
                     Start.setShowScreen(false);
                     return;
-                } else if (this.pronunciationCommands.contains(command)) {
-                    
+                } else if (showPronunciation && this.pronunciationCommands.containsKey(command)) {
+                        this.playFile(command);
                 }
 
                 if (showPronunciation) {
@@ -99,6 +100,8 @@ public class CharacterRenderer implements DictionaryScreen {
 
         StdDraw.setFont(Utils.createChineseFont(20));
 
+        CantoPAndT cantoPAndT = new CantoPAndT(Start.getPathToCantoPAndT());
+
         double yStart = 0.6;
         int ySubtract = 0;
 
@@ -106,6 +109,7 @@ public class CharacterRenderer implements DictionaryScreen {
         for (String[] pronunciation : pronunciations) {
             String pronunciationString = pronunciation[0] + pronunciation[1];
             if (showNumber) {
+                this.pronunciationCommands.put((char) count, this.findAudioFile(pronunciation));
                 pronunciationString = pronunciationString + "  " + count;
             }
             StdDraw.text(xCoord, yStart - (0.05 * ySubtract),
@@ -146,6 +150,24 @@ public class CharacterRenderer implements DictionaryScreen {
             StdDraw.text(0.2, 0.3 - (0.05 * i), example);
             i = i + 1;
         }
+    }
+
+    /**
+     * Find the audio file associated with the pronunciation combo.
+     * @param pronunciationCombo A length two array with the 0-index character being the
+     *                           pronunciation and the 1-index character being the tone.
+     * @return  A String for the file path of the corresponding audio file.
+     */
+    private String findAudioFile(String[] pronunciationCombo) {
+        return "Audio/" + this.cantoPAndT.pronunciationFromCombo(pronunciationCombo) + ".mp3";
+    }
+
+    /**
+     * Play the audio file that maps to the command in the pronunciation commands map.
+     * @param command   A Char from 1 to the number of pronunciations of the character. 
+     */
+    private void playFile(char command) {
+
     }
 
 }

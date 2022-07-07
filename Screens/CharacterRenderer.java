@@ -3,6 +3,7 @@ package Screens;
 import edu.princeton.cs.introcs.StdDraw;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -25,10 +26,17 @@ public class CharacterRenderer implements DictionaryScreen {
 
     private boolean showPronunciation = false;
 
+    private Set<Character> pronunciationCommands;
+
 
 
     public CharacterRenderer(ChineseCharacter chineseChar) {
         this.chineseChar = chineseChar;
+        this.pronunciationCommands = new HashSet<>();
+
+        for (int i = 1; i <= chineseChar.getCantonesePronunciation().size(); i = i + 1) {
+            this.pronunciationCommands.add((char) i);
+        }
     }
 
 
@@ -59,14 +67,18 @@ public class CharacterRenderer implements DictionaryScreen {
                 } else if (command == 'q') {
                     Start.setShowScreen(false);
                     return;
+                } else if (this.pronunciationCommands.contains(command)) {
+                    
                 }
 
                 if (showPronunciation) {
                     CantoPAndT cantoFinder = new CantoPAndT(Start.getPathToCantoPAndT());
                     MPAndT mFinder = new MPAndT(Start.getPathToMPAndT());
 
-                    drawPronunciation(cantoFinder.characterCombo(this.chineseChar), traditionalSide);
-                    drawPronunciation(mFinder.characterCombo(this.chineseChar), simplifiedSide);
+                    drawPronunciation(cantoFinder.characterCombo(this.chineseChar), traditionalSide,
+                            true);
+                    drawPronunciation(mFinder.characterCombo(this.chineseChar), simplifiedSide,
+                            false);
                 }
 
                 this.drawBotScreen();
@@ -80,8 +92,10 @@ public class CharacterRenderer implements DictionaryScreen {
      * @param pronunciations    List of pronunciation combos from the Character.
      * @param xCoord    The coordinate that the character is drawn to. Use to find relative position
      *                  to place the pronunciations.
+     * @param showNumber  boolean indicating whether to add a number next to the pronunciation
+     *                    to press the audio.
      */
-    private void drawPronunciation(List<String[]> pronunciations, double xCoord) {
+    private void drawPronunciation(List<String[]> pronunciations, double xCoord, boolean showNumber) {
 
         StdDraw.setFont(Utils.createChineseFont(20));
 
@@ -90,8 +104,12 @@ public class CharacterRenderer implements DictionaryScreen {
 
         int count = 1;
         for (String[] pronunciation : pronunciations) {
+            String pronunciationString = pronunciation[0] + pronunciation[1];
+            if (showNumber) {
+                pronunciationString = pronunciationString + "  " + count;
+            }
             StdDraw.text(xCoord, yStart - (0.05 * ySubtract),
-                    pronunciation[0] + pronunciation[1] + "   " + count);
+                    pronunciationString);
             ySubtract = ySubtract + 1;
             count = count + 1;
         }

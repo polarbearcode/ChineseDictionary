@@ -38,6 +38,10 @@ public class CharacterRenderer implements DictionaryScreen {
         this.chineseChar = chineseChar;
         this.pronunciationCommands = new HashMap<>();
         this.charList = new CharacterList(Start.getPathToDictionary());
+
+        for (int i = 1; i <= this.chineseChar.getCantonesePronunciation().size(); i = i + 1) {
+            this.pronunciationCommands.put((char) (i + '0'), null);
+        }
     }
 
 
@@ -109,7 +113,7 @@ public class CharacterRenderer implements DictionaryScreen {
         for (String[] pronunciation : pronunciations) {
             String pronunciationString = pronunciation[0] + pronunciation[1];
             if (showNumber) {
-                this.pronunciationCommands.put((char) count, this.findAudioFile(pronunciation));
+                this.pronunciationCommands.put((char) (count + '0'), this.findAudioFile(pronunciation));
                 pronunciationString = pronunciationString + "  " + count;
             }
             StdDraw.text(xCoord, yStart - (0.05 * ySubtract),
@@ -159,15 +163,15 @@ public class CharacterRenderer implements DictionaryScreen {
      * @return  A String for the file path of the corresponding audio file.
      */
     private String findAudioFile(String[] pronunciationCombo) {
-        return "Audio/" + this.cantoPAndT.pronunciationFromCombo(pronunciationCombo) + ".mp3";
+        return "./Audio/" + this.cantoPAndT.pronunciationFromCombo(pronunciationCombo) + ".mp3";
     }
 
     /**
      * Play the audio file that maps to the command in the pronunciation commands map.
-     * @param command   A Char from 1 to the number of pronunciations of the character. 
+     * @param command   A Char from 1 to the number of pronunciations of the character.
      */
     private void playFile(char command) {
-
+        AudioPlayer.play(this.pronunciationCommands.get(command));
     }
 
 }

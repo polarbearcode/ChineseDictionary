@@ -105,13 +105,18 @@ public class Start {
                 characterInput.drawToScreen();
                 characterInput.getMainFrame().dispose();
             } else if (command == 'x') {
-                Set<String> dictionaryChars = charList.getCurrentDictionary().keySet();
-                List<String> characterKeys = new ArrayList<>();
-                characterKeys.addAll(dictionaryChars);
-                Collections.shuffle(characterKeys);
+                try {
+                    Set<String> dictionaryChars = charList.getCurrentDictionary().keySet();
+                    List<String> characterKeys = new ArrayList<>();
+                    characterKeys.addAll(dictionaryChars);
+                    Collections.shuffle(characterKeys);
 
-                CharacterRenderer c = new CharacterRenderer(charList.lookUp(characterKeys.get(0)));
-                c.drawToScreen();
+                    CharacterRenderer c = new CharacterRenderer(charList.lookUp(characterKeys.get(0)));
+                    c.drawToScreen();
+                } catch (IndexOutOfBoundsException e) {
+                    StdDraw.setFont(Utils.comicSansFont(10));
+                    StdDraw.text(0.1, 0.5, "No characters in dictionary");
+                }
 
             } else if (command == 'q') {
                 break;

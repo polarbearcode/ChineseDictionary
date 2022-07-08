@@ -4,6 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.*;
 
+import java.io.File;
+
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 public class AudioPlayer {
 
     /**
@@ -12,6 +18,13 @@ public class AudioPlayer {
      */
     public static void play(String filePath) {
 
+        JFXPanel j = new JFXPanel();
+
+        Media hit = new Media(new File(filePath).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(hit);
+        mediaPlayer.play();
+
+/**
         try {
             AudioInputStream ais = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
@@ -19,7 +32,9 @@ public class AudioPlayer {
             clip.start();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
-        }
+        } **/
+
+
 
     }
 }

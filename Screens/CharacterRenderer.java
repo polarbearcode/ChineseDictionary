@@ -13,10 +13,10 @@ import Utils.*;
 public class CharacterRenderer implements DictionaryScreen {
 
     /** The character whose information will be shown. **/
-    private final ChineseCharacter chineseChar;
+    private ChineseCharacter chineseChar;
 
     /** The character list the information is tied to. **/
-    private final CharacterList charList;
+    private CharacterList charList;
 
     private final int windowWidth = 500;
 
@@ -32,6 +32,9 @@ public class CharacterRenderer implements DictionaryScreen {
     private final CantoPAndT cantoPAndT = new CantoPAndT(Start.getPathToCantoPAndT());
 
 
+    CharacterRenderer() {
+        this(Utils.createDefaultChar());
+    }
 
 
     public CharacterRenderer(ChineseCharacter chineseChar) {

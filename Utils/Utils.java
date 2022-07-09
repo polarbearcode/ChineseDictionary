@@ -1,5 +1,7 @@
 package Utils;
 
+import Characters.ChineseCharacter;
+import Test.TestChineseCharacter;
 import edu.princeton.cs.introcs.StdDraw;
 
 import javax.swing.*;
@@ -7,6 +9,10 @@ import java.awt.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Utils {
@@ -95,12 +101,24 @@ public class Utils {
 
     /** Wait until a key is typed to get the next command. **/
     public static char getNextCommand() {
+
         while (!StdDraw.hasNextKeyTyped()) {
             continue;
         }
 
-
         return StdDraw.nextKeyTyped();
+    }
+
+    public static ChineseCharacter createDefaultChar() {
+        List<String> pronunciations = new ArrayList<>();
+        pronunciations.add("zung2");
+        pronunciations.add("zung3");
+
+        ChineseCharacter 種 = new ChineseCharacter("种", "種", new HashSet<String>(pronunciations),
+                new HashSet<String>(Arrays.asList("zhong3", "zhong4")),
+                new HashSet<>(Arrays.asList("种群", "种植")));
+
+        return 種;
     }
 
 }

@@ -1,4 +1,5 @@
 package Test;
+import Utils.Utils;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
 import org.junit.After;
@@ -38,7 +39,7 @@ public class TestEditCharInfo {
 
         assertNull(c.lookUp("种"));
 
-        c.addCharacter(TestChineseCharacter.multiplePronunciationChar());
+        c.addCharacter(Utils.createDefaultChar());
 
     }
 

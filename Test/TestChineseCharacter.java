@@ -1,5 +1,6 @@
 package Test;
 
+import Utils.Utils;
 import org.junit.Test;
 
 import java.util.*;
@@ -17,7 +18,7 @@ public class TestChineseCharacter {
     private final ChineseCharacter 汉 = new ChineseCharacter("汉", "漢",
             "hon3", "han4");
 
-    private final ChineseCharacter 種 = multiplePronunciationChar();
+    private final ChineseCharacter 種 = Utils.createDefaultChar();
 
     private final String mTestMapPath = "./Test/testMPAndT.srl";
 
@@ -193,8 +194,7 @@ public class TestChineseCharacter {
     public void testAddSameCharacter() {
         cleanUpDictionary();
 
-        ChineseCharacter chineseChar = multiplePronunciationChar();
-
+        ChineseCharacter chineseChar = Utils.createDefaultChar();
         c.addCharacter(chineseChar);
 
         chineseChar.addExamples("种类");
@@ -206,7 +206,7 @@ public class TestChineseCharacter {
         assertTrue(charLookUp.getExampleUses().contains("种类"));
         assertEquals(3, charLookUp.getExampleUses().size());
 
-        ChineseCharacter chineseCharLessExamples = multiplePronunciationChar();
+        ChineseCharacter chineseCharLessExamples = Utils.createDefaultChar();
         chineseCharLessExamples.removeExample("种植");
         chineseCharLessExamples.removeExample("种群");
 
@@ -235,18 +235,7 @@ public class TestChineseCharacter {
 
     /** Helper function to create a character with multiple pronunciations.
      * @return  A Chinese character that has a list of pronunciations.  **/
-    static ChineseCharacter multiplePronunciationChar() {
 
-        List<String> pronunciations = new ArrayList<>();
-        pronunciations.add("zung2");
-        pronunciations.add("zung3");
-
-        ChineseCharacter 種 = new ChineseCharacter("种", "種", new HashSet<String>(pronunciations),
-                new HashSet<String>(Arrays.asList("zhong3", "zhong4")),
-                new HashSet<>(Arrays.asList("种群", "种植")));
-
-        return 種;
-    }
 
 
 

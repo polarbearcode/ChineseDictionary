@@ -43,8 +43,9 @@ public class Start {
         StdDraw.text(0.5, 0.6, "Look Up (L)");
         StdDraw.text(0.5, 0.5, "Add Character (A)");
         StdDraw.text(0.5, 0.4, "Random Character (X)");
-        StdDraw.text(0.5, 0.3, "Edit (E)");
-        StdDraw.text(0.5, 0.2, "Exit (Q)");
+        StdDraw.text(0.5, 0.3, "Flash Cards (F)");
+        StdDraw.text(0.5, 0.2, "Edit (E)");
+        StdDraw.text(0.5, 0.1, "Exit (Q)");
 
     }
 

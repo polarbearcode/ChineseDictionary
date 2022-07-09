@@ -110,12 +110,10 @@ public class Utils {
     }
 
     public static ChineseCharacter createDefaultChar() {
-        List<String> pronunciations = new ArrayList<>();
-        pronunciations.add("zung2");
-        pronunciations.add("zung3");
 
-        ChineseCharacter 種 = new ChineseCharacter("种", "種", new HashSet<String>(pronunciations),
-                new HashSet<String>(Arrays.asList("zhong3", "zhong4")),
+        ChineseCharacter 種 = new ChineseCharacter("种", "種",
+                new HashSet<>(Arrays.asList("zung2", "zung3")),
+                new HashSet<>(Arrays.asList("zhong3", "zhong4")),
                 new HashSet<>(Arrays.asList("种群", "种植")));
 
         return 種;

@@ -20,5 +20,6 @@ public class RemoveButtonListener extends EditScreenButtons implements ActionLis
     @Override
     public void action() {
         this.editScreen.getCharList().removeChar(this.editScreen.getCharBox().getText());
+        this.editScreen.getMainFrame().dispose();
     }
 }

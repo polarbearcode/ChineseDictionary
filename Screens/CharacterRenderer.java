@@ -60,37 +60,28 @@ public class CharacterRenderer implements DictionaryScreen {
 
         while (true) {
 
-                char command = Utils.getNextCommand();
+            char command = Utils.getNextCommand();
 
-                this.drawTopScreen(simplifiedSide, traditionalSide, characterDrawY);
+            this.drawTopScreen(simplifiedSide, traditionalSide, characterDrawY);
 
-                if (command == 'h') {
-                    showPronunciation = !showPronunciation;
-                } else if (command == 'm') {
-                    showScreen = false;
-                    return;
-                } else if (command == 'q') {
-                    Start.setShowScreen(false);
-                    return;
-                } else if (showPronunciation && this.pronunciationCommands.containsKey(command)) {
-                        this.playFile(command);
-                }
+            processCommand(command);
 
-                if (showPronunciation) {
-                    CantoPAndT cantoFinder = new CantoPAndT(Start.getPathToCantoPAndT());
-                    MPAndT mFinder = new MPAndT(Start.getPathToMPAndT());
 
-                    drawPronunciation(cantoFinder.characterCombo(this.chineseChar), traditionalSide,
-                            true);
-                    drawPronunciation(mFinder.characterCombo(this.chineseChar), simplifiedSide,
-                            false);
-                }
+            if (showPronunciation) {
+                CantoPAndT cantoFinder = new CantoPAndT(Start.getPathToCantoPAndT());
+                MPAndT mFinder = new MPAndT(Start.getPathToMPAndT());
 
-                this.drawBotScreen();
-
-                StdDraw.show();
+                drawPronunciation(cantoFinder.characterCombo(this.chineseChar), traditionalSide,
+                        true);
+                drawPronunciation(mFinder.characterCombo(this.chineseChar), simplifiedSide,
+                        false);
             }
+
+            this.drawBotScreen();
+
+            StdDraw.show();
         }
+    }
 
     /**
      * Put the pronunciation combos of a character to the screen.
@@ -103,8 +94,6 @@ public class CharacterRenderer implements DictionaryScreen {
     private void drawPronunciation(List<String[]> pronunciations, double xCoord, boolean showNumber) {
 
         StdDraw.setFont(Utils.createChineseFont(20));
-
-        CantoPAndT cantoPAndT = new CantoPAndT(Start.getPathToCantoPAndT());
 
         double yStart = 0.6;
         int ySubtract = 0;
@@ -122,6 +111,24 @@ public class CharacterRenderer implements DictionaryScreen {
             count = count + 1;
         }
 
+    }
+
+    /**
+     * Process the typed in command.
+     * @param command Char, the character entered.
+     */
+    private void processCommand(char command) {
+        if (command == 'h') {
+            showPronunciation = !showPronunciation;
+        } else if (command == 'm') {
+            showScreen = false;
+            return;
+        } else if (command == 'q') {
+            Start.setShowScreen(false);
+            return;
+        } else if (showPronunciation && this.pronunciationCommands.containsKey(command)) {
+            this.playFile(command);
+        }
     }
 
     /**

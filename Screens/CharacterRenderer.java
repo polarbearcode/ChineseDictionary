@@ -177,8 +177,20 @@ public class CharacterRenderer implements DictionaryScreen {
      * Play the audio file that maps to the command in the pronunciation commands map.
      * @param command   A Char from 1 to the number of pronunciations of the character.
      */
-    private void playFile(char command) {
+    void playFile(char command) {
         AudioPlayer.play(this.pronunciationCommands.get(command));
+    }
+
+    void setShowScreen(boolean show) {
+        this.showScreen = show;
+    }
+
+    Map<Character, String> getPronunciationCommands() {
+        return this.pronunciationCommands;
+    }
+
+    boolean getShowScreen() {
+        return this.showScreen;
     }
 
 }

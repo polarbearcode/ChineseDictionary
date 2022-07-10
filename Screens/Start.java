@@ -104,7 +104,6 @@ public class Start {
             } else if (command == 'a') {
                 CharacterInput characterInput = new CharacterInput(charList);
                 characterInput.drawToScreen();
-                characterInput.getMainFrame().dispose();
             } else if (command == 'x') {
                 try {
                     Set<String> dictionaryChars = charList.getCurrentDictionary().keySet();

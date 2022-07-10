@@ -41,10 +41,8 @@ public class CharacterRenderer implements DictionaryScreen {
         this.chineseChar = chineseChar;
         this.pronunciationCommands = new HashMap<>();
         this.charList = new CharacterList(Start.getPathToDictionary());
+        this.updatesPronunciationCommands();
 
-        for (int i = 1; i <= this.chineseChar.getCantonesePronunciation().size(); i = i + 1) {
-            this.pronunciationCommands.put((char) (i + '0'), null);
-        }
     }
 
 
@@ -176,6 +174,13 @@ public class CharacterRenderer implements DictionaryScreen {
         return "./Audio/" + this.cantoPAndT.pronunciationFromCombo(pronunciationCombo) + ".mp3";
     }
 
+    /** Set the character that is being shown.
+     * @param chineseChar The new ChineseCharacter **/
+    public void setChineseChar(ChineseCharacter chineseChar) {
+        this.chineseChar = chineseChar;
+        this.updatesPronunciationCommands();
+    }
+
     /**
      * Play the audio file that maps to the command in the pronunciation commands map.
      * @param command   A Char from 1 to the number of pronunciations of the character.
@@ -194,6 +199,12 @@ public class CharacterRenderer implements DictionaryScreen {
 
     boolean getShowScreen() {
         return this.showScreen;
+    }
+
+    private void updatesPronunciationCommands() {
+        for (int i = 1; i <= this.chineseChar.getCantonesePronunciation().size(); i = i + 1) {
+            this.pronunciationCommands.put((char) (i + '0'), null);
+        }
     }
 
 }

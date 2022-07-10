@@ -59,7 +59,7 @@ public class CharacterRenderer implements DictionaryScreen {
         this.drawTopScreen(simplifiedSide, traditionalSide, characterDrawY);
         this.drawBotScreen();
 
-        while (true) {
+        while (this.showScreen) {
 
             char command = Utils.getNextCommand();
 

@@ -118,7 +118,7 @@ public class CharacterRenderer implements DictionaryScreen {
      * Process the typed in command.
      * @param command Char, the character entered.
      */
-    private void processCommand(char command) {
+    public void processCommand(char command) {
         if (command == 'h') {
             showPronunciation = !showPronunciation;
         } else if (command == 'm') {

@@ -1,10 +1,6 @@
 package Utils;
 
 import java.io.File;
-import java.io.IOException;
-import javax.sound.sampled.*;
-
-import java.io.File;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
@@ -28,18 +24,6 @@ public class AudioPlayer {
         } catch (MediaException e) {
             System.out.println("Audio file not found");
         }
-
-/**
-        try {
-            AudioInputStream ais = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(ais);
-            clip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
-        } **/
-
-
 
     }
 }

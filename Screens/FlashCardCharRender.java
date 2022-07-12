@@ -39,13 +39,11 @@ public class FlashCardCharRender extends CharacterRenderer implements Dictionary
     @Override
     public void processCommand(char command){
         if (command == 'h') {
-            this.setShowScreen(!this.getShowScreen());
+            this.switchShowPronunciation();
         } else if (command == 'm') {
             this.setShowScreen(false);
-            return;
         } else if (command == 'q') {
             Start.setShowScreen(false);
-            return;
         } else if (this.getShowScreen() && this.getPronunciationCommands().containsKey(command)) {
             this.playFile(command);
         } else if (command == 'n') {

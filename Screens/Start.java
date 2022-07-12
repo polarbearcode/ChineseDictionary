@@ -123,6 +123,9 @@ public class Start {
             } else if (command == 'e') {
                 EditScreen e = new EditScreen();
                 e.drawToScreen();
+            } else if (command == 'f') {
+                FlashCardCharRender f = new FlashCardCharRender(charList);
+                f.drawToScreen();
             }
             charList = new CharacterList(Start.pathToDictionary);
         }

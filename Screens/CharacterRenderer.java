@@ -63,8 +63,6 @@ public class CharacterRenderer implements DictionaryScreen {
 
             char command = Utils.getNextCommand();
 
-            this.drawTopScreen(simplifiedSide, traditionalSide, characterDrawY);
-
             processCommand(command);
 
 
@@ -78,6 +76,7 @@ public class CharacterRenderer implements DictionaryScreen {
                         false);
             }
 
+            this.drawTopScreen(simplifiedSide, traditionalSide, characterDrawY);
             this.drawBotScreen();
 
             StdDraw.show();

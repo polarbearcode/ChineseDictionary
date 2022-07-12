@@ -17,11 +17,11 @@ import Utils.*;
 public class Start {
 
     /** Path to the dictionary file. **/
-    private static String pathToDictionary = "Test/testDictionary.srl";
+    private static String pathToDictionary;
 
-    private static String pathToCantoPAndT = "Test/testCPAndT.srl";
+    private static String pathToCantoPAndT;
 
-    private static String pathToMPAndT = "Test/testMPAndT.srl";
+    private static String pathToMPAndT;
 
     private static boolean showScreen = true;
     /** Draw the main menu screen. **/
@@ -130,6 +130,29 @@ public class Start {
             charList = new CharacterList(Start.pathToDictionary);
         }
 
+    }
+
+
+    /**
+     * Set the three file path variables either to the test files or dictionary files.
+     * @param testOrDictionary  String, "Test" or "Dictionary"
+     */
+    private void setFilePaths(String testOrDictionary) {
+        if (testOrDictionary.equals("Test")) {
+            Start.pathToDictionary = "Test/testDictionary.srl";
+
+            Start.pathToCantoPAndT = "Test/testCPAndT.srl";
+
+            Start.pathToMPAndT = "Test/testMPAndT.srl";
+        } else if (testOrDictionary.equals("Dictionary")) {
+
+            Start.pathToDictionary = "DictionaryFiles/dictionary.srl";
+
+            Start.pathToCantoPAndT = "DictionaryFiles/CPAndT.srl";
+
+            Start.pathToMPAndT = "DictionaryFiles/MPAndT.srl";
+
+        }
     }
 
     public static void main(String[] args) {

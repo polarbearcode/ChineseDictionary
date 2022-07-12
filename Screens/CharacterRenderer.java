@@ -52,6 +52,8 @@ public class CharacterRenderer implements DictionaryScreen {
     @Override
     public void drawToScreen() {
 
+        StdDraw.clear(Color.ORANGE);
+
         double simplifiedSide = 0.3;
         double traditionalSide = 0.6;
         double characterDrawY = 0.8;
@@ -62,6 +64,8 @@ public class CharacterRenderer implements DictionaryScreen {
         while (this.showScreen) {
 
             char command = Utils.getNextCommand();
+
+            StdDraw.clear(Color.orange);
 
             processCommand(command);
 
@@ -138,7 +142,6 @@ public class CharacterRenderer implements DictionaryScreen {
      * @param characterDrawY    double, where vertically to draw both characters
      */
     private void drawTopScreen(double simplifiedSide, double traditionalSide, double characterDrawY) {
-        StdDraw.clear(Color.ORANGE);
 
         StdDraw.setPenColor(Color.BLACK);
         StdDraw.setFont(Utils.createChineseFont(50));
@@ -204,6 +207,13 @@ public class CharacterRenderer implements DictionaryScreen {
         for (int i = 1; i <= this.chineseChar.getCantonesePronunciation().size(); i = i + 1) {
             this.pronunciationCommands.put((char) (i + '0'), null);
         }
+    }
+
+    /**
+     * Set the showscreen from true to false or vice versa
+     */
+    void switchShowPronunciation() {
+        this.showPronunciation = !this.showPronunciation;
     }
 
 }

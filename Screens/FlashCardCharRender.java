@@ -34,9 +34,10 @@ public class FlashCardCharRender extends CharacterRenderer implements Dictionary
 
     /**
      * Process the user command.
-     * @param command   The char entered.
+     * @param command The char entered.
      */
-    private void processCommand(char command){
+    @Override
+    public void processCommand(char command){
         if (command == 'h') {
             this.setShowScreen(!this.getShowScreen());
         } else if (command == 'm') {
@@ -96,7 +97,7 @@ public class FlashCardCharRender extends CharacterRenderer implements Dictionary
              */
             private CharLinkedList() {
                 this.sentinel = new CharNode("X", null);
-                this.sentinel.next.next = this.sentinel;
+                this.sentinel.next = this.sentinel;
                 this.isEmpty = true;
             }
 
@@ -139,12 +140,17 @@ public class FlashCardCharRender extends CharacterRenderer implements Dictionary
 
                 @Override
                 public boolean hasNext() {
-                    return isEmpty;
+                    return !isEmpty;
                 }
 
                 @Override
                 public CharNode next() {
-                    return start.next;
+                    if (start.next == sentinel) {
+                        return start.next;
+                    }
+                    CharNode toReturn = start.next;
+                    start = start.next;
+                    return toReturn;
                 }
             }
 

@@ -135,22 +135,20 @@ public class Start {
 
     /**
      * Set the three file path variables either to the test files or dictionary files.
-     * @param testOrDictionary  String, "Test" or "Dictionary"
+     * @param p Either Test or Dictionary
      */
-    private void setFilePaths(String testOrDictionary) {
-        if (testOrDictionary.equals("Test")) {
-            Start.pathToDictionary = "Test/testDictionary.srl";
+    private void setFilePaths(FilePaths p) {
 
-            Start.pathToCantoPAndT = "Test/testCPAndT.srl";
-
-            Start.pathToMPAndT = "Test/testMPAndT.srl";
-        } else if (testOrDictionary.equals("Dictionary")) {
-
-            Start.pathToDictionary = "DictionaryFiles/dictionary.srl";
-
-            Start.pathToCantoPAndT = "DictionaryFiles/CPAndT.srl";
-
-            Start.pathToMPAndT = "DictionaryFiles/MPAndT.srl";
+        switch (p) {
+            case TEST:
+                Start.pathToDictionary = "Test/testDictionary.srl";
+                Start.pathToCantoPAndT = "Test/testCPAndT.srl";
+                Start.pathToMPAndT = "Test/testMPAndT.srl";
+                break;
+            case DICTIONARY:
+                Start.pathToDictionary = "DictionaryFiles/dictionary.srl";
+                Start.pathToCantoPAndT = "DictionaryFiles/CPAndT.srl";
+                Start.pathToMPAndT = "DictionaryFiles/MPAndT.srl";
 
         }
     }
@@ -158,6 +156,7 @@ public class Start {
     public static void main(String[] args) {
 
         Start s = new Start();
+        s.setFilePaths(FilePaths.TEST);
         s.drawToScreen();
         System.exit(0);
     }

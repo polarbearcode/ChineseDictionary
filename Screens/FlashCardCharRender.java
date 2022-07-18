@@ -83,49 +83,42 @@ public class FlashCardCharRender extends CharacterRenderer implements Dictionary
         /** Use to put characters in a list and cycle through them. **/
         private static class CharLinkedList implements Iterable<CharLinkedList.CharNode> {
 
-            /** Sentinel node. **/
-            private CharNode sentinel;
+
+            /** The last node. **/
+            private CharNode last;
 
             /** Boolean indicating if list is empty. **/
             private boolean isEmpty;
 
+            private CharNode sentinel;
 
-            /**
-             * Instantiate an empty list.
-             */
             private CharLinkedList() {
                 this.sentinel = new CharNode("X", null);
                 this.sentinel.next = this.sentinel;
+                this.last = sentinel;
                 this.isEmpty = true;
             }
 
+
+
             private CharLinkedList(String chineseChar) {
                 this();
-                this.sentinel.next = new CharNode(chineseChar, this.sentinel);
-                this.isEmpty = false;
+                this.add(chineseChar);
             }
 
 
             /** Add a character to the end of the list. **/
             private void add(String chineseChar) {
-                CharNode p = this.sentinel;
 
-                while (p.next != this.sentinel) {
-                    p = p.next;
-                }
-
-                p.next = new CharNode(chineseChar, this.sentinel.next);
-                this.isEmpty = false;
+               this.last.next =  new CharNode(chineseChar, this.sentinel.next);
+               this.last = this.last.next;
+               this.isEmpty = false;
             }
 
-            /** Get the first node. **/
-            private CharNode getFirst() {
-                return this.sentinel.next;
-            }
 
             @Override
             public Iterator<CharLinkedList.CharNode> iterator() {
-                return new CharLinkedList.CharLinkedListIterator(this.sentinel);
+                return new CharLinkedList.CharLinkedListIterator(this.sentinel.next);
             }
 
             private class CharLinkedListIterator implements Iterator<CharNode> {
@@ -143,9 +136,7 @@ public class FlashCardCharRender extends CharacterRenderer implements Dictionary
 
                 @Override
                 public CharNode next() {
-                    if (start.next == sentinel) {
-                        return start.next;
-                    }
+
                     CharNode toReturn = start.next;
                     start = start.next;
                     return toReturn;

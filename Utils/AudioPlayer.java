@@ -22,7 +22,7 @@ public class AudioPlayer {
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
             mediaPlayer.play();
         } catch (MediaException e) {
-            System.out.println("Audio file not found");
+            System.out.println("Audio file not found " + filePath);
         }
 
     }
